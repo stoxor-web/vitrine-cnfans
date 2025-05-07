@@ -189,6 +189,9 @@
 
   <div class="grid" id="productGrid"></div>
 
+  <!-- Grille produits -->
+  <div class="grid" id="productGrid"></div>
+
   <script>
     let products = [];
     fetch('jadeship_products.json')
@@ -198,12 +201,13 @@
     function filterProducts() {
       const cat = document.getElementById('categoryFilter').value;
       const br  = document.getElementById('brandFilter').value;
-      const filtered = products.filter(p =>
-        (cat==='all' || p.category===cat) &&
-        (br==='all'  || p.brand===br)
+      const filtered = products.filter(p => 
+        (cat==='all'|| p.category===cat) &&
+        (br==='all' || p.brand===br)
       );
       displayProducts(filtered);
     }
+
 
     function displayProducts(list) {
       const grid = document.getElementById('productGrid');
