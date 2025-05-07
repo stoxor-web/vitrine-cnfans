@@ -201,6 +201,21 @@
       displayProducts(filtered);
     }
 
+    function openAppOrWeb(event, webUrl) {
+      var start = Date.now();
+      const cnfansLink = event.target.getAttribute("data-product-link");
+      
+      // Tentative d'ouverture de l'application CNFANS avec un lien produit
+      window.location = `cnfans://product?link=${encodeURIComponent(cnfansLink)}`;
+      
+      setTimeout(function() {
+        // Si l'application n'est pas ouverte après 2 secondes, redirige vers le lien web
+        if (Date.now() - start < 2000) {
+          window.location = webUrl; // Rediriger vers le produit sur le site web
+        }
+      }, 1000); // Attendre 1 seconde avant de rediriger
+    }
+
     function displayProducts(list) {
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
@@ -208,7 +223,7 @@
         const card = document.createElement('div');
         card.className = 'product';
         card.innerHTML = `
-          <a href="${p.cnfans_link}" target="_blank">
+          <a href="${p.cnfans_link}" target="_blank" onclick="openAppOrWeb(event, '${p.cnfans_link}')" data-product-link="${p.cnfans_link}">
             <img src="${p.image}" alt="${p.title}">
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price} €</div>
