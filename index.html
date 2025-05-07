@@ -152,13 +152,7 @@
 
     <select id="brandFilter" onchange="filterProducts()">
       <option value="all">Toutes les marques</option>
-      <option value="Adidas">Adidas</option>
-      <option value="Balenciaga">Balenciaga</option>
-      <option value="Nike">Nike</option>
-      <option value="Nike">Under Armor</option>
-      <option value="Nike">Hermes</option>
-      <option value="Puma">Puma</option>
-
+      <!-- Liste des marques remplie dynamiquement -->
     </select>
   </div>
 
@@ -171,8 +165,21 @@
       .then(res => res.json())
       .then(data => {
         products = data;
+        populateBrandFilter(); // Remplir le sélecteur de marques dynamiquement
         filterProducts();  // Afficher tous les produits au début
       });
+
+    // Fonction pour remplir dynamiquement le sélecteur de marques
+    function populateBrandFilter() {
+      const brandFilter = document.getElementById('brandFilter');
+      const brands = [...new Set(products.map(product => product.brand))]; // Extraire les marques uniques
+      brands.forEach(brand => {
+        const option = document.createElement('option');
+        option.value = brand;
+        option.textContent = brand;
+        brandFilter.appendChild(option);
+      });
+    }
 
     function filterProducts() {
       const selectedCategory = document.getElementById('categoryFilter').value;
