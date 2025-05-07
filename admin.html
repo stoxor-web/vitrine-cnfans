@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Admin Produits CNFANS</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
@@ -13,7 +12,6 @@
     button { margin: 5px; padding: 6px 12px; }
     select { width: 100%; padding: 5px; }
   </style>
-
   <!-- Ajouter le CDN de SortableJS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
@@ -68,11 +66,11 @@
           <td><input type="text" value="${p.id}" onchange="products[${i}].id = this.value"></td>
           <td><input type="text" value="${p.image}" onchange="products[${i}].image = this.value"></td>
           <td>
-            <select onchange="products[${i}].category = this.value">
-              <option value="Mode Homme" ${p.category === 'Mode Homme' ? 'selected' : ''}>Mode Homme</option>
-              <option value="Mode Femme" ${p.category === 'Mode Femme' ? 'selected' : ''}>Mode Femme</option>
-              <option value="Accessoires" ${p.category === 'Accessoires' ? 'selected' : ''}>Accessoires</option>
-              <option value="Chaussures" ${p.category === 'Chaussures' ? 'selected' : ''}>Chaussures</option>
+            <select multiple onchange="updateCategories(${i}, this)">
+              <option value="Mode Homme" ${p.category.includes('Mode Homme') ? 'selected' : ''}>Mode Homme</option>
+              <option value="Mode Femme" ${p.category.includes('Mode Femme') ? 'selected' : ''}>Mode Femme</option>
+              <option value="Accessoires" ${p.category.includes('Accessoires') ? 'selected' : ''}>Accessoires</option>
+              <option value="Chaussures" ${p.category.includes('Chaussures') ? 'selected' : ''}>Chaussures</option>
             </select>
           </td>
           <td>
@@ -83,7 +81,6 @@
               <option value="Balenciaga" ${p.brand === 'Balenciaga' ? 'selected' : ''}>Balenciaga</option>
               <option value="Hermes" ${p.brand === 'Hermes' ? 'selected' : ''}>Hermes</option>
               <option value="Under Armor" ${p.brand === 'Under Armor' ? 'selected' : ''}>Under Armor</option>
-              <option value="Supreme" ${p.brand === 'Supreme' ? 'selected' : ''}>Supreme</option>
             </select>
           </td>
           <td><input type="number" value="${p.price}" onchange="products[${i}].price = parseFloat(this.value)" step="0.01"></td>
@@ -108,7 +105,7 @@
 
     // Fonction pour ajouter un produit
     function addProduct() {
-      products.push({ title: "", platform: "", id: "", image: "", category: "Mode Homme", brand: "Nike", price: 0, cnfans_link: "", source: "" });
+      products.push({ title: "", platform: "", id: "", image: "", category: [], brand: "Nike", price: 0, cnfans_link: "", source: "" });
       renderTable();
     }
 
@@ -116,6 +113,12 @@
     function deleteProduct(index) {
       products.splice(index, 1);
       renderTable();
+    }
+
+    // Fonction pour mettre à jour les catégories
+    function updateCategories(index, selectElement) {
+      const selectedCategories = Array.from(selectElement.selectedOptions).map(option => option.value);
+      products[index].category = selectedCategories;
     }
 
     // Fonction pour télécharger le fichier JSON mis à jour
