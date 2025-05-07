@@ -1,20 +1,18 @@
 [
     {
-        "title": "Pantalon Cargo Homme Style Coréen",
-        "image": "https://via.placeholder.com/300x300.png?text=Pantalon+Cargo+Homme",
-        "source": "https://detail.1688.com/offer/675318965920.html",
-        "cnfans_link": "https://www.cnfans.com/redirect?link=https%3A%2F%2Fdetail.1688.com%2Foffer%2F675318965920.html&ref=212491"
+        "title": "Produit CNFANS Exemple 1",
+        "platform": "TAOBAO",
+        "id": "628597198711",
+        "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=628597198711&ref=212491",
+        "source": "https://item.taobao.com/item.htm?id=628597198711",
+        "image": "https://via.placeholder.com/300x300.png?text=Produit+628597198711"
     },
     {
-        "title": "T-shirt Oversize Streetwear Femme",
-        "image": "https://via.placeholder.com/300x300.png?text=T-shirt+Oversize+Femme",
-        "source": "https://item.taobao.com/item.htm?id=720551823710",
-        "cnfans_link": "https://www.cnfans.com/redirect?link=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D720551823710&ref=212491"
-    },
-    {
-        "title": "Sac à Dos Minimaliste 2025",
-        "image": "https://via.placeholder.com/300x300.png?text=Sac+Minimaliste",
-        "source": "https://detail.1688.com/offer/666333221102.html",
-        "cnfans_link": "https://www.cnfans.com/redirect?link=https%3A%2F%2Fdetail.1688.com%2Foffer%2F666333221102.html&ref=212491"
+        "title": "Produit CNFANS Exemple 2",
+        "platform": "1688",
+        "id": "646368135305",
+        "cnfans_link": "https://cnfans.com/product?platform=1688&id=646368135305&ref=212491",
+        "source": "https://detail.1688.com/offer/646368135305.html",
+        "image": "https://via.placeholder.com/300x300.png?text=Produit+646368135305"
     }
 ]
