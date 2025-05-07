@@ -1,18 +1,23 @@
+
 [
-    {
-        "title": "Produit 1688 #1",
-        "id": "646368135305",
-        "platform": "1688",
-        "image": "https://global-img-cdn.1688.com/img/ibank/O1CN01cS5eTd23mXAO2Vn82_!!2210872537298-0-cib.jpg",
-        "source": "https://cnfans.com/product?id=646368135305&platform=ALI_1688&ref=44529",
-        "cnfans_link": "https://cnfans.com/product?platform=1688&id=646368135305&ref=212491"
-    },
-    {
-        "title": "Produit TAOBAO #2",
-        "id": "628597198711",
-        "platform": "TAOBAO",
-        "image": "https://img.alicdn.com/bao/uploaded/i4/2207838825669/O1CN01dC2RJO1rkSAJYcEho_!!2207838825669.jpg",
-        "source": "https://cnfans.com/product?id=628597198711&platform=TAOBAO&ref=44529",
-        "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=628597198711&ref=212491"
-    }
+  {
+    "title": "Pantalon Cargo Homme",
+    "id": "123456789",
+    "platform": "1688",
+    "image": "https://image_url.jpg",
+    "category": "Mode Homme",
+    "price": 29.99,
+    "cnfans_link": "https://cnfans.com/product?platform=1688&id=123456789&ref=212491",
+    "source": "https://www.1688.com/offer/123456789.html"
+  },
+  {
+    "title": "T-shirt Oversize Femme",
+    "id": "987654321",
+    "platform": "TAOBAO",
+    "image": "https://image_url.jpg",
+    "category": "Mode Femme",
+    "price": 19.99,
+    "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=987654321&ref=212491",
+    "source": "https://www.taobao.com/item.htm?id=987654321"
+  }
 ]
