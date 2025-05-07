@@ -71,6 +71,7 @@
       color: #000;
       text-decoration: none;
     }
+
     /* Style pour la bannière des réseaux sociaux */
     .social-banner {
       background-color: #333;
@@ -88,9 +89,38 @@
     .social-banner a:hover {
       color: #007bff;
     }
+
     /* Suppression du soulignement des liens des produits */
     .product a {
-      text-decoration: none; /* Supprimer le soulignement des liens */
+      text-decoration: none;
+    }
+
+    /* Style des sélecteurs de catégories et de marques */
+    select {
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: 2px solid #ddd;
+      background-color: #ffffff;
+      color: #333;
+      width: 250px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      margin: 10px 0;
+    }
+
+    select:hover {
+      border-color: #007bff;
+      background-color: #f0f8ff;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #0056b3;
+      background-color: #e6f7ff;
+    }
+
+    option {
+      padding: 10px;
     }
   </style>
 </head>
@@ -107,7 +137,7 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 40px; height: 40px;">
     </a>
     <a href="https://www.tiktok.com/@trendy_world_off" target="_blank">
-      <img src="https://cdn.pixabay.com/photo/2021/01/30/06/43/tiktok-5962993_1280.png" alt="TikTok" style="width: 50px; height: 50px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo_2018.svg" alt="TikTok" style="width: 40px; height: 40px;">
     </a>
   </div>
 
