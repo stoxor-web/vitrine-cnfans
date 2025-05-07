@@ -24,7 +24,7 @@
     <thead>
       <tr>
         <th>Titre</th><th>Plateforme</th><th>ID</th><th>Image</th>
-        <th>Catégorie</th><th>Marque</th><th>Prix (€)</th><th>Actions</th>
+        <th>Catégorie</th><th>Marque</th><th>Couleurs</th><th>Prix (€)</th><th>Actions</th>
       </tr>
     </thead>
     <tbody id="productTableBody"></tbody>
@@ -33,12 +33,19 @@
   <script>
     let products = [];
     let brands = [];
+    let colors = [];
 
-    // Charger la liste des marques depuis brands.json
+    // Charger la liste des marques
     fetch('brands.json')
-      .then(response => response.json())
-      .then(data => { brands = data; })
+      .then(res => res.json())
+      .then(data => brands = data)
       .catch(err => console.error('Erreur chargement brands.json:', err));
+
+    // Charger la liste des couleurs
+    fetch('colors.json')
+      .then(res => res.json())
+      .then(data => colors = data)
+      .catch(err => console.error('Erreur chargement colors.json:', err));
 
     document.getElementById('fileInput').addEventListener('change', function(e) {
       const reader = new FileReader();
@@ -55,14 +62,14 @@
       tbody.innerHTML = '';
       products.forEach((p, i) => {
         const row = document.createElement('tr');
-        // Champs texte
+        // Titre, plateforme, id, image
         row.innerHTML = `
           <td><input value="${p.title}" onchange="products[${i}].title=this.value"></td>
           <td><input value="${p.platform}" onchange="products[${i}].platform=this.value"></td>
           <td><input value="${p.id}" onchange="products[${i}].id=this.value"></td>
           <td><input value="${p.image}" onchange="products[${i}].image=this.value"></td>
         `;
-        // Catégorie statique
+        // Catégorie
         const catCell = document.createElement('td');
         const catSelect = document.createElement('select');
         ['Mode Homme','Mode Femme','Accessoires','Chaussures'].forEach(c => {
@@ -73,7 +80,7 @@
         catSelect.onchange = e => products[i].category = e.target.value;
         catCell.appendChild(catSelect);
         row.appendChild(catCell);
-        // Marque dynamique
+        // Marque
         const brandCell = document.createElement('td');
         const brandSelect = document.createElement('select');
         brands.forEach(br => {
@@ -84,10 +91,25 @@
         brandSelect.onchange = e => products[i].brand = e.target.value;
         brandCell.appendChild(brandSelect);
         row.appendChild(brandCell);
+        // Couleurs multi-select
+        const colorCell = document.createElement('td');
+        const colorSelect = document.createElement('select');
+        colorSelect.multiple = true;
+        colors.forEach(col => {
+          const opt = document.createElement('option'); opt.value = col; opt.textContent = col;
+          if (Array.isArray(p.colors) && p.colors.includes(col)) opt.selected = true;
+          colorSelect.appendChild(opt);
+        });
+        colorSelect.onchange = e => {
+          const selected = Array.from(e.target.selectedOptions).map(o => o.value);
+          products[i].colors = selected;
+        };
+        colorCell.appendChild(colorSelect);
+        row.appendChild(colorCell);
         // Prix
         const priceCell = document.createElement('td');
         const priceInput = document.createElement('input');
-        priceInput.type = 'number'; priceInput.step = '0.01'; priceInput.value = p.price;
+        priceInput.type = 'number'; priceInput.step = '0.01'; priceInput.value = p.price || 0;
         priceInput.onchange = e => products[i].price = parseFloat(e.target.value);
         priceCell.appendChild(priceInput);
         row.appendChild(priceCell);
@@ -115,8 +137,8 @@
     function addProduct() {
       products.push({
         title:'', platform:'', id:'', image:'',
-        category:'Mode Homme', brand: brands[0] || '',
-        price:0, cnfans_link:'', source:''
+        category:'Mode Homme', brand:brands[0]||'',
+        colors:[], price:0, cnfans_link:'', source:''
       });
       renderTable();
     }
