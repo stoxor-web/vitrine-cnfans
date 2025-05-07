@@ -73,52 +73,52 @@
   <script>
     let products = [], brands = [], colors = [];
 
-    // Charger et trier les marques
+    // load & sort brands
     fetch('brands.json')
-      .then(r => r.json())
-      .then(data => {
-        brands = data.sort((a, b) => a.localeCompare(b, 'fr'));
+      .then(r=>r.json())
+      .then(data=>{
+        brands = data.sort((a,b)=>a.localeCompare(b,'fr'));
         const bf = document.getElementById('brandFilter');
-        brands.forEach(b => {
-          const o = document.createElement('option');
-          o.value = o.textContent = b;
+        brands.forEach(b=>{
+          const o=document.createElement('option');
+          o.value=o.textContent=b;
           bf.appendChild(o);
         });
       });
 
-    // Charger les couleurs
+    // load colors
     fetch('colors.json')
-      .then(r => r.json())
-      .then(data => { colors = data; })
+      .then(r=>r.json())
+      .then(data=>{ colors = data; })
       .catch(console.error);
 
-    // Charger les produits
+    // load products
     fetch('jadeship_products.json')
-      .then(r => r.json())
-      .then(data => { products = data; filterProducts(); })
+      .then(r=>r.json())
+      .then(data=>{ products = data; filterProducts(); })
       .catch(console.error);
 
-    function filterProducts() {
+    function filterProducts(){
       const cat = document.getElementById('categoryFilter').value;
       const br = document.getElementById('brandFilter').value;
-      const filtered = products.filter(p =>
-        (cat === 'all' || p.category === cat) &&
-        (br === 'all' || p.brand === br)
+      const filtered = products.filter(p=>
+        (cat==='all'||p.category===cat) &&
+        (br==='all'||p.brand===br)
       );
       displayProducts(filtered);
     }
 
-    function displayProducts(list) {
+    function displayProducts(list){
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
-      list.forEach(p => {
+      list.forEach(p=>{
         const card = document.createElement('a');
-        card.className = 'product';
-        card.href = p.cnfans_link;
-        card.target = '_blank';
+        card.className='product';
+        card.href=p.cnfans_link;
+        card.target='_blank';
 
-        // Cercles de couleurs
-        const circles = (p.colors || []).map(code =>
+        // color circles
+        const circles = (p.colors || []).map(code=>
           `<span class="color-circle" style="background:${code}"></span>`
         ).join('');
 
