@@ -205,7 +205,7 @@
       var start = Date.now();
       const cnfansLink = event.target.getAttribute("data-product-link");
       
-      // Tentative d'ouverture de l'application CNFANS avec un deep link
+      // Tentative d'ouverture de l'application CNFANS avec un lien produit
       window.location = `cnfans://product?link=${encodeURIComponent(cnfansLink)}`;
       
       setTimeout(function() {
