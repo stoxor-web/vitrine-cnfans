@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TRENDY WORLD SHOP</title>
   <style>
+    /* Suppression du soulignement pour tous les liens */
+    a {
+      text-decoration: none !important;
+      color: inherit;
+    }
+
     html, body {
       overflow-x: hidden;
       margin: 0; padding: 0; width: 100%;
@@ -22,7 +28,7 @@
     }
     .admin-link {
       position: absolute; top: 5px; left: 5px;
-      font-size: 24px; color: white; text-decoration: none;
+      font-size: 24px; color: white;
     }
     .admin-link:hover { color: #007bff; }
     .marquee {
@@ -63,13 +69,12 @@
     }
     .product-title {
       padding:10px; font-size:16px; font-weight:bold;
-      color:#333; text-decoration:none;
+      color:#333;
     }
     .product-price {
       padding:10px; font-size:16px; font-weight:bold;
-      color:#000; text-decoration:none;
+      color:#000;
     }
-    .product a { text-decoration:none; color:inherit; display:block; }
     .social-banner {
       background:#808080; text-align:center; padding:10px 0;
     }
@@ -138,10 +143,6 @@
       .then(r => r.json())
       .then(data => { products = data; filterProducts(); });
 
-    function isMobile() {
-      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
-
     function filterProducts() {
       const cat = document.getElementById('categoryFilter').value;
       const br  = document.getElementById('brandFilter').value;
@@ -163,7 +164,7 @@
 
         // Désactivation temporaire de l'ouverture dans l'appli mobile
         // link.addEventListener('click', e => {
-        //   if (!isMobile()) return;
+        //   if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
         //   e.preventDefault();
         //   const productWeb = p.cnfans_link;
         //   const intent = `intent://${new URL(productWeb).pathname}?${new URL(productWeb).searchParams.toString()}#Intent;package=com.cnfans.app;scheme=https;end`;
