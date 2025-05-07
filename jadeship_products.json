@@ -3,7 +3,7 @@
     "title": "Birkenstock Boston",
     "platform": "Weidian",
     "id": "7233949100",
-    "image": "https://images.cnfans.com/1626531767394082817/inbound-water-mark/97590644e6fe9015b12771a3d9549cd0104b2c7f28fddec24ed6db49aa7de1cc.jpg",
+    "image": "https://www.tower-london.fr/cdn/shop/files/35868865-420b-424a-88ed-5a685c555879.jpg?v=1730120806",
     "category": "Mode Homme",
     "price": 23,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7233949100&ref=212491",
@@ -13,7 +13,7 @@
     "title": "Socks Nike ",
     "platform": "ALI_1688",
     "id": "733761829621",
-    "image": "https://cbu01.alicdn.com/img/ibank/O1CN01aruaqN1Bs2x8jvNza_!!0-0-cib.jpg",
+    "image": "https://media.strefatenisa.com.pl/public/media/58/3d/5c/1728158515/sx6888-010-white.png?ts=1745861473",
     "category": "Accessoires",
     "brand": "Nike",
     "price": 3,
@@ -24,11 +24,33 @@
     "title": "Supreme Bag",
     "platform": "ALI_1688",
     "id": "669472226357",
-    "image": "https://images.cnfans.com/1626531767394082817/inbound-water-mark/35e3a7694866939d9814cd4787aa3d1bd83411efadb27c2f046790a8f12f0ca3.jpg",
+    "image": "https://preview.redd.it/oogt362wddgb1.jpg?width=640&crop=smart&auto=webp&s=c14647a00f7d7a6bf6ef5e3a10ff5bff6d56b0ee",
     "category": "Accessoires",
-    "brand": "Nike",
+    "brand": "Supreme",
     "price": 5,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=669472226357&ref=212491",
     "source": "https://www.cnfans.com/product?id=669472226357&platform=ALI_1688"
+  },
+  {
+    "title": "T-Shirt Stussy",
+    "platform": "TAOBAO",
+    "id": "824021405560",
+    "image": "https://image.goxip.com/0CQfrDuPyGJfJx1-zuXuURtbe88=/fit-in/500x500/filters:format(jpg):quality(80):fill(white)/https:%2F%2Fimages.stockx.com%2Fimages%2FStussy-Fuzzy-Dice-Tee-White-Product_V2.jpg",
+    "category": "Mode Homme",
+    "brand": "Nike",
+    "price": 12,
+    "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=824021405560&ref=212491",
+    "source": "https://www.cnfans.com/product?id=824021405560&platform=TAOBAO"
+  },
+  {
+    "title": "Yeezy Slide",
+    "platform": "WEIDIAN",
+    "id": "7303775374",
+    "image": "https://cdn.shopify.com/s/files/1/2358/2817/products/yeezy-slide-onyx_1.png?v=1664208163",
+    "category": "Mode Homme",
+    "brand": "Nike",
+    "price": 0,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7303775374&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7303775374&platform=WEIDIAN"
   }
 ]
