@@ -29,7 +29,8 @@
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=733761829621&ref=212491",
     "source": "https://www.cnfans.com/product?id=733761829621&platform=ALI_1688",
     "colors": [
-      "#43A047"
+      "#212121",
+      "#FAFAFA"
     ]
   },
   {
@@ -41,7 +42,13 @@
     "brand": "Supreme",
     "price": 5.6,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=669472226357&ref=212491",
-    "source": "https://www.cnfans.com/product?id=669472226357&platform=ALI_1688"
+    "source": "https://www.cnfans.com/product?id=669472226357&platform=ALI_1688",
+    "colors": [
+      "#E53935",
+      "#1E88E5",
+      "#FDD835",
+      "#212121"
+    ]
   },
   {
     "title": "T-Shirt Stussy",
@@ -52,7 +59,12 @@
     "brand": "Stussy",
     "price": 12.4,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=824021405560&ref=212491",
-    "source": "https://www.cnfans.com/product?id=824021405560&platform=TAOBAO"
+    "source": "https://www.cnfans.com/product?id=824021405560&platform=TAOBAO",
+    "colors": [
+      "#D81B60",
+      "#212121",
+      "#FAFAFA"
+    ]
   },
   {
     "title": "Yeezy Slide",
@@ -63,7 +75,12 @@
     "brand": "Yeezy",
     "price": 13.5,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7303775374&ref=212491",
-    "source": "https://www.cnfans.com/product?id=7303775374&platform=WEIDIAN"
+    "source": "https://www.cnfans.com/product?id=7303775374&platform=WEIDIAN",
+    "colors": [
+      "#1565C0",
+      "#212121",
+      "#FAFAFA"
+    ]
   },
   {
     "title": "RL Zip",
@@ -74,7 +91,10 @@
     "brand": "Ralph Lauren",
     "price": 26.5,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=6990966530&ref=212491",
-    "source": "https://www.cnfans.com/product?id=6990966530&platform=Weidian"
+    "source": "https://www.cnfans.com/product?id=6990966530&platform=Weidian",
+    "colors": [
+      "#1E88E5"
+    ]
   },
   {
     "title": "Running T-Shirt",
@@ -85,7 +105,10 @@
     "brand": "Nike",
     "price": 8.1,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=903094980820&ref=212491",
-    "source": "https://www.cnfans.com/product?id=903094980820&platform=TAOBAO"
+    "source": "https://www.cnfans.com/product?id=903094980820&platform=TAOBAO",
+    "colors": [
+      "#43A047"
+    ]
   },
   {
     "title": "Hermes Belt ",
@@ -96,7 +119,10 @@
     "brand": "Hermès",
     "price": 4,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=624002677203&ref=212491",
-    "source": "https://www.cnfans.com/product?id=624002677203&platform=TAOBAO"
+    "source": "https://www.cnfans.com/product?id=624002677203&platform=TAOBAO",
+    "colors": [
+      "#212121"
+    ]
   },
   {
     "title": "Arc'Teryx Alpha SV",
@@ -107,6 +133,11 @@
     "brand": "Arc'teryx",
     "price": 40,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=6338187156&ref=212491",
-    "source": "https://www.cnfans.com/product?id=6338187156&platform=Weidian"
+    "source": "https://www.cnfans.com/product?id=6338187156&platform=Weidian",
+    "colors": [
+      "#212121",
+      "#757575",
+      "#FAFAFA"
+    ]
   }
 ]
