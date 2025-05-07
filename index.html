@@ -19,21 +19,19 @@
       text-align: center;
       position: relative;
     }
+    /* Style de l'icône du cadenas en haut à gauche */
     .admin-link {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #007bff;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: transparent;
       color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
+      font-size: 24px;
       text-decoration: none;
-      font-size: 14px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s ease;
+      cursor: pointer;
     }
     .admin-link:hover {
-      background-color: #0056b3;
+      color: #007bff;
     }
     .grid {
       display: grid;
@@ -64,16 +62,15 @@
       font-size: 16px;
       font-weight: bold;
       color: #333;
-      text-decoration: none; /* Suppression du soulignement du titre */
+      text-decoration: none;
     }
     .product-price {
       padding: 10px;
       font-size: 14px;
       font-weight: normal;
       color: #000;
-      text-decoration: none; /* Suppression du soulignement du prix */
+      text-decoration: none;
     }
-
     /* Style pour la bannière des réseaux sociaux */
     .social-banner {
       background-color: #333;
@@ -91,7 +88,6 @@
     .social-banner a:hover {
       color: #007bff;
     }
-
     /* Suppression du soulignement des liens des produits */
     .product a {
       text-decoration: none; /* Supprimer le soulignement des liens */
@@ -101,6 +97,8 @@
 <body>
   <header>
     <h1>Produits Tendance Français 2025</h1>
+    <!-- Icône cadenas en haut à gauche pour accéder à l'admin -->
+    <a href="admin.html" class="admin-link">🔒</a>
   </header>
 
   <!-- Bannière des réseaux sociaux avec icônes -->
@@ -173,7 +171,5 @@
     }
   </script>
 
-  <!-- Lien vers l'admin -->
-  <a href="admin.html" class="admin-link">🔐 Accès Admin</a>
 </body>
 </html>
