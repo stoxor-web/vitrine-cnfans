@@ -1,26 +1,18 @@
 [
     {
-        "title": "Produit CNFANS Exemple 1",
-        "source": "https://item.taobao.com/item.htm?id=628597198711",
-        "platform": "TAOBAO",
-        "id": "628597198711",
-        "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=628597198711&ref=212491",
-        "image": "https://img.uufinds.com/product/2025/05/07/1919920567442522113/qc/2c92808596a853a80196a9358aa94522.webp"
-    },
-    {
-        "title": "Produit CNFANS Exemple 2",
-        "source": "https://detail.1688.com/offer/646368135305.html",
-        "platform": "1688",
+        "title": "Produit 1688 #1",
         "id": "646368135305",
-        "cnfans_link": "https://cnfans.com/product?platform=1688&id=646368135305&ref=212491",
-        "image": "https://via.placeholder.com/300x300.png?text=Produit%20CNFANS%20Exemple%202"
+        "platform": "1688",
+        "image": "https://global-img-cdn.1688.com/img/ibank/O1CN01cS5eTd23mXAO2Vn82_!!2210872537298-0-cib.jpg",
+        "source": "https://cnfans.com/product?id=646368135305&platform=ALI_1688&ref=44529",
+        "cnfans_link": "https://cnfans.com/product?platform=1688&id=646368135305&ref=212491"
     },
     {
-        "title": "Produit CNFANS Exemple 3",
-        "source": "https://item.taobao.com/item.htm?id=123456789012",
+        "title": "Produit TAOBAO #2",
+        "id": "628597198711",
         "platform": "TAOBAO",
-        "id": "123456789012",
-        "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=123456789012&ref=212491",
-        "image": "https://via.placeholder.com/300x300.png?text=Produit%20CNFANS%20Exemple%203"
+        "image": "https://img.alicdn.com/imgextra/i4/1234567890/O1CN01xxx.jpg",
+        "source": "https://cnfans.com/product?id=628597198711&platform=TAOBAO&ref=44529",
+        "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=628597198711&ref=212491"
     }
 ]
