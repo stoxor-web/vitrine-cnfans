@@ -63,36 +63,28 @@
       font-weight: normal;
       color: #000;
     }
-
-    /* Mode Sombre */
-    body.dark-mode {
-      background-color: #121212;
-      color: #ffffff;
-    }
-    body.dark-mode header {
-      background-color: #333333;
-    }
-    body.dark-mode .product {
-      background-color: #222222;
-    }
-    body.dark-mode .product-title {
-      color: #f1f1f1;
-    }
   </style>
 </head>
 <body>
   <header>
     <h1>Produits Tendance Français 2025</h1>
     <a href="admin.html" class="admin-link">🔐 Accès Admin</a>
-    <button id="toggleMode" onclick="toggleMode()">🌙 Mode Sombre</button>
   </header>
 
   <div style="padding: 20px; text-align: center;">
-    <select id="categoryFilter" onchange="filterByCategory()">
+    <select id="categoryFilter" onchange="filterProducts()">
       <option value="all">Toutes les catégories</option>
       <option value="Mode Homme">Mode Homme</option>
       <option value="Mode Femme">Mode Femme</option>
       <option value="Accessoires">Accessoires</option>
+    </select>
+
+    <select id="brandFilter" onchange="filterProducts()">
+      <option value="all">Toutes les marques</option>
+      <option value="Nike">Nike</option>
+      <option value="Adidas">Adidas</option>
+      <option value="Puma">Puma</option>
+      <option value="Balenciaga">Balenciaga</option>
     </select>
   </div>
 
@@ -105,14 +97,19 @@
       .then(res => res.json())
       .then(data => {
         products = data;
-        filterByCategory();  // Afficher tous les produits au début
+        filterProducts();  // Afficher tous les produits au début
       });
 
-    function filterByCategory() {
+    function filterProducts() {
       const selectedCategory = document.getElementById('categoryFilter').value;
-      const filteredProducts = selectedCategory === 'all' 
-        ? products 
-        : products.filter(product => product.category === selectedCategory);
+      const selectedBrand = document.getElementById('brandFilter').value;
+
+      const filteredProducts = products.filter(product => {
+        const categoryMatch = selectedCategory === 'all' || product.category === selectedCategory;
+        const brandMatch = selectedBrand === 'all' || product.brand === selectedBrand;
+        return categoryMatch && brandMatch;
+      });
+
       displayProducts(filteredProducts);
     }
 
@@ -126,40 +123,12 @@
           <a href="${product.cnfans_link}" target="_blank">
             <img src="${product.image}" alt="${product.title}" />
             <div class="product-title">${product.title}</div>
-            <div class="product-price">${product.price} €</div> <!-- Affichage du prix -->
+            <div class="product-price">${product.price} €</div>
           </a>
         `;
         grid.appendChild(card);
       });
     }
-
-    // Fonction pour basculer entre mode sombre et clair
-    function toggleMode() {
-      const body = document.body;
-      const button = document.getElementById('toggleMode');
-
-      // Basculer la classe 'dark-mode' sur le body
-      body.classList.toggle('dark-mode');
-
-      // Modifier le texte du bouton en fonction du mode
-      if (body.classList.contains('dark-mode')) {
-        button.textContent = "☀️ Mode Clair";
-      } else {
-        button.textContent = "🌙 Mode Sombre";
-      }
-
-      // Sauvegarder la préférence dans le localStorage
-      localStorage.setItem('mode', body.classList.contains('dark-mode') ? 'dark' : 'light');
-    }
-
-    // Vérifier la préférence de l'utilisateur au chargement
-    document.addEventListener("DOMContentLoaded", function() {
-      const mode = localStorage.getItem('mode');
-      if (mode === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.getElementById('toggleMode').textContent = "☀️ Mode Clair";
-      }
-    });
   </script>
 </body>
 </html>

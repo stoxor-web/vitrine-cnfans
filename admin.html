@@ -12,35 +12,11 @@
     input[type="text"] { width: 100%; padding: 5px; }
     button { margin: 5px; padding: 6px 12px; }
     select { width: 100%; padding: 5px; }
-
-    /* Mode Clair */
-    body {
-      background-color: #ffffff;
-      color: #000000;
-    }
-    header {
-      background-color: #111827;
-      color: white;
-    }
-
-    /* Mode Sombre */
-    body.dark-mode {
-      background-color: #121212;
-      color: #ffffff;
-    }
-    body.dark-mode header {
-      background-color: #333333;
-    }
-    body.dark-mode table {
-      background-color: #222222;
-      color: #ffffff;
-    }
   </style>
 </head>
 <body>
   <header>
     <h1>🛠️ Interface Admin – Produits CNFANS</h1>
-    <button id="toggleMode" onclick="toggleMode()">🌙 Mode Sombre</button>
   </header>
 
   <input type="file" id="fileInput" accept=".json"><br><br>
@@ -129,34 +105,6 @@
       link.download = 'jadeship_products.json';
       link.click();
     }
-
-    // Fonction pour basculer entre mode sombre et clair
-    function toggleMode() {
-      const body = document.body;
-      const button = document.getElementById('toggleMode');
-
-      // Basculer la classe 'dark-mode' sur le body
-      body.classList.toggle('dark-mode');
-
-      // Modifier le texte du bouton en fonction du mode
-      if (body.classList.contains('dark-mode')) {
-        button.textContent = "☀️ Mode Clair";
-      } else {
-        button.textContent = "🌙 Mode Sombre";
-      }
-
-      // Sauvegarder la préférence dans le localStorage
-      localStorage.setItem('mode', body.classList.contains('dark-mode') ? 'dark' : 'light');
-    }
-
-    // Vérifier la préférence de l'utilisateur au chargement
-    document.addEventListener("DOMContentLoaded", function() {
-      const mode = localStorage.getItem('mode');
-      if (mode === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.getElementById('toggleMode').textContent = "☀️ Mode Clair";
-      }
-    });
   </script>
 </body>
 </html>
