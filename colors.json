@@ -1,0 +1,9 @@
+[
+  { "name": "Rouge",    "code": "#E53935" },
+  { "name": "Bleu",     "code": "#1E88E5" },
+  { "name": "Vert",     "code": "#43A047" },
+  { "name": "Jaune",    "code": "#FDD835" },
+  { "name": "Noir",     "code": "#212121" },
+  { "name": "Blanc",    "code": "#FAFAFA" }
+  // … etc.
+]
