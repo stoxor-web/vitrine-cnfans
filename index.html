@@ -6,7 +6,7 @@
   <title>BEST ITEMS 2025</title>
   <style>
     html, body {
-      overflow-x: hidden; /* Empêche le défilement horizontal */
+      overflow-x: hidden;
       width: 100%;
       margin: 0;
       padding: 0;
@@ -21,9 +21,7 @@
       padding: 20px;
       text-align: center;
       position: relative;
-      text-decoration: none;
     }
-    /* Icône cadenas */
     .admin-link {
       position: absolute;
       top: 5px;
@@ -54,7 +52,6 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-100%); }
     }
-    /* Grille produits */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -75,7 +72,7 @@
     .product img {
       width: 100%;
       height: 220px;
-      object-fit: contain; /* Ajuste l'image sans zoom ni déformation */
+      object-fit: contain;
     }
     .product-title {
       padding: 10px;
@@ -86,26 +83,33 @@
     }
     .product-price {
       padding: 10px;
-      font-size: 16px; /* Augmenter la taille du prix */
-      font-weight: bold; /* Mettre le prix en gras */
+      font-size: 16px; 
+      font-weight: bold;
       color: #000;
       text-decoration: none;
     }
     .product a { text-decoration: none; }
-    /* Bannière réseaux */
+    /* Bannière des réseaux sociaux - suppression du soulignement des liens */
     .social-banner {
       background: #808080;
       text-align: center;
       padding: 10px 0;
-      text-decoration: none;
+    }
+    .social-banner a {
+      color: white;
+      text-decoration: none; /* Enlever le soulignement des liens */
+      margin: 0 15px;
+      font-size: 24px;
+      transition: color 0.3s ease;
+    }
+    .social-banner a:hover {
+      color: #007bff;
     }
     .social-banner a img {
       width: 40px;
       height: 40px;
       margin: 0 10px;
-      text-decoration: none;
     }
-    /* Sélecteurs */
     .filters {
       text-align: center;
       padding: 20px;
@@ -126,7 +130,7 @@
     @media (max-width: 768px) {
       .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
       .product-title { font-size: 14px; }
-      .product-price { font-size: 12px; }
+      .product-price { font-size: 14px; }
       .filters select { width: 200px; }
     }
     @media (max-width: 480px) {
