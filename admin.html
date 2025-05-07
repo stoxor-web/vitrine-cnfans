@@ -15,6 +15,24 @@
   </style>
 </head>
 <body>
+  <script>
+    // Définir le mot de passe
+    const password = "admin123"; // Tu peux changer ce mot de passe par ce que tu veux
+
+    // Demander à l'utilisateur de saisir le mot de passe
+    const userPassword = prompt("Veuillez entrer le mot de passe pour accéder à l'administration");
+
+    // Vérifier si le mot de passe est correct
+    if (userPassword !== password) {
+      // Si le mot de passe est incorrect, afficher un message d'accès refusé
+      document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;'>⛔ Accès refusé</h1>";
+      throw new Error("Mot de passe incorrect.");
+    } else {
+      // Si le mot de passe est correct, continuer à charger la page admin
+      console.log("Accès autorisé !");
+    }
+  </script>
+
   <h1>🛠️ Interface Admin – Produits CNFANS</h1>
 
   <input type="file" id="fileInput" accept=".json"><br><br>
@@ -61,7 +79,6 @@
             <select onchange="products[${i}].category = this.value">
               <option value="Mode Homme" ${p.category === 'Mode Homme' ? 'selected' : ''}>Mode Homme</option>
               <option value="Mode Femme" ${p.category === 'Mode Femme' ? 'selected' : ''}>Mode Femme</option>
-              <option value="Chaussures" ${p.category === 'Chaussures' ? 'selected' : ''}>Chaussures</option>
               <option value="Accessoires" ${p.category === 'Accessoires' ? 'selected' : ''}>Accessoires</option>
             </select>
           </td>
