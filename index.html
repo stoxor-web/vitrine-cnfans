@@ -20,12 +20,20 @@
       position: relative;
     }
     .admin-link {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      color: #007bff;
+      position: fixed;
+      bottom: 20px;  /* Fixer le bouton à 20px du bas de la page */
+      right: 20px;   /* Placer le bouton à 20px du côté droit */
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
       text-decoration: none;
       font-size: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+    .admin-link:hover {
+      background-color: #0056b3;  /* Changer la couleur lors du survol */
     }
     .grid {
       display: grid;
@@ -56,24 +64,40 @@
       font-size: 16px;
       font-weight: bold;
       color: #333;
-      text-decoration: none; /* Suppression du soulignement du titre */
+      text-decoration: none;
     }
     .product-price {
       padding: 10px;
       font-size: 14px;
       font-weight: normal;
       color: #000;
-      text-decoration: none; /* Suppression du soulignement du prix */
+      text-decoration: none;
     }
-    a {
-      text-decoration: none; /* Suppression du soulignement de tous les liens */
+    select {
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      background-color: #ffffff;
+      color: #333;
+      width: 200px;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+      margin: 5px;
+    }
+    select:hover {
+      border-color: #007bff;
+      background-color: #f0f8ff;
+    }
+    select:focus {
+      outline: none;
+      border-color: #007bff;
+      background-color: #e6f7ff;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Produits Tendance Français 2025</h1>
-    <a href="admin.html" class="admin-link">🔐 Accès Admin</a>
   </header>
 
   <div style="padding: 20px; text-align: center;">
@@ -135,5 +159,8 @@
       });
     }
   </script>
+
+  <!-- Lien vers l'admin -->
+  <a href="admin.html" class="admin-link">🔐 Accès Admin</a>
 </body>
 </html>
