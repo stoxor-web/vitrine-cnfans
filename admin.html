@@ -12,28 +12,36 @@
     input[type="text"] { width: 100%; padding: 5px; }
     button { margin: 5px; padding: 6px 12px; }
     select { width: 100%; padding: 5px; }
+
+    /* Mode Clair */
+    body {
+      background-color: #ffffff;
+      color: #000000;
+    }
+    header {
+      background-color: #111827;
+      color: white;
+    }
+
+    /* Mode Sombre */
+    body.dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+    }
+    body.dark-mode header {
+      background-color: #333333;
+    }
+    body.dark-mode table {
+      background-color: #222222;
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
-  <script>
-    // Définir le mot de passe
-    const password = "admin123"; // Tu peux changer ce mot de passe par ce que tu veux
-
-    // Demander à l'utilisateur de saisir le mot de passe
-    const userPassword = prompt("Veuillez entrer le mot de passe pour accéder à l'administration");
-
-    // Vérifier si le mot de passe est correct
-    if (userPassword !== password) {
-      // Si le mot de passe est incorrect, afficher un message d'accès refusé
-      document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;'>⛔ Accès refusé</h1>";
-      throw new Error("Mot de passe incorrect.");
-    } else {
-      // Si le mot de passe est correct, continuer à charger la page admin
-      console.log("Accès autorisé !");
-    }
-  </script>
-
-  <h1>🛠️ Interface Admin – Produits CNFANS</h1>
+  <header>
+    <h1>🛠️ Interface Admin – Produits CNFANS</h1>
+    <button id="toggleMode" onclick="toggleMode()">🌙 Mode Sombre</button>
+  </header>
 
   <input type="file" id="fileInput" accept=".json"><br><br>
   <button onclick="addProduct()">➕ Ajouter un produit</button>
@@ -47,6 +55,7 @@
         <th>ID</th>
         <th>Image</th>
         <th>Catégorie</th>
+        <th>Prix (€)</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -82,6 +91,7 @@
               <option value="Accessoires" ${p.category === 'Accessoires' ? 'selected' : ''}>Accessoires</option>
             </select>
           </td>
+          <td><input type="number" value="${p.price}" onchange="products[${i}].price = parseFloat(this.value)" step="0.01"></td>
           <td><button onclick="deleteProduct(${i})">🗑 Supprimer</button></td>
         `;
         tbody.appendChild(row);
@@ -89,7 +99,7 @@
     }
 
     function addProduct() {
-      products.push({ title: "", platform: "", id: "", image: "", category: "Mode Homme", cnfans_link: "", source: "" });
+      products.push({ title: "", platform: "", id: "", image: "", category: "Mode Homme", price: 0, cnfans_link: "", source: "" });
       renderTable();
     }
 
@@ -110,6 +120,34 @@
       link.download = 'jadeship_products.json';
       link.click();
     }
+
+    // Fonction pour basculer entre mode sombre et clair
+    function toggleMode() {
+      const body = document.body;
+      const button = document.getElementById('toggleMode');
+
+      // Basculer la classe 'dark-mode' sur le body
+      body.classList.toggle('dark-mode');
+
+      // Modifier le texte du bouton en fonction du mode
+      if (body.classList.contains('dark-mode')) {
+        button.textContent = "☀️ Mode Clair";
+      } else {
+        button.textContent = "🌙 Mode Sombre";
+      }
+
+      // Sauvegarder la préférence dans le localStorage
+      localStorage.setItem('mode', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    }
+
+    // Vérifier la préférence de l'utilisateur au chargement
+    document.addEventListener("DOMContentLoaded", function() {
+      const mode = localStorage.getItem('mode');
+      if (mode === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('toggleMode').textContent = "☀️ Mode Clair";
+      }
+    });
   </script>
 </body>
 </html>
