@@ -9,10 +9,13 @@
     h1 { text-align: center; }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
     th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-    input[type="text"] { width: 100%; padding: 5px; }
+    input[type="text"], input[type="number"], select { width: 100%; padding: 5px; }
     button { margin: 5px; padding: 6px 12px; }
     select { width: 100%; padding: 5px; }
   </style>
+
+  <!-- Ajouter le CDN de SortableJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
 <body>
   <header>
@@ -36,23 +39,26 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody></tbody>
+    <tbody id="productTableBody"></tbody>
   </table>
 
   <script>
     let products = [];
 
+    // Charger le fichier JSON
     document.getElementById('fileInput').addEventListener('change', function(e) {
       const reader = new FileReader();
       reader.onload = function() {
         products = JSON.parse(reader.result);
         renderTable();
+        enableDragAndDrop(); // Activer le drag and drop après avoir rendu la table
       };
       reader.readAsText(e.target.files[0]);
     });
 
+    // Fonction pour afficher les produits dans le tableau
     function renderTable() {
-      const tbody = document.querySelector('#productTable tbody');
+      const tbody = document.querySelector('#productTableBody');
       tbody.innerHTML = '';
       products.forEach((p, i) => {
         const row = document.createElement('tr');
@@ -76,7 +82,7 @@
               <option value="Puma" ${p.brand === 'Puma' ? 'selected' : ''}>Puma</option>
               <option value="Balenciaga" ${p.brand === 'Balenciaga' ? 'selected' : ''}>Balenciaga</option>
               <option value="Hermes" ${p.brand === 'Hermes' ? 'selected' : ''}>Hermes</option>
-              <option value="Under Armor" ${p.brand === 'Under Armo' ? 'selected' : ''}>Under Armo</option>
+              <option value="Under Armor" ${p.brand === 'Under Armor' ? 'selected' : ''}>Under Armor</option>
             </select>
           </td>
           <td><input type="number" value="${p.price}" onchange="products[${i}].price = parseFloat(this.value)" step="0.01"></td>
@@ -86,16 +92,32 @@
       });
     }
 
+    // Fonction pour activer le drag and drop sur les lignes
+    function enableDragAndDrop() {
+      const tbody = document.getElementById('productTableBody');
+      new Sortable(tbody, {
+        animation: 150, // Temps d'animation pour le déplacement des lignes
+        onEnd: function(evt) {
+          // Mettre à jour l'ordre des produits dans le tableau
+          const movedItem = products.splice(evt.oldIndex, 1)[0];
+          products.splice(evt.newIndex, 0, movedItem);
+        }
+      });
+    }
+
+    // Fonction pour ajouter un produit
     function addProduct() {
       products.push({ title: "", platform: "", id: "", image: "", category: "Mode Homme", brand: "Nike", price: 0, cnfans_link: "", source: "" });
       renderTable();
     }
 
+    // Fonction pour supprimer un produit
     function deleteProduct(index) {
       products.splice(index, 1);
       renderTable();
     }
 
+    // Fonction pour télécharger le fichier JSON mis à jour
     function downloadJSON() {
       products.forEach(p => {
         p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
