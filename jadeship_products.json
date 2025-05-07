@@ -85,5 +85,16 @@
     "price": 4,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=624002677203&ref=212491",
     "source": "https://www.cnfans.com/product?id=624002677203&platform=TAOBAO"
+  },
+  {
+    "title": "Arc'Teryx Alpha SV",
+    "platform": "Weidian",
+    "id": "6338187156",
+    "image": "https://images.arcteryx.com/F24/1350x1710/Alpha-SV-Jacket-Black.jpg",
+    "category": "Mode Homme",
+    "brand": "Nike",
+    "price": 40,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=6338187156&ref=212491",
+    "source": "https://www.cnfans.com/product?id=6338187156&platform=Weidian"
   }
 ]
