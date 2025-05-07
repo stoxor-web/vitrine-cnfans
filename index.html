@@ -3,21 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TRENDY WORLD SHOP</title>
+  <title>BEST ITEMS 2025</title>
   <style>
-    /* Suppression du soulignement pour tous les liens */
-    a {
-      text-decoration: none !important;
-      color: inherit;
-    }
-
-    html, body {
-      overflow-x: hidden;
-      margin: 0; padding: 0; width: 100%;
-    }
     body {
       font-family: Arial, sans-serif;
       background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
     header {
       background-color: #111827;
@@ -26,96 +19,111 @@
       text-align: center;
       position: relative;
     }
-    .admin-link {
-      position: absolute; top: 5px; left: 5px;
-      font-size: 24px; color: white;
-    }
-    .admin-link:hover { color: #007bff; }
+    /* Message déroulant */
     .marquee {
-      background: red; overflow: hidden; white-space: nowrap;
-    }
-    .marquee span {
-      display: inline-block; padding-left:100%;
-      animation: scroll 20s linear infinite;
-      color: white; font-size: 14px; font-weight: bold;
+      background-color: red;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 5px 0;
+      text-align: center;
+      position: relative;
+      animation: scroll 30s linear infinite;
     }
     @keyframes scroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-100%); }
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
-    .filters {
-      text-align: center; padding: 20px;
+    /* Icône cadenas */
+    .admin-link {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background-color: transparent;
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+      cursor: pointer;
     }
-    .filters select {
-      padding: 12px 20px; font-size:16px; border-radius:25px;
-      border:2px solid #ddd; margin:0 10px 20px; transition:.3s;
+    .admin-link:hover { color: #007bff; }
+    .social-banner {
+      background-color: #808080;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
     }
-    .filters select:hover {
-      border-color: #007bff; background: #f0f8ff;
+    .social-banner a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 24px;
+      transition: color 0.3s ease;
     }
+    .social-banner a:hover { color: #007bff; }
     .grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
-      gap:20px; padding:20px; max-width:1200px; margin:auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
     }
     .product {
-      background:#fff; border-radius:10px; overflow:hidden;
-      box-shadow:0 2px 10px rgba(0,0,0,.05);
-      text-align:center; transition:transform .2s ease;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.2s ease;
     }
     .product:hover { transform: translateY(-5px); }
-    .product img {
-      width:100%; height:220px; object-fit:contain;
-    }
+    .product img { width: 100%; height: 220px; object-fit: cover; }
     .product-title {
-      padding:10px; font-size:16px; font-weight:bold;
-      color:#333;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
     }
     .product-price {
-      padding:10px; font-size:16px; font-weight:bold;
-      color:#000;
+      padding: 10px;
+      font-size: 14px;
+      color: #000;
     }
-    .social-banner {
-      background:#808080; text-align:center; padding:10px 0;
+    select {
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: 2px solid #ddd;
+      background-color: #fff;
+      color: #333;
+      width: 250px;
+      margin: 10px 5px;
+      transition: background-color 0.3s, border-color 0.3s;
     }
-    .social-banner a img {
-      width:40px; height:40px; margin:0 10px; vertical-align:middle;
-    }
-    @media (max-width:768px) {
-      .grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:15px; }
-      .product-title { font-size:14px; }
-      .product-price { font-size:12px; }
-    }
-    @media (max-width:480px) {
-      .grid { grid-template-columns:1fr; gap:10px; }
-      .filters select { width:160px; margin-bottom:15px; }
-    }
+    select:hover { border-color: #007bff; background-color: #f0f8ff; }
+    select:focus { outline: none; border-color: #0056b3; background-color: #e6f7ff; }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>TRENDY WORLD SHOP</h1>
-    <div class="marquee"><span>Attention, les prix affichés ne comprennent pas les frais de livraison.</span></div>
+    <h1>BEST ITEMS 2025</h1>
+    <div class="marquee">Attention, les prix affichés ne comprennent pas les frais de livraison.</div>
     <a href="admin.html" class="admin-link">🔒</a>
   </header>
 
   <div class="social-banner">
     <a href="https://cnfans.com/register?ref=212491" target="_blank">
-      <img src="https://spreadsheetcnfans.my.canva.site/_assets/media/2ee61dcee3eb5c104658e8ee50dd3ba2.png" alt="CNFans">
+      <img src="https://spreadsheetcnfans.my.canva.site/_assets/media/2ee61dcee3eb5c104658e8ee50dd3ba2.png" alt="CNFans" style="width:45px; height:45px;">
     </a>
     <a href="https://www.tiktok.com/@trendy_world_off" target="_blank">
-      <img src="https://cdn.pixabay.com/photo/2021/01/30/06/43/tiktok-5962993_1280.png" alt="TikTok">
+      <img src="https://cdn.pixabay.com/photo/2021/01/30/06/43/tiktok-5962993_1280.png" alt="TikTok" style="width:45px; height:45px;">
     </a>
     <a href="https://www.instagram.com/trendy_world_off/" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-    </a>
-    <a href="https://youtu.be/n_2sIEApRhk?si=wGym7D6Deui_vARg&t=12" target="_blank">
-      <img src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-104-432560.png?f=webp" alt="YouTube">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width:40px; height:40px;">
     </a>
   </div>
 
-  <div class="filters">
+  <div style="text-align:center; padding:20px;">
     <select id="categoryFilter" onchange="filterProducts()">
       <option value="all">Toutes les catégories</option>
       <option value="Mode Homme">Homme</option>
@@ -125,6 +133,13 @@
     </select>
     <select id="brandFilter" onchange="filterProducts()">
       <option value="all">Toutes les marques</option>
+      <option value="Adidas">Adidas</option>
+      <option value="Balenciaga">Balenciaga</option>
+      <option value="Nike">Nike</option>
+      <option value="Under Armor">Under Armor</option>
+      <option value="Hermes">Hermes</option>
+      <option value="Puma">Puma</option>
+      <option value="Supreme">Supreme</option>
     </select>
   </div>
 
@@ -132,57 +147,34 @@
 
   <script>
     let products = [];
-    let brands = [];
-
-    // Charger les marques dynamiquement
-    fetch('brands.json')
-      .then(r => r.json())
-      .then(data => {
-        brands = data;
-        const bf = document.getElementById('brandFilter');
-        brands.forEach(b => {
-          const opt = document.createElement('option');
-          opt.value = b;
-          opt.textContent = b;
-          bf.appendChild(opt);
-        });
-      })
-      .catch(e => console.error('Erreur chargement brands.json', e));
-
-    // Charger les produits
     fetch('jadeship_products.json')
-      .then(r => r.json())
-      .then(data => { products = data; filterProducts(); })
-      .catch(e => console.error('Erreur chargement products', e));
+      .then(res => res.json())
+      .then(data => { products = data; filterProducts(); });
 
     function filterProducts() {
       const cat = document.getElementById('categoryFilter').value;
-      const br  = document.getElementById('brandFilter').value;
+      const br = document.getElementById('brandFilter').value;
       const filtered = products.filter(p =>
-        (cat==='all' || p.category===cat) &&
-        (br==='all'  || p.brand===br)
+        (cat === 'all' || p.category === cat) &&
+        (br === 'all' || p.brand === br)
       );
       displayProducts(filtered);
     }
-
     function displayProducts(list) {
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
       list.forEach(p => {
-        const link = document.createElement('a');
-        link.className = 'product';
-        link.href   = p.cnfans_link;
-        link.target = '_blank';
-
-        link.innerHTML = `
-          <img src="${p.image}" alt="${p.title}">
-          <div class="product-title">${p.title}</div>
-          <div class="product-price">${p.price} €</div>
-        `;
-        grid.appendChild(link);
+        const card = document.createElement('div');
+        card.className = 'product';
+        card.innerHTML = `
+          <a href="${p.cnfans_link}" target="_blank">
+            <img src="${p.image}" alt="${p.title}" />
+            <div class="product-title">${p.title}</div>
+            <div class="product-price">${p.price} €</div>
+          </a>`;
+        grid.appendChild(card);
       });
     }
   </script>
-
 </body>
 </html>
