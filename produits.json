@@ -1,9 +1,0 @@
-[
-    {
-        "title": "Exemple de Produit Populaire",
-        "image": "https://example.com/product-image.jpg",
-        "cnfans_link": "https://www.cnfans.com/redirect?link=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1234567890&ref=TONCODE",
-        "taobao_url": "https://item.taobao.com/item.htm?id=1234567890",
-        "qc_link": "https://www.wegobuy.com/en/page/buy?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1234567890"
-    }
-]
