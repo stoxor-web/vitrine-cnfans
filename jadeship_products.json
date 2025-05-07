@@ -16,7 +16,7 @@
     "image": "https://noirfonce.fr/cdn/shop/products/nike-everyday-plus-socks-black-dv9475-010.jpg?v=1679604293",
     "category": "Accessoires",
     "brand": "Nike",
-    "price": 3,
+    "price": 3.5,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=733761829621&ref=212491",
     "source": "https://www.cnfans.com/product?id=733761829621&platform=ALI_1688"
   },
@@ -27,7 +27,7 @@
     "image": "https://preview.redd.it/oogt362wddgb1.jpg?width=640&crop=smart&auto=webp&s=c14647a00f7d7a6bf6ef5e3a10ff5bff6d56b0ee",
     "category": "Accessoires",
     "brand": "Supreme",
-    "price": 5,
+    "price": 5.6,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=669472226357&ref=212491",
     "source": "https://www.cnfans.com/product?id=669472226357&platform=ALI_1688"
   },
@@ -38,7 +38,7 @@
     "image": "https://image.goxip.com/0CQfrDuPyGJfJx1-zuXuURtbe88=/fit-in/500x500/filters:format(jpg):quality(80):fill(white)/https:%2F%2Fimages.stockx.com%2Fimages%2FStussy-Fuzzy-Dice-Tee-White-Product_V2.jpg",
     "category": "Mode Homme",
     "brand": "Nike",
-    "price": 12,
+    "price": 12.4,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=824021405560&ref=212491",
     "source": "https://www.cnfans.com/product?id=824021405560&platform=TAOBAO"
   },
@@ -52,60 +52,5 @@
     "price": 13.5,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7303775374&ref=212491",
     "source": "https://www.cnfans.com/product?id=7303775374&platform=WEIDIAN"
-  },
-  {
-    "title": "",
-    "platform": "",
-    "id": "",
-    "image": "",
-    "category": "Mode Homme",
-    "brand": "Nike",
-    "price": 0,
-    "cnfans_link": "https://cnfans.com/product?platform=&id=&ref=212491",
-    "source": "https://www.cnfans.com/product?id=&platform="
-  },
-  {
-    "title": "",
-    "platform": "",
-    "id": "",
-    "image": "",
-    "category": "Mode Homme",
-    "brand": "Nike",
-    "price": 0,
-    "cnfans_link": "https://cnfans.com/product?platform=&id=&ref=212491",
-    "source": "https://www.cnfans.com/product?id=&platform="
-  },
-  {
-    "title": "",
-    "platform": "",
-    "id": "",
-    "image": "",
-    "category": "Mode Homme",
-    "brand": "Nike",
-    "price": 0,
-    "cnfans_link": "https://cnfans.com/product?platform=&id=&ref=212491",
-    "source": "https://www.cnfans.com/product?id=&platform="
-  },
-  {
-    "title": "",
-    "platform": "",
-    "id": "",
-    "image": "",
-    "category": "Mode Homme",
-    "brand": "Nike",
-    "price": 0,
-    "cnfans_link": "https://cnfans.com/product?platform=&id=&ref=212491",
-    "source": "https://www.cnfans.com/product?id=&platform="
-  },
-  {
-    "title": "",
-    "platform": "",
-    "id": "",
-    "image": "",
-    "category": "Mode Homme",
-    "brand": "Nike",
-    "price": 0,
-    "cnfans_link": "https://cnfans.com/product?platform=&id=&ref=212491",
-    "source": "https://www.cnfans.com/product?id=&platform="
   }
 ]
