@@ -207,11 +207,11 @@
       window.location = "cnfans://product?id=" + event.target.getAttribute("data-product-id");
       
       setTimeout(function() {
-        // Si l'application n'est pas ouverte après 2 secondes, redirige vers le lien web
-        if (Date.now() - start < 2000) {
+        // Si l'application n'est pas ouverte après 1 secondes, redirige vers le lien web
+        if (Date.now() - start < 1000) {
           window.location = webUrl; // Rediriger vers le produit sur le site web
         }
-      }, 1000); // Attendre 1 seconde avant de rediriger
+      }, 900); // Attendre 1 seconde avant de rediriger
     }
 
     function displayProducts(list) {
