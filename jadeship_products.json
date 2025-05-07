@@ -16,7 +16,8 @@
       "#424242",
       "#757575",
       "#BDBDBD"
-    ]
+    ],
+    "color": "Rouge clair"
   },
   {
     "title": "Socks Nike ",
@@ -25,7 +26,7 @@
     "image": "https://noirfonce.fr/cdn/shop/products/nike-everyday-plus-socks-black-dv9475-010.jpg?v=1679604293",
     "category": "Accessoires",
     "brand": "Nike",
-    "price": 3.5,
+    "price": 4,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=733761829621&ref=212491",
     "source": "https://www.cnfans.com/product?id=733761829621&platform=ALI_1688",
     "colors": [
@@ -40,7 +41,7 @@
     "image": "https://preview.redd.it/oogt362wddgb1.jpg?width=640&crop=smart&auto=webp&s=c14647a00f7d7a6bf6ef5e3a10ff5bff6d56b0ee",
     "category": "Accessoires",
     "brand": "Supreme",
-    "price": 5.6,
+    "price": 6,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=669472226357&ref=212491",
     "source": "https://www.cnfans.com/product?id=669472226357&platform=ALI_1688",
     "colors": [
@@ -57,7 +58,7 @@
     "image": "https://image.goxip.com/0CQfrDuPyGJfJx1-zuXuURtbe88=/fit-in/500x500/filters:format(jpg):quality(80):fill(white)/https:%2F%2Fimages.stockx.com%2Fimages%2FStussy-Fuzzy-Dice-Tee-White-Product_V2.jpg",
     "category": "Mode Homme",
     "brand": "Stussy",
-    "price": 12.4,
+    "price": 13,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=824021405560&ref=212491",
     "source": "https://www.cnfans.com/product?id=824021405560&platform=TAOBAO",
     "colors": [
@@ -73,7 +74,7 @@
     "image": "https://cdn.shopify.com/s/files/1/2358/2817/products/yeezy-slide-onyx_1.png?v=1664208163",
     "category": "Mode Homme",
     "brand": "Yeezy",
-    "price": 13.5,
+    "price": 14,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7303775374&ref=212491",
     "source": "https://www.cnfans.com/product?id=7303775374&platform=WEIDIAN",
     "colors": [
@@ -89,7 +90,7 @@
     "image": "https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1304684_lifestyle?wid=600&hei=600&fmt=jpeg",
     "category": "Mode Homme",
     "brand": "Ralph Lauren",
-    "price": 26.5,
+    "price": 26,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=6990966530&ref=212491",
     "source": "https://www.cnfans.com/product?id=6990966530&platform=Weidian",
     "colors": [
@@ -103,7 +104,7 @@
     "image": "https://cdn.idealo.com/folder/Product/202100/1/202100169/s4_produktbild_gross_6/nike-dri-fit-adv-techknit-ultra-short-sleeves-shirt-dm4753.jpg",
     "category": "Mode Homme",
     "brand": "Nike",
-    "price": 8.1,
+    "price": 8,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=903094980820&ref=212491",
     "source": "https://www.cnfans.com/product?id=903094980820&platform=TAOBAO",
     "colors": [
@@ -139,5 +140,53 @@
       "#757575",
       "#FAFAFA"
     ]
+  },
+  {
+    "title": "RL T-Shirt ",
+    "platform": "Weidian",
+    "id": "7385422431",
+    "image": "https://media-cdn.citadium.com/image/60/3/3971603.png?fit=bounds&bg-color=EBEDEF&width=634&height=950&canvas=634-950",
+    "category": "Mode Homme",
+    "brand": "Ralph Lauren",
+    "color": "",
+    "price": 9,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7385422431&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7385422431&platform=Weidian"
+  },
+  {
+    "title": "Wallet Sulpice",
+    "platform": "Weidian",
+    "id": "7441986075",
+    "image": "https://cdn-images.farfetch-contents.com/22/84/93/98/22849398_53276173_1000.jpg",
+    "category": "Accessoires",
+    "brand": "Goyard",
+    "color": "",
+    "price": 9,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7441986075&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7441986075&platform=Weidian"
+  },
+  {
+    "title": "Wallet Victoire",
+    "platform": "Weidian",
+    "id": "7441986075",
+    "image": "https://image.goxip.com/_j3rsOGUmmAVD7fQwNRvQLurOsg=/fit-in/500x500/filters:format(jpg):quality(80):fill(white)/https:%2F%2Fimages.stockx.com%2Fimages%2FGoyard-Victoire-Wallet-Black-Natural-V.jpg",
+    "category": "Accessoires",
+    "brand": "Goyard",
+    "color": "",
+    "price": 13,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7441986075&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7441986075&platform=Weidian"
+  },
+  {
+    "title": "Wallet ",
+    "platform": "Weidian",
+    "id": "7441986075",
+    "image": "https://media.monogramparis.com/393162/sac-bandouliere-goyard-toile-monogramme-gris.webp",
+    "category": "Accessoires",
+    "brand": "Goyard",
+    "color": "",
+    "price": 27,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7441986075&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7441986075&platform=Weidian"
   }
 ]
