@@ -58,7 +58,7 @@
     const correctPwd = '123456'; // <-- Définir ici le mot de passe
     let pwdTimer;
 
-    // Rediriger si non validé en 10s
+    // Rediriger si non validé en 15s
     window.onload = () => {
       pwdTimer = setTimeout(() => {
         window.location.href = 'index.html';
@@ -67,7 +67,7 @@
 
     function checkPwd() {
       const input = document.getElementById('adminPwd').value;
-      if(input === correctPwd) {
+      if (input === correctPwd) {
         clearTimeout(pwdTimer);
         document.getElementById('pw-overlay').style.display = 'none';
       } else {
@@ -75,80 +75,146 @@
       }
     }
 
-    // Reste du code admin (drag&drop, renderTable, etc.)
     let products = [];
     let brands = [];
     let colors = [];
-    fetch('brands.json').then(r=>r.json()).then(d=>brands=d.sort((a,b)=>a.localeCompare(b,'fr')));
-    fetch('colors.json').then(r=>r.json()).then(d=>colors=d);
+
+    // Charger marques et couleurs
+    fetch('brands.json').then(r => r.json()).then(d => brands = d.sort((a, b) => a.localeCompare(b, 'fr')));
+    fetch('colors.json').then(r => r.json()).then(d => colors = d);
 
     document.getElementById('fileInput').addEventListener('change', e => {
       const reader = new FileReader();
-      reader.onload = () => { products = JSON.parse(reader.result); renderTable(); enableDragAndDrop(); };
+      reader.onload = () => {
+        products = JSON.parse(reader.result);
+        renderTable();
+        enableDragAndDrop();
+      };
       reader.readAsText(e.target.files[0]);
     });
 
     function renderTable() {
       const tbody = document.getElementById('productTableBody');
       tbody.innerHTML = '';
-      products.forEach((p,i)=>{
+
+      products.forEach((p, i) => {
         const row = document.createElement('tr');
-        row.innerHTML =
-          `<td><input value="${p.title||''}" onchange="products[${i}].title=this.value"></td>`+
-          `<td><input value="${p.platform||''}" onchange="products[${i}].platform=this.value"></td>`+
-          `<td><input value="${p.id||''}" onchange="products[${i}].id=this.value"></td>`+
-          `<td><input value="${p.image||''}" onchange="products[${i}].image=this.value"></td>`;
-        // catégorie
+
+        // Colonnes titre / plateforme / id / image
+        row.innerHTML = `
+          <td><input value="${p.title||''}" onchange="products[${i}].title=this.value"></td>
+          <td><input value="${p.platform||''}" onchange="products[${i}].platform=this.value"></td>
+          <td><input value="${p.id||''}" onchange="products[${i}].id=this.value"></td>
+          <td><input value="${p.image||''}" onchange="products[${i}].image=this.value"></td>
+        `;
+        // Catégorie
         const catCell = document.createElement('td');
         const catSelect = document.createElement('select');
-        ['Mode Homme','Mode Femme','Accessoires','Chaussures'].forEach(v=>{
-          const o=document.createElement('option'); o.value=o.textContent=v;
-          if(p.category===v) o.selected=true;
+        ['Mode Homme','Mode Femme','Accessoires','Chaussures'].forEach(v => {
+          const o = document.createElement('option');
+          o.value = o.textContent = v;
+          if (p.category === v) o.selected = true;
           catSelect.appendChild(o);
         });
-        catSelect.onchange=e=>products[i].category=e.target.value;
+        catSelect.onchange = e => products[i].category = e.target.value;
         catCell.appendChild(catSelect);
         row.appendChild(catCell);
-        // marque
+
+        // Marque
         const brandCell = document.createElement('td');
         const brandSelect = document.createElement('select');
-        brands.forEach(br=>{ const o=document.createElement('option'); o.value=o.textContent=br; if(p.brand===br)o.selected=true; brandSelect.appendChild(o); });
-        brandSelect.onchange=e=>products[i].brand=e.target.value;
+        brands.forEach(br => {
+          const o = document.createElement('option');
+          o.value = o.textContent = br;
+          if (p.brand === br) o.selected = true;
+          brandSelect.appendChild(o);
+        });
+        brandSelect.onchange = e => products[i].brand = e.target.value;
         brandCell.appendChild(brandSelect);
         row.appendChild(brandCell);
-        // couleurs
+
+        // ** Couleurs multiple **
         const colorCell = document.createElement('td');
         const colorSelect = document.createElement('select');
-        const empty = document.createElement('option');empty.value='';empty.textContent='-- Choisir --';colorSelect.appendChild(empty);
-        colors.forEach(c=>{ const o=document.createElement('option');o.value=o.textContent=c.name; if(p.color===c.name) o.selected=true; colorSelect.appendChild(o); });
-        colorSelect.onchange=e=>products[i].color=e.target.value;
+        colorSelect.multiple = true;
+        colors.forEach(c => {
+          const o = document.createElement('option');
+          o.value = c.code;        // stocke le code couleur
+          o.textContent = c.name;  // affiche le nom
+          if (Array.isArray(p.colors) && p.colors.includes(c.code)) {
+            o.selected = true;
+          }
+          colorSelect.appendChild(o);
+        });
+        colorSelect.onchange = e => {
+          // mise à jour du tableau products[i].colors
+          products[i].colors = Array
+            .from(e.target.selectedOptions)
+            .map(o => o.value);
+        };
         colorCell.appendChild(colorSelect);
         row.appendChild(colorCell);
-        // prix
-        const priceCell = document.createElement('td'); priceCell.classList.add('price-column');
-        const priceInput = document.createElement('input'); priceInput.type='number'; priceInput.step='0.01'; priceInput.value=p.price||0;
-        priceInput.onchange=e=>products[i].price=parseFloat(e.target.value);
+
+        // Prix
+        const priceCell = document.createElement('td');
+        priceCell.classList.add('price-column');
+        const priceInput = document.createElement('input');
+        priceInput.type = 'number';
+        priceInput.step = '0.01';
+        priceInput.value = p.price || 0;
+        priceInput.onchange = e => products[i].price = parseFloat(e.target.value);
         priceCell.appendChild(priceInput);
         row.appendChild(priceCell);
-        // actions
-        const ac = document.createElement('td');
-        const del = document.createElement('button'); del.textContent='🗑 Supprimer'; del.onclick=()=>deleteProduct(i);
-        ac.appendChild(del); row.appendChild(ac);
+
+        // Actions
+        const actionCell = document.createElement('td');
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '🗑 Supprimer';
+        delBtn.onclick = () => deleteProduct(i);
+        actionCell.appendChild(delBtn);
+        row.appendChild(actionCell);
+
         tbody.appendChild(row);
       });
     }
 
     function enableDragAndDrop() {
-      new Sortable(document.getElementById('productTableBody'),{animation:150,onEnd:e=>{
-        const [m]=products.splice(e.oldIndex,1); products.splice(e.newIndex,0,m);
-      }});
+      new Sortable(document.getElementById('productTableBody'), {
+        animation: 150,
+        onEnd: evt => {
+          const [moved] = products.splice(evt.oldIndex, 1);
+          products.splice(evt.newIndex, 0, moved);
+        }
+      });
     }
 
-    function addProduct(){ products.push({ title:'',platform:'',id:'',image:'',category:'Mode Homme',brand:brands[0]||'',color:'',price:0,cnfans_link:'',source:'' }); renderTable(); }
-    function deleteProduct(i){ products.splice(i,1); renderTable(); }
+    function addProduct() {
+      products.push({
+        title:'', platform:'', id:'', image:'',
+        category:'Mode Homme',
+        brand: brands[0] || '',
+        colors: [],   // tableau pour plusieurs couleurs
+        price:0,
+        cnfans_link:'', source:''
+      });
+      renderTable();
+    }
+
+    function deleteProduct(i) {
+      products.splice(i, 1);
+      renderTable();
+    }
+
     function downloadJSON(){
-      products.forEach(p=>{ p.cnfans_link=`https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`; p.source=`https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`; });
-      const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='jadeship_products.json'; a.click();
+      products.forEach(p => {
+        p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
+        p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
+      });
+      const blob = new Blob([JSON.stringify(products, null, 2)], { type:'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'jadeship_products.json';
+      a.click();
     }
   </script>
 </body>
