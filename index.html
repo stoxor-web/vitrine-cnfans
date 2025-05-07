@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Produits CNFANS</title>
+  <style>
+    body { font-family: Arial; background: #f2f2f2; padding: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+    .product { background: white; border-radius: 10px; padding: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .product img { width: 100%; height: auto; border-radius: 8px; }
+    .product-title { margin-top: 10px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>🛍️ Produits populaires avec lien CNFANS</h1>
+  <div class="grid" id="productGrid"></div>
+
+  <script>
+    fetch('jadeship_products.json')
+      .then(res => res.json())
+      .then(data => {
+        const grid = document.getElementById('productGrid');
+        data.forEach(product => {
+          const card = document.createElement('div');
+          card.className = 'product';
+          card.innerHTML = `
+            <a href="${product.cnfans_link}" target="_blank">
+              <img src="${product.image}" alt="${product.title}">
+              <div class="product-title">${product.title}</div>
+            </a>
+          `;
+          grid.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>
