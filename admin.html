@@ -8,9 +8,15 @@
     h1 { text-align: center; }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
     th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-    input[type="text"], input[type="number"], select { width: 100%; padding: 5px; }
+    input[type="text"], input[type="number"], select { width: 100%; padding: 5px; box-sizing: border-box; }
     select[multiple] { height: 100px; }
     button { margin: 5px; padding: 6px 12px; }
+
+    /* **** AJOUT : largeur réduite de la colonne Prix **** */
+    th.price-column, td.price-column {
+      width: 80px;        /* Ajuste cette valeur à 50 % de ton width initiale */
+      max-width: 80px;
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
@@ -24,8 +30,16 @@
   <table id="productTable">
     <thead>
       <tr>
-        <th>Titre</th><th>Plateforme</th><th>ID</th><th>Image</th>
-        <th>Catégorie</th><th>Marque</th><th>Couleurs</th><th>Prix (€)</th><th>Actions</th>
+        <th>Titre</th>
+        <th>Plateforme</th>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Catégorie</th>
+        <th>Marque</th>
+        <th>Couleurs</th>
+        <!-- on ajoute la classe price-column -->
+        <th class="price-column">Prix (€)</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody id="productTableBody"></tbody>
@@ -36,19 +50,13 @@
     let brands = [];
     let colors = [];
 
-    // Charger la liste des marques
+    // Charger marques et couleurs
     fetch('brands.json')
-      .then(res => res.json())
-      .then(data => brands = data.sort((a,b)=>a.localeCompare(b,'fr')))
-      .catch(err => console.error('Erreur chargement brands.json:', err));
-
-    // Charger la liste des couleurs
+      .then(r=>r.json()).then(data=>brands=data.sort((a,b)=>a.localeCompare(b,'fr')));
     fetch('colors.json')
-      .then(res => res.json())
-      .then(data => colors = data)  // colors = [{name,code},...]
-      .catch(err => console.error('Erreur chargement colors.json:', err));
+      .then(r=>r.json()).then(data=>colors=data);
 
-    document.getElementById('fileInput').addEventListener('change', function(e) {
+    document.getElementById('fileInput').addEventListener('change', e => {
       const reader = new FileReader();
       reader.onload = () => {
         products = JSON.parse(reader.result);
@@ -64,8 +72,7 @@
 
       products.forEach((p, i) => {
         const row = document.createElement('tr');
-
-        // Colonnes titre / plateforme / id / image
+        // Titre / plateforme / id / image
         row.innerHTML = `
           <td><input value="${p.title||''}" onchange="products[${i}].title=this.value"></td>
           <td><input value="${p.platform||''}" onchange="products[${i}].platform=this.value"></td>
@@ -76,12 +83,13 @@
         // Catégorie
         const catCell = document.createElement('td');
         const catSelect = document.createElement('select');
-        ['Mode Homme','Mode Femme','Accessoires','Chaussures'].forEach(optVal => {
-          const opt = document.createElement('option');
-          opt.value = opt.textContent = optVal;
-          if (p.category === optVal) opt.selected = true;
-          catSelect.appendChild(opt);
-        });
+        ['Mode Homme','Mode Femme','Accessoires','Chaussures']
+          .forEach(optVal => {
+            const opt = document.createElement('option');
+            opt.value = opt.textContent = optVal;
+            if (p.category===optVal) opt.selected = true;
+            catSelect.appendChild(opt);
+          });
         catSelect.onchange = e => products[i].category = e.target.value;
         catCell.appendChild(catSelect);
         row.appendChild(catCell);
@@ -92,7 +100,7 @@
         brands.forEach(br => {
           const opt = document.createElement('option');
           opt.value = opt.textContent = br;
-          if (p.brand === br) opt.selected = true;
+          if (p.brand===br) opt.selected = true;
           brandSelect.appendChild(opt);
         });
         brandSelect.onchange = e => products[i].brand = e.target.value;
@@ -111,17 +119,18 @@
           colorSelect.appendChild(opt);
         });
         colorSelect.onchange = e => {
-          products[i].colors = Array.from(e.target.selectedOptions).map(o => o.value);
+          products[i].colors = Array.from(e.target.selectedOptions).map(o=>o.value);
         };
         colorCell.appendChild(colorSelect);
         row.appendChild(colorCell);
 
         // Prix
         const priceCell = document.createElement('td');
+        priceCell.classList.add('price-column');
         const priceInput = document.createElement('input');
         priceInput.type = 'number';
         priceInput.step = '0.01';
-        priceInput.value = p.price || 0;
+        priceInput.value = p.price||0;
         priceInput.onchange = e => products[i].price = parseFloat(e.target.value);
         priceCell.appendChild(priceInput);
         row.appendChild(priceCell);
@@ -161,7 +170,7 @@
     }
 
     function deleteProduct(i) {
-      products.splice(i, 1);
+      products.splice(i,1);
       renderTable();
     }
 
@@ -170,7 +179,7 @@
         p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
         p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
       });
-      const blob = new Blob([JSON.stringify(products, null, 2)], { type: 'application/json' });
+      const blob = new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
       a.download = 'jadeship_products.json';
