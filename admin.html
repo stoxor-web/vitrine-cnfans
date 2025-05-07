@@ -32,125 +32,112 @@
 
   <script>
     let products = [];
+    let brands = [];
+
+    // Charger la liste des marques depuis brands.json
+    fetch('brands.json')
+      .then(response => response.json())
+      .then(data => { brands = data; })
+      .catch(err => console.error('Erreur chargement brands.json:', err));
 
     document.getElementById('fileInput').addEventListener('change', function(e) {
       const reader = new FileReader();
-      reader.onload = () => { products = JSON.parse(reader.result); renderTable(); enableDragAndDrop(); };
+      reader.onload = () => {
+        products = JSON.parse(reader.result);
+        renderTable();
+        enableDragAndDrop();
+      };
       reader.readAsText(e.target.files[0]);
     });
 
     function renderTable() {
       const tbody = document.getElementById('productTableBody');
       tbody.innerHTML = '';
-      products.forEach((p,i) => {
+      products.forEach((p, i) => {
         const row = document.createElement('tr');
+        // Titre, Plateforme, ID, Image
         row.innerHTML = `
           <td><input value="${p.title}" onchange="products[${i}].title=this.value"></td>
           <td><input value="${p.platform}" onchange="products[${i}].platform=this.value"></td>
           <td><input value="${p.id}" onchange="products[${i}].id=this.value"></td>
           <td><input value="${p.image}" onchange="products[${i}].image=this.value"></td>
-          <td>
-            <select onchange="products[${i}].category=this.value">
-              <option>Mode Homme</option>
-              <option>Mode Femme</option>
-              <option>Accessoires</option>
-              <option>Chaussures</option>
-            </select>
-          </td>
-          <td>
-            <select onchange="products[${i}].brand=this.value">
-              <option>Adidas</option>
-              <option>Ami</option>
-              <option>Apple</option>
-              <option>Arc'teryx</option>
-              <option>Asics</option>
-              <option>Balenciaga</option>
-              <option>Birkenstock</option>
-              <option>Burberry</option>
-              <option>C.P Company</option>
-              <option>Calvin Klein</option>
-              <option>Carhartt</option>
-              <option>Coach</option>
-              <option>Corteiz</option>
-              <option>Diesel</option>
-              <option>Dior</option>
-              <option>DR Martens</option>
-              <option>Enfants</option>
-              <option>Essentials</option>
-              <option>Fred Perry</option>
-              <option>G-Shock</option>
-              <option>Gallery Dept</option>
-              <option>Golden Goose</option>
-              <option>Goyard</option>
-              <option>Gucci</option>
-              <option>Hermès</option>
-              <option>Jacquemus</option>
-              <option>K-Way</option>
-              <option>Kaws</option>
-              <option>Lacoste</option>
-              <option>Lanvin</option>
-              <option>Lego</option>
-              <option>Louis Vuitton</option>
-              <option>Moncler</option>
-              <option>Mont Blanc</option>
-              <option>New Balance</option>
-              <option>New Era</option>
-              <option>Nike</option>
-              <option>Oakley</option>
-              <option>Others</option>
-              <option>Palace</option>
-              <option>Pokemon</option>
-              <option>Ralph Lauren</option>
-              <option>Rolex</option>
-              <option>Salomon</option>
-              <option>Seiko</option>
-              <option>Stone Island</option>
-              <option>Stussy</option>
-              <option>Supreme</option>
-              <option>The North Face</option>
-              <option>Thom Browne</option>
-              <option>Tissot</option>
-              <option>Ugg</option>
-              <option>Under Armour</option>
-              <option>Van Cleef</option>
-              <option>Veja</option>
-              <option>Venum</option>
-              <option>Yeezy</option>
-              <option>Yves Saint Laurent</option>
-            </select>
-          </td>
-          <td><input type="number" value="${p.price}" onchange="products[${i}].price=parseFloat(this.value)" step="0.01"></td>
-          <td><button onclick="deleteProduct(${i})">🗑 Supprimer</button></td>
         `;
+        // Catégorie select (statique)
+        const catCell = document.createElement('td');
+        const catSelect = document.createElement('select');
+        ['Mode Homme','Mode Femme','Accessoires','Chaussures'].forEach(c => {
+          const opt = document.createElement('option'); opt.value = c; opt.textContent = c;
+          if (p.category === c) opt.selected = true;
+          catSelect.appendChild(opt);
+        });
+        catSelect.onchange = e => { products[i].category = e.target.value; };
+        catCell.appendChild(catSelect);
+        row.appendChild(catCell);
+        // Marque select (dynamique)
+        const brandCell = document.createElement('td');
+        const brandSelect = document.createElement('select');
+        brands.forEach(br => {
+          const opt = document.createElement('option'); opt.value = br; opt.textContent = br;
+          if (p.brand === br) opt.selected = true;
+          brandSelect.appendChild(opt);
+        });
+        brandSelect.onchange = e => { products[i].brand = e.target.value; };
+        brandCell.appendChild(brandSelect);
+        row.appendChild(brandCell);
+        // Prix
+        const priceCell = document.createElement('td');
+        const priceInput = document.createElement('input');
+        priceInput.type = 'number'; priceInput.step = '0.01';
+        priceInput.value = p.price;
+        priceInput.onchange = e => { products[i].price = parseFloat(e.target.value); };
+        priceCell.appendChild(priceInput);
+        row.appendChild(priceCell);
+        // Actions
+        const actionCell = document.createElement('td');
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '🗑 Supprimer';
+        delBtn.onclick = () => deleteProduct(i);
+        actionCell.appendChild(delBtn);
+        row.appendChild(actionCell);
+
         tbody.appendChild(row);
       });
     }
 
     function enableDragAndDrop() {
       new Sortable(document.getElementById('productTableBody'), {
-        animation:150,
+        animation: 150,
         onEnd: evt => {
-          const [moved] = products.splice(evt.oldIndex,1);
-          products.splice(evt.newIndex,0,moved);
+          const [moved] = products.splice(evt.oldIndex, 1);
+          products.splice(evt.newIndex, 0, moved);
         }
       });
     }
 
     function addProduct() {
-      products.push({title:"",platform:"",id:"",image:"",category:"Mode Homme",brand:"Nike",price:0,cnfans_link:"",source:""});
+      products.push({
+        title: '', platform: '', id: '', image: '',
+        category: 'Mode Homme', brand: brands[0] || '',
+        price: 0, cnfans_link: '', source: ''
+      });
       renderTable();
     }
+
     function deleteProduct(i) {
-      products.splice(i,1); renderTable();
+      products.splice(i, 1);
+      renderTable();
     }
+
     function downloadJSON() {
-      products.forEach(p=>{
-        p.cnfans_link=`https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
-        p.source=`https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
+      products.forEach(p => {
+        p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
+        p.source = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
       });
-      const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
-      const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-      a.download='jadeship_products.json'; a.click();
+      const blob = new Blob([JSON.stringify(products, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'jadeship_products.json';
+      a.click();
     }
   </script>
 </body>
