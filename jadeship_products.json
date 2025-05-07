@@ -9,8 +9,7 @@
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7233949100&ref=212491",
     "source": "https://www.cnfans.com/product?id=7233949100&platform=Weidian",
     "brand": "Birkenstock",
-    "colors": [
-    ],
+    "colors": [],
     "color": "Rouge clair"
   },
   {
@@ -23,8 +22,7 @@
     "price": 4,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=733761829621&ref=212491",
     "source": "https://www.cnfans.com/product?id=733761829621&platform=ALI_1688",
-    "colors": [
-    ]
+    "colors": []
   },
   {
     "title": "Supreme Bag",
@@ -36,8 +34,7 @@
     "price": 6,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=669472226357&ref=212491",
     "source": "https://www.cnfans.com/product?id=669472226357&platform=ALI_1688",
-    "colors": [
-    ]
+    "colors": []
   },
   {
     "title": "T-Shirt Stussy",
@@ -49,8 +46,7 @@
     "price": 13,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=824021405560&ref=212491",
     "source": "https://www.cnfans.com/product?id=824021405560&platform=TAOBAO",
-    "colors": [
-    ]
+    "colors": []
   },
   {
     "title": "Yeezy Slide",
@@ -62,8 +58,7 @@
     "price": 14,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7303775374&ref=212491",
     "source": "https://www.cnfans.com/product?id=7303775374&platform=WEIDIAN",
-    "colors": [
-    ]
+    "colors": []
   },
   {
     "title": "RL Zip",
@@ -75,8 +70,7 @@
     "price": 26,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=6990966530&ref=212491",
     "source": "https://www.cnfans.com/product?id=6990966530&platform=Weidian",
-    "colors": [
-    ]
+    "colors": []
   },
   {
     "title": "Running T-Shirt",
@@ -88,8 +82,7 @@
     "price": 8,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=903094980820&ref=212491",
     "source": "https://www.cnfans.com/product?id=903094980820&platform=TAOBAO",
-    "colors": [
-    ]
+    "colors": []
   },
   {
     "title": "Hermes Belt ",
@@ -101,8 +94,7 @@
     "price": 4,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=624002677203&ref=212491",
     "source": "https://www.cnfans.com/product?id=624002677203&platform=TAOBAO",
-    "colors": [
-    ]
+    "colors": []
   },
   {
     "title": "Arc'Teryx Alpha SV",
@@ -114,14 +106,13 @@
     "price": 40,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=6338187156&ref=212491",
     "source": "https://www.cnfans.com/product?id=6338187156&platform=Weidian",
-    "colors": [
-    ]
+    "colors": []
   },
   {
     "title": "RL T-Shirt ",
     "platform": "Weidian",
     "id": "7385422431",
-    "image": "https://media-cdn.citadium.com/image/60/3/3971603.png?fit=bounds&bg-color=EBEDEF&width=634&height=950&canvas=634-950",
+    "image": "https://cdn.aboutstatic.com/file/images/add7b6045be87a2ce987dae2d5ac0979.png?bg=F4F4F5&quality=75&trim=1&height=480&width=360",
     "category": "Mode Homme",
     "brand": "Ralph Lauren",
     "color": "",
@@ -164,5 +155,29 @@
     "price": 27,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7441986075&ref=212491",
     "source": "https://www.cnfans.com/product?id=7441986075&platform=Weidian"
+  },
+  {
+    "title": "ZIP C.P Company",
+    "platform": "Weidian",
+    "id": "7428545388",
+    "image": "https://static.flexdog.fr/flexdog-2/products/images/0293b998-8bce-4032-8310-e4b38d039e26.jpeg",
+    "category": "Mode Homme",
+    "brand": "C.P Company",
+    "colors": [],
+    "price": 17,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7428545388&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7428545388&platform=Weidian"
+  },
+  {
+    "title": "SWEAT Stussy",
+    "platform": "Weidian",
+    "id": "7407518126",
+    "image": "https://i.ebayimg.com/images/g/XvUAAOSwul1jg2da/s-l1200.jpg",
+    "category": "Mode Homme",
+    "brand": "Stussy",
+    "colors": [],
+    "price": 15,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7407518126&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7407518126&platform=Weidian"
   }
 ]
