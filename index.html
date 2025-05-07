@@ -21,8 +21,8 @@
     }
     .admin-link {
       position: fixed;
-      bottom: 20px;  /* Fixer le bouton à 20px du bas de la page */
-      right: 20px;   /* Placer le bouton à 20px du côté droit */
+      bottom: 20px;
+      right: 20px;
       background-color: #007bff;
       color: white;
       padding: 10px 20px;
@@ -33,7 +33,7 @@
       transition: background-color 0.3s ease;
     }
     .admin-link:hover {
-      background-color: #0056b3;  /* Changer la couleur lors du survol */
+      background-color: #0056b3;
     }
     .grid {
       display: grid;
@@ -73,25 +73,23 @@
       color: #000;
       text-decoration: none;
     }
-    select {
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      background-color: #ffffff;
-      color: #333;
-      width: 200px;
-      transition: border-color 0.3s ease, background-color 0.3s ease;
-      margin: 5px;
+
+    /* Style pour la bannière des réseaux sociaux */
+    .social-banner {
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
     }
-    select:hover {
-      border-color: #007bff;
-      background-color: #f0f8ff;
+    .social-banner a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 24px;  /* Taille plus grande pour les icônes */
+      transition: color 0.3s ease;
     }
-    select:focus {
-      outline: none;
-      border-color: #007bff;
-      background-color: #e6f7ff;
+    .social-banner a:hover {
+      color: #007bff;
     }
   </style>
 </head>
@@ -99,6 +97,16 @@
   <header>
     <h1>Produits Tendance Français 2025</h1>
   </header>
+
+  <!-- Bannière des réseaux sociaux avec icônes -->
+  <div class="social-banner">
+    <a href="https://www.instagram.com/trendy_world_off/" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 40px; height: 40px;">
+    </a>
+    <a href="https://www.tiktok.com/@trendy_world_off" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo_2018.svg" alt="TikTok" style="width: 40px; height: 40px;">
+    </a>
+  </div>
 
   <div style="padding: 20px; text-align: center;">
     <select id="categoryFilter" onchange="filterProducts()">
