@@ -83,6 +83,7 @@
               <option value="Balenciaga" ${p.brand === 'Balenciaga' ? 'selected' : ''}>Balenciaga</option>
               <option value="Hermes" ${p.brand === 'Hermes' ? 'selected' : ''}>Hermes</option>
               <option value="Under Armor" ${p.brand === 'Under Armor' ? 'selected' : ''}>Under Armor</option>
+              <option value="Supreme" ${p.brand === 'Supreme' ? 'selected' : ''}>Supreme</option>
             </select>
           </td>
           <td><input type="number" value="${p.price}" onchange="products[${i}].price = parseFloat(this.value)" step="0.01"></td>
