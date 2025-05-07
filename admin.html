@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,16 +10,11 @@
     th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
     input[type="text"], input[type="number"], select { width: 100%; padding: 5px; }
     button { margin: 5px; padding: 6px 12px; }
-    select { width: 100%; padding: 5px; }
   </style>
-
-  <!-- Ajouter le CDN de SortableJS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
 <body>
-  <header>
-    <h1>🛠️ Interface Admin – Produits CNFANS</h1>
-  </header>
+  <header><h1>🛠️ Interface Admin – Produits CNFANS</h1></header>
 
   <input type="file" id="fileInput" accept=".json"><br><br>
   <button onclick="addProduct()">➕ Ajouter un produit</button>
@@ -29,14 +23,8 @@
   <table id="productTable">
     <thead>
       <tr>
-        <th>Titre</th>
-        <th>Plateforme</th>
-        <th>ID</th>
-        <th>Image</th>
-        <th>Catégorie</th>
-        <th>Marque</th>
-        <th>Prix (€)</th>
-        <th>Actions</th>
+        <th>Titre</th><th>Plateforme</th><th>ID</th><th>Image</th>
+        <th>Catégorie</th><th>Marque</th><th>Prix (€)</th><th>Actions</th>
       </tr>
     </thead>
     <tbody id="productTableBody"></tbody>
@@ -45,91 +33,124 @@
   <script>
     let products = [];
 
-    // Charger le fichier JSON
     document.getElementById('fileInput').addEventListener('change', function(e) {
       const reader = new FileReader();
-      reader.onload = function() {
-        products = JSON.parse(reader.result);
-        renderTable();
-        enableDragAndDrop(); // Activer le drag and drop après avoir rendu la table
-      };
+      reader.onload = () => { products = JSON.parse(reader.result); renderTable(); enableDragAndDrop(); };
       reader.readAsText(e.target.files[0]);
     });
 
-    // Fonction pour afficher les produits dans le tableau
     function renderTable() {
-      const tbody = document.querySelector('#productTableBody');
+      const tbody = document.getElementById('productTableBody');
       tbody.innerHTML = '';
-      products.forEach((p, i) => {
+      products.forEach((p,i) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td><input type="text" value="${p.title}" onchange="products[${i}].title = this.value"></td>
-          <td><input type="text" value="${p.platform}" onchange="products[${i}].platform = this.value"></td>
-          <td><input type="text" value="${p.id}" onchange="products[${i}].id = this.value"></td>
-          <td><input type="text" value="${p.image}" onchange="products[${i}].image = this.value"></td>
+          <td><input value="${p.title}" onchange="products[${i}].title=this.value"></td>
+          <td><input value="${p.platform}" onchange="products[${i}].platform=this.value"></td>
+          <td><input value="${p.id}" onchange="products[${i}].id=this.value"></td>
+          <td><input value="${p.image}" onchange="products[${i}].image=this.value"></td>
           <td>
-            <select onchange="products[${i}].category = this.value">
-              <option value="Mode Homme" ${p.category === 'Mode Homme' ? 'selected' : ''}>Mode Homme</option>
-              <option value="Mode Femme" ${p.category === 'Mode Femme' ? 'selected' : ''}>Mode Femme</option>
-              <option value="Accessoires" ${p.category === 'Accessoires' ? 'selected' : ''}>Accessoires</option>
-              <option value="Chaussures" ${p.category === 'Chaussures' ? 'selected' : ''}>Chaussures</option>
+            <select onchange="products[${i}].category=this.value">
+              <option>Mode Homme</option>
+              <option>Mode Femme</option>
+              <option>Accessoires</option>
+              <option>Chaussures</option>
             </select>
           </td>
           <td>
-            <select onchange="products[${i}].brand = this.value">
-              <option value="Nike" ${p.brand === 'Nike' ? 'selected' : ''}>Nike</option>
-              <option value="Adidas" ${p.brand === 'Adidas' ? 'selected' : ''}>Adidas</option>
-              <option value="Puma" ${p.brand === 'Puma' ? 'selected' : ''}>Puma</option>
-              <option value="Balenciaga" ${p.brand === 'Balenciaga' ? 'selected' : ''}>Balenciaga</option>
-              <option value="Hermes" ${p.brand === 'Hermes' ? 'selected' : ''}>Hermes</option>
-              <option value="Under Armor" ${p.brand === 'Under Armor' ? 'selected' : ''}>Under Armor</option>
-              <option value="Supreme" ${p.brand === 'Supreme' ? 'selected' : ''}>Supreme</option>
+            <select onchange="products[${i}].brand=this.value">
+              <option>Adidas</option>
+              <option>Ami</option>
+              <option>Apple</option>
+              <option>Arc'teryx</option>
+              <option>Asics</option>
+              <option>Balenciaga</option>
+              <option>Birkenstock</option>
+              <option>Burberry</option>
+              <option>C.P Company</option>
+              <option>Calvin Klein</option>
+              <option>Carhartt</option>
+              <option>Coach</option>
+              <option>Corteiz</option>
+              <option>Diesel</option>
+              <option>Dior</option>
+              <option>DR Martens</option>
+              <option>Enfants</option>
+              <option>Essentials</option>
+              <option>Fred Perry</option>
+              <option>G-Shock</option>
+              <option>Gallery Dept</option>
+              <option>Golden Goose</option>
+              <option>Goyard</option>
+              <option>Gucci</option>
+              <option>Hermès</option>
+              <option>Jacquemus</option>
+              <option>K-Way</option>
+              <option>Kaws</option>
+              <option>Lacoste</option>
+              <option>Lanvin</option>
+              <option>Lego</option>
+              <option>Louis Vuitton</option>
+              <option>Moncler</option>
+              <option>Mont Blanc</option>
+              <option>New Balance</option>
+              <option>New Era</option>
+              <option>Nike</option>
+              <option>Oakley</option>
+              <option>Others</option>
+              <option>Palace</option>
+              <option>Pokemon</option>
+              <option>Ralph Lauren</option>
+              <option>Rolex</option>
+              <option>Salomon</option>
+              <option>Seiko</option>
+              <option>Stone Island</option>
+              <option>Stussy</option>
+              <option>Supreme</option>
+              <option>The North Face</option>
+              <option>Thom Browne</option>
+              <option>Tissot</option>
+              <option>Ugg</option>
+              <option>Under Armour</option>
+              <option>Van Cleef</option>
+              <option>Veja</option>
+              <option>Venum</option>
+              <option>Yeezy</option>
+              <option>Yves Saint Laurent</option>
             </select>
           </td>
-          <td><input type="number" value="${p.price}" onchange="products[${i}].price = parseFloat(this.value)" step="0.01"></td>
+          <td><input type="number" value="${p.price}" onchange="products[${i}].price=parseFloat(this.value)" step="0.01"></td>
           <td><button onclick="deleteProduct(${i})">🗑 Supprimer</button></td>
         `;
         tbody.appendChild(row);
       });
     }
 
-    // Fonction pour activer le drag and drop sur les lignes
     function enableDragAndDrop() {
-      const tbody = document.getElementById('productTableBody');
-      new Sortable(tbody, {
-        animation: 150, // Temps d'animation pour le déplacement des lignes
-        onEnd: function(evt) {
-          // Mettre à jour l'ordre des produits dans le tableau
-          const movedItem = products.splice(evt.oldIndex, 1)[0];
-          products.splice(evt.newIndex, 0, movedItem);
+      new Sortable(document.getElementById('productTableBody'), {
+        animation:150,
+        onEnd: evt => {
+          const [moved] = products.splice(evt.oldIndex,1);
+          products.splice(evt.newIndex,0,moved);
         }
       });
     }
 
-    // Fonction pour ajouter un produit
     function addProduct() {
-      products.push({ title: "", platform: "", id: "", image: "", category: "Mode Homme", brand: "Nike", price: 0, cnfans_link: "", source: "" });
+      products.push({title:"",platform:"",id:"",image:"",category:"Mode Homme",brand:"Nike",price:0,cnfans_link:"",source:""});
       renderTable();
     }
-
-    // Fonction pour supprimer un produit
-    function deleteProduct(index) {
-      products.splice(index, 1);
-      renderTable();
+    function deleteProduct(i) {
+      products.splice(i,1); renderTable();
     }
-
-    // Fonction pour télécharger le fichier JSON mis à jour
     function downloadJSON() {
-      products.forEach(p => {
-        p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
-        p.source = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
+      products.forEach(p=>{
+        p.cnfans_link=`https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
+        p.source=`https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
       });
-
-      const blob = new Blob([JSON.stringify(products, null, 2)], { type: 'application/json' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'jadeship_products.json';
-      link.click();
+      const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+      a.download='jadeship_products.json'; a.click();
     }
   </script>
 </body>
