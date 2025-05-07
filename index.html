@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BEST ITEMS 2025</title>
+  <title>TRENDY WORLD SHOP</title>
   <style>
     html, body {
-      overflow-x: hidden;
+      overflow-x: hidden; /* Empêche le défilement horizontal */
       width: 100%;
       margin: 0;
       padding: 0;
@@ -21,7 +21,9 @@
       padding: 20px;
       text-align: center;
       position: relative;
+      text-decoration: none;
     }
+    /* Icône cadenas */
     .admin-link {
       position: absolute;
       top: 5px;
@@ -52,6 +54,7 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-100%); }
     }
+    /* Grille produits */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -72,7 +75,7 @@
     .product img {
       width: 100%;
       height: 220px;
-      object-fit: contain;
+      object-fit: contain; /* Ajuste l'image sans zoom ni déformation */
     }
     .product-title {
       padding: 10px;
@@ -83,33 +86,26 @@
     }
     .product-price {
       padding: 10px;
-      font-size: 16px; 
-      font-weight: bold;
+      font-size: 16px; /* Augmenter la taille du prix */
+      font-weight: bold; /* Mettre le prix en gras */
       color: #000;
       text-decoration: none;
     }
     .product a { text-decoration: none; }
-    /* Bannière des réseaux sociaux - suppression du soulignement des liens */
+    /* Bannière réseaux */
     .social-banner {
       background: #808080;
       text-align: center;
       padding: 10px 0;
-    }
-    .social-banner a {
-      color: white;
-      text-decoration: none; /* Enlever le soulignement des liens */
-      margin: 0 15px;
-      font-size: 24px;
-      transition: color 0.3s ease;
-    }
-    .social-banner a:hover {
-      color: #007bff;
+      text-decoration: none;
     }
     .social-banner a img {
       width: 40px;
       height: 40px;
       margin: 0 10px;
+      text-decoration: none;
     }
+    /* Sélecteurs */
     .filters {
       text-align: center;
       padding: 20px;
@@ -130,7 +126,7 @@
     @media (max-width: 768px) {
       .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
       .product-title { font-size: 14px; }
-      .product-price { font-size: 14px; }
+      .product-price { font-size: 12px; }
       .filters select { width: 200px; }
     }
     @media (max-width: 480px) {
@@ -204,6 +200,20 @@
       );
       displayProducts(filtered);
     }
+
+    function openAppOrWeb(event, webUrl) {
+      var start = Date.now();
+      // Tentative d'ouverture de l'application CNFANS
+      window.location = "cnfans://product?id=" + event.target.getAttribute("data-product-id");
+      
+      setTimeout(function() {
+        // Si l'application n'est pas ouverte après 2 secondes, redirige vers le lien web
+        if (Date.now() - start < 2000) {
+          window.location = webUrl; // Rediriger vers le produit sur le site web
+        }
+      }, 1000); // Attendre 1 seconde avant de rediriger
+    }
+
     function displayProducts(list) {
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
@@ -211,8 +221,8 @@
         const card = document.createElement('div');
         card.className = 'product';
         card.innerHTML = `
-          <a href="${p.cnfans_link}" target="_blank">
-            <img src="${p.image}" alt="${p.title}">
+          <a href="cnfans://product?id=${p.id}" onclick="openAppOrWeb(event, '${p.cnfans_link}')">
+            <img src="${p.image}" alt="${p.title}" data-product-id="${p.id}">
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price} €</div>
           </a>`;
