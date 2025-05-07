@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -125,13 +126,64 @@
     </select>
     <select id="brandFilter" onchange="filterProducts()">
       <option value="all">Toutes les marques</option>
-      <option value="Adidas">Adidas</option>
-      <option value="Balenciaga">Balenciaga</option>
-      <option value="Nike">Nike</option>
-      <option value="Under Armor">Under Armor</option>
-      <option value="Hermes">Hermes</option>
-      <option value="Puma">Puma</option>
-      <option value="Supreme">Supreme</option>
+      <option>Adidas</option>
+      <option>Ami</option>
+      <option>Apple</option>
+      <option>Arc'teryx</option>
+      <option>Asics</option>
+      <option>Balenciaga</option>
+      <option>Birkenstock</option>
+      <option>Burberry</option>
+      <option>C.P Company</option>
+      <option>Calvin Klein</option>
+      <option>Carhartt</option>
+      <option>Coach</option>
+      <option>Corteiz</option>
+      <option>Diesel</option>
+      <option>Dior</option>
+      <option>DR Martens</option>
+      <option>Enfants</option>
+      <option>Essentials</option>
+      <option>Fred Perry</option>
+      <option>G-Shock</option>
+      <option>Gallery Dept</option>
+      <option>Golden Goose</option>
+      <option>Goyard</option>
+      <option>Gucci</option>
+      <option>Hermès</option>
+      <option>Jacquemus</option>
+      <option>K-Way</option>
+      <option>Kaws</option>
+      <option>Lacoste</option>
+      <option>Lanvin</option>
+      <option>Lego</option>
+      <option>Louis Vuitton</option>
+      <option>Moncler</option>
+      <option>Mont Blanc</option>
+      <option>New Balance</option>
+      <option>New Era</option>
+      <option>Nike</option>
+      <option>Oakley</option>
+      <option>Others</option>
+      <option>Palace</option>
+      <option>Pokemon</option>
+      <option>Ralph Lauren</option>
+      <option>Rolex</option>
+      <option>Salomon</option>
+      <option>Seiko</option>
+      <option>Stone Island</option>
+      <option>Stussy</option>
+      <option>Supreme</option>
+      <option>The North Face</option>
+      <option>Thom Browne</option>
+      <option>Tissot</option>
+      <option>Ugg</option>
+      <option>Under Armour</option>
+      <option>Van Cleef</option>
+      <option>Veja</option>
+      <option>Venum</option>
+      <option>Yeezy</option>
+      <option>Yves Saint Laurent</option>
     </select>
   </div>
 
@@ -180,12 +232,4 @@
         link.innerHTML = `
           <img src="${p.image}" alt="${p.title}">
           <div class="product-title">${p.title}</div>
-          <div class="product-price">${p.price} €</div>
-        `;
-        grid.appendChild(link);
-      });
-    }
-  </script>
-
-</body>
-</html>
+          <div class="product-price">${p.price
