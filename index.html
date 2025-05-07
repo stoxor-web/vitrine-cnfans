@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BEST ITEMS 2025</title>
   <style>
-    /* Empêche tout scroll horizontal */
     html, body {
-      overflow-x: hidden;
+      overflow-x: hidden; /* Empêche le défilement horizontal */
       width: 100%;
       margin: 0;
       padding: 0;
@@ -75,7 +74,7 @@
     .product img {
       width: 100%;
       height: 220px;
-      object-fit: cover;
+      object-fit: contain; /* Ajuste l'image sans zoom ni déformation */
     }
     .product-title {
       padding: 10px;
@@ -124,7 +123,7 @@
       .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
       .product-title { font-size: 14px; }
       .product-price { font-size: 12px; }
-      .filters select { width: 180px; }
+      .filters select { width: 200px; }
     }
     @media (max-width: 480px) {
       .grid { grid-template-columns: 1fr; gap: 10px; }
@@ -136,7 +135,7 @@
 
   <header>
     <h1>BEST ITEMS 2025</h1>
-    <!-- Bandeau déroulant -->
+    <!-- Message déroulant en rouge -->
     <div class="marquee"><span>Attention, les prix affichés ne comprennent pas les frais de livraison.</span></div>
     <!-- Lien admin -->
     <a href="admin.html" class="admin-link">🔒</a>
@@ -213,5 +212,6 @@
       });
     }
   </script>
+
 </body>
 </html>
