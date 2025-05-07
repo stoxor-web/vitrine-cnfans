@@ -21,7 +21,6 @@
       padding: 20px;
       text-align: center;
       position: relative;
-      text-decoration: none;
     }
     /* Icône cadenas */
     .admin-link {
@@ -91,19 +90,18 @@
       color: #000;
       text-decoration: none;
     }
-    .product a { text-decoration: none; }
+    .product a { text-decoration: none; color: inherit; }
     /* Bannière réseaux */
     .social-banner {
       background: #808080;
       text-align: center;
       padding: 10px 0;
-      text-decoration: none;
     }
     .social-banner a img {
       width: 40px;
       height: 40px;
       margin: 0 10px;
-      text-decoration: none;
+      vertical-align: middle;
     }
     /* Sélecteurs */
     .filters {
@@ -191,44 +189,53 @@
       .then(r => r.json())
       .then(data => { products = data; filterProducts(); });
 
+    function isMobile() {
+      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
     function filterProducts() {
       const cat = document.getElementById('categoryFilter').value;
       const br  = document.getElementById('brandFilter').value;
-      const filtered = products.filter(p => 
-        (cat==='all'|| p.category===cat) &&
-        (br==='all' || p.brand===br)
+      const filtered = products.filter(p =>
+        (cat==='all' || p.category===cat) &&
+        (br==='all'  || p.brand===br)
       );
       displayProducts(filtered);
-    }
-
-    function openAppOrWeb(event, webUrl) {
-      var start = Date.now();
-      const cnfansLink = event.target.getAttribute("data-product-link");
-      
-      // Tentative d'ouverture de l'application CNFANS avec un lien produit
-      window.location = `cnfans://product?link=${encodeURIComponent(cnfansLink)}`;
-      
-      setTimeout(function() {
-        // Si l'application n'est pas ouverte après 2 secondes, redirige vers le lien web
-        if (Date.now() - start < 2000) {
-          window.location = webUrl; // Rediriger vers le produit sur le site web
-        }
-      }, 1000); // Attendre 1 seconde avant de rediriger
     }
 
     function displayProducts(list) {
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
       list.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'product';
-        card.innerHTML = `
-          <a href="${p.cnfans_link}" target="_blank" onclick="openAppOrWeb(event, '${p.cnfans_link}')" data-product-link="${p.cnfans_link}">
-            <img src="${p.image}" alt="${p.title}">
-            <div class="product-title">${p.title}</div>
-            <div class="product-price">${p.price} €</div>
-          </a>`;
-        grid.appendChild(card);
+        const a = document.createElement('a');
+        a.className = 'product';
+        a.href      = p.cnfans_link;
+        a.target    = '_blank';
+        a.innerHTML = `
+          <img src="${p.image}" alt="${p.title}">
+          <div class="product-title">${p.title}</div>
+          <div class="product-price">${p.price} €</div>
+        `;
+        a.addEventListener('click', function(e) {
+          if (!isMobile()) {
+            // Sur desktop : on laisse le lien s'ouvrir en nouvel onglet
+            return;
+          }
+          // Sur mobile : empêcher le comportement par défaut
+          e.preventDefault();
+          const webUrl = p.cnfans_link;
+          const appUrl = `cnfans://product?link=${encodeURIComponent(webUrl)}`;
+          const t0 = Date.now();
+          // Essayer d'ouvrir l'app
+          window.location = appUrl;
+          setTimeout(() => {
+            // Si l'app ne répond pas, rediriger vers la page web du produit
+            if (Date.now() - t0 < 1500) {
+              window.location = webUrl;
+            }
+          }, 1000);
+        });
+        grid.appendChild(a);
       });
     }
   </script>
