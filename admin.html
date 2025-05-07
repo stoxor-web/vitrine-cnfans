@@ -34,7 +34,7 @@
       <input type="password" id="adminPwd" placeholder="Entrez le mot de passe">
       <br>
       <button onclick="checkPwd()">Valider</button>
-      <p id="timerMsg">Vous avez 10 secondes pour saisir le mot de passe...</p>
+      <p id="timerMsg">Vous avez 15 secondes pour saisir le mot de passe...</p>
     </div>
   </div>
 
@@ -62,7 +62,7 @@
     window.onload = () => {
       pwdTimer = setTimeout(() => {
         window.location.href = 'index.html';
-      }, 10000);
+      }, 15000);
     };
 
     function checkPwd() {
