@@ -55,6 +55,7 @@
         <th>ID</th>
         <th>Image</th>
         <th>Catégorie</th>
+        <th>Marque</th>
         <th>Prix (€)</th>
         <th>Actions</th>
       </tr>
@@ -91,6 +92,14 @@
               <option value="Accessoires" ${p.category === 'Accessoires' ? 'selected' : ''}>Accessoires</option>
             </select>
           </td>
+          <td>
+            <select onchange="products[${i}].brand = this.value">
+              <option value="Nike" ${p.brand === 'Nike' ? 'selected' : ''}>Nike</option>
+              <option value="Adidas" ${p.brand === 'Adidas' ? 'selected' : ''}>Adidas</option>
+              <option value="Puma" ${p.brand === 'Puma' ? 'selected' : ''}>Puma</option>
+              <option value="Balenciaga" ${p.brand === 'Balenciaga' ? 'selected' : ''}>Balenciaga</option>
+            </select>
+          </td>
           <td><input type="number" value="${p.price}" onchange="products[${i}].price = parseFloat(this.value)" step="0.01"></td>
           <td><button onclick="deleteProduct(${i})">🗑 Supprimer</button></td>
         `;
@@ -99,7 +108,7 @@
     }
 
     function addProduct() {
-      products.push({ title: "", platform: "", id: "", image: "", category: "Mode Homme", price: 0, cnfans_link: "", source: "" });
+      products.push({ title: "", platform: "", id: "", image: "", category: "Mode Homme", brand: "Nike", price: 0, cnfans_link: "", source: "" });
       renderTable();
     }
 
