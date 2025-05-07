@@ -138,7 +138,7 @@
 <body>
 
   <header>
-    <h1>TRENDY WORLD SHOP</h1>
+    <h1>BEST ITEMS 2025</h1>
     <!-- Message déroulant en rouge -->
     <div class="marquee"><span>Attention, les prix affichés ne comprennent pas les frais de livraison.</span></div>
     <!-- Lien admin -->
@@ -203,8 +203,10 @@
 
     function openAppOrWeb(event, webUrl) {
       var start = Date.now();
-      // Tentative d'ouverture de l'application CNFANS avec le lien du produit
-      window.location = event.target.getAttribute("data-product-link");
+      const cnfansLink = event.target.getAttribute("data-product-link");
+      
+      // Tentative d'ouverture de l'application CNFANS avec un deep link
+      window.location = `cnfans://product?link=${encodeURIComponent(cnfansLink)}`;
       
       setTimeout(function() {
         // Si l'application n'est pas ouverte après 2 secondes, redirige vers le lien web
@@ -221,7 +223,7 @@
         const card = document.createElement('div');
         card.className = 'product';
         card.innerHTML = `
-          <a href="cnfans://product?id=${p.id}" onclick="openAppOrWeb(event, '${p.cnfans_link}')" data-product-link="${p.cnfans_link}">
+          <a href="cnfans://product?link=${encodeURIComponent(p.cnfans_link)}" onclick="openAppOrWeb(event, '${p.cnfans_link}')" data-product-link="${p.cnfans_link}">
             <img src="${p.image}" alt="${p.title}" data-product-id="${p.id}">
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price} €</div>
