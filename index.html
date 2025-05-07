@@ -131,17 +131,21 @@
       <option value="Chaussures">Chaussures</option>
       <option value="Accessoires">Accessoires</option>
     </select>
-    <select id="brandFilter" onchange="filterProducts()">
-      <option value="all">Toutes les marques</option>
-      <option value="Adidas">Adidas</option>
-      <option value="Balenciaga">Balenciaga</option>
-      <option value="Nike">Nike</option>
-      <option value="Under Armor">Under Armor</option>
-      <option value="Hermes">Hermes</option>
-      <option value="Puma">Puma</option>
-      <option value="Supreme">Supreme</option>
-    </select>
-  </div>
+    // Charger la liste des marques depuis brands.json
+    fetch('brands.json')
+      .then(response => response.json())
+      .then(data => { brands = data; })
+      .catch(err => console.error('Erreur chargement brands.json:', err));
+
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        products = JSON.parse(reader.result);
+        renderTable();
+        enableDragAndDrop();
+      };
+      reader.readAsText(e.target.files[0]);
+    });
 
   <div class="grid" id="productGrid"></div>
 
