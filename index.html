@@ -203,15 +203,15 @@
 
     function openAppOrWeb(event, webUrl) {
       var start = Date.now();
-      // Tentative d'ouverture de l'application CNFANS
-      window.location = "cnfans://product?id=" + event.target.getAttribute("data-product-id");
+      // Tentative d'ouverture de l'application CNFANS avec le lien du produit
+      window.location = event.target.getAttribute("data-product-link");
       
       setTimeout(function() {
-        // Si l'application n'est pas ouverte après 1 secondes, redirige vers le lien web
-        if (Date.now() - start < 1000) {
+        // Si l'application n'est pas ouverte après 2 secondes, redirige vers le lien web
+        if (Date.now() - start < 2000) {
           window.location = webUrl; // Rediriger vers le produit sur le site web
         }
-      }, 900); // Attendre 1 seconde avant de rediriger
+      }, 1000); // Attendre 1 seconde avant de rediriger
     }
 
     function displayProducts(list) {
@@ -221,7 +221,7 @@
         const card = document.createElement('div');
         card.className = 'product';
         card.innerHTML = `
-          <a href="cnfans://product?id=${p.id}" onclick="openAppOrWeb(event, '${p.cnfans_link}')">
+          <a href="cnfans://product?id=${p.id}" onclick="openAppOrWeb(event, '${p.cnfans_link}')" data-product-link="${p.cnfans_link}">
             <img src="${p.image}" alt="${p.title}" data-product-id="${p.id}">
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price} €</div>
