@@ -46,7 +46,6 @@
       const reader = new FileReader();
       reader.onload = function() {
         products = JSON.parse(reader.result);
-        populateBrandFilter(); // Remplir dynamiquement la liste des marques
         renderTable();
       };
       reader.readAsText(e.target.files[0]);
@@ -72,27 +71,18 @@
           </td>
           <td>
             <select onchange="products[${i}].brand = this.value">
-              <!-- Liste des marques remplie dynamiquement -->
+              <option value="Nike" ${p.brand === 'Nike' ? 'selected' : ''}>Nike</option>
+              <option value="Adidas" ${p.brand === 'Adidas' ? 'selected' : ''}>Adidas</option>
+              <option value="Puma" ${p.brand === 'Puma' ? 'selected' : ''}>Puma</option>
+              <option value="Balenciaga" ${p.brand === 'Balenciaga' ? 'selected' : ''}>Balenciaga</option>
+              <option value="Hermes" ${p.brand === 'Hermes' ? 'selected' : ''}>Hermes</option>
+              <option value="Under Armor" ${p.brand === 'Under Armo' ? 'selected' : ''}>Under Armo</option>
             </select>
           </td>
           <td><input type="number" value="${p.price}" onchange="products[${i}].price = parseFloat(this.value)" step="0.01"></td>
           <td><button onclick="deleteProduct(${i})">🗑 Supprimer</button></td>
         `;
         tbody.appendChild(row);
-      });
-    }
-
-    // Fonction pour remplir dynamiquement le sélecteur de marques
-    function populateBrandFilter() {
-      const brandSelects = document.querySelectorAll('select'); // Cibler tous les selects de la marque
-      const brands = [...new Set(products.map(product => product.brand))]; // Extraire les marques uniques
-      brandSelects.forEach(select => {
-        brands.forEach(brand => {
-          const option = document.createElement('option');
-          option.value = brand;
-          option.textContent = brand;
-          select.appendChild(option);
-        });
       });
     }
 
