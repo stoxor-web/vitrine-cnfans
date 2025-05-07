@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -150,6 +149,53 @@
     option {
       padding: 10px;
     }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Plus petit sur tablette */
+        gap: 15px;
+      }
+
+      .product-title {
+        font-size: 14px;
+      }
+
+      .product-price {
+        font-size: 12px;
+      }
+
+      .social-banner a {
+        font-size: 20px;
+      }
+
+      select {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+        gap: 10px;
+      }
+
+      .product-title {
+        font-size: 12px;
+      }
+
+      .product-price {
+        font-size: 10px;
+      }
+
+      .social-banner a {
+        font-size: 18px;
+      }
+
+      select {
+        width: 180px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -164,7 +210,7 @@
 
   <!-- Bannière des réseaux sociaux avec icônes -->
   <div class="social-banner">
-         <a href="https://cnfans.com/register?ref=212491" target="_blank">
+    <a href="https://cnfans.com/register?ref=212491" target="_blank">
       <img src="https://spreadsheetcnfans.my.canva.site/_assets/media/2ee61dcee3eb5c104658e8ee50dd3ba2.png" alt="CNFans" style="width: 45px; height: 45px;">
     </a>
     <a href="https://www.tiktok.com/@trendy_world_off" target="_blank">
@@ -173,7 +219,6 @@
     <a href="https://www.instagram.com/trendy_world_off/" target="_blank">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 40px; height: 40px;">
     </a>
-        </a>
     <a href="https://youtu.be/n_2sIEApRhk?si=wGym7D6Deui_vARg&t=12" target="_blank">
       <img src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-104-432560.png?f=webp" alt="Youtube" style="width: 40px; height: 40px;">
     </a>
@@ -193,8 +238,8 @@
       <option value="Adidas">Adidas</option>
       <option value="Balenciaga">Balenciaga</option>
       <option value="Nike">Nike</option>
-      <option value="Nike">Under Armor</option>
-      <option value="Nike">Hermes</option>
+      <option value="Under Armor">Under Armor</option>
+      <option value="Hermes">Hermes</option>
       <option value="Puma">Puma</option>
       <option value="Supreme">Supreme</option>
     </select>
