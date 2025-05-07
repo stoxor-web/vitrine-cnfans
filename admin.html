@@ -4,12 +4,7 @@
   <meta charset="UTF-8">
   <title>Admin Produits CNFANS</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
-    h1 { text-align: center; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
-    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-    input[type="text"], input[type="number"], select { width: 100%; padding: 5px; }
-    button { margin: 5px; padding: 6px 12px; }
+    /* … your existing styles … */
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
@@ -20,11 +15,11 @@
   <button onclick="addProduct()">➕ Ajouter un produit</button>
   <button onclick="downloadJSON()">💾 Télécharger JSON</button>
 
-  <table id="productTable">
+  <table>
     <thead>
       <tr>
         <th>Titre</th><th>Plateforme</th><th>ID</th><th>Image</th>
-        <th>Catégorie</th><th>Marque</th><th>Prix (€)</th><th>Actions</th>
+        <th>Catégorie</th><th>Marque</th><th>Couleurs</th><th>Prix (€)</th><th>Actions</th>
       </tr>
     </thead>
     <tbody id="productTableBody"></tbody>
@@ -32,18 +27,28 @@
 
   <script>
     let products = [];
-    let brands = [];
+    let brands   = [];
+    let colors   = [];
 
-    // Charger la liste des marques depuis brands.json
+    // 1) Load & sort brands
     fetch('brands.json')
-      .then(response => response.json())
-      .then(data => { brands = data; })
-      .catch(err => console.error('Erreur chargement brands.json:', err));
+      .then(r => r.json())
+      .then(data => { brands = data.sort((a,b)=>a.localeCompare(b, 'fr')); })
+      .catch(console.error);
 
-    document.getElementById('fileInput').addEventListener('change', function(e) {
+    // 2) Load colors
+    fetch('colors.json')
+      .then(r => r.json())
+      .then(data => { colors = data; })
+      .catch(console.error);
+
+    // 3) Load products file
+    document.getElementById('fileInput').addEventListener('change', e => {
       const reader = new FileReader();
       reader.onload = () => {
         products = JSON.parse(reader.result);
+        // ensure every product has a colors array
+        products.forEach(p => p.colors = p.colors || []);
         renderTable();
         enableDragAndDrop();
       };
@@ -53,50 +58,72 @@
     function renderTable() {
       const tbody = document.getElementById('productTableBody');
       tbody.innerHTML = '';
-      products.forEach((p, i) => {
+
+      products.forEach((p,i) => {
         const row = document.createElement('tr');
-        // Champs texte
+
+        // text inputs
         row.innerHTML = `
-          <td><input value="${p.title}" onchange="products[${i}].title=this.value"></td>
-          <td><input value="${p.platform}" onchange="products[${i}].platform=this.value"></td>
-          <td><input value="${p.id}" onchange="products[${i}].id=this.value"></td>
-          <td><input value="${p.image}" onchange="products[${i}].image=this.value"></td>
+          <td><input value="${p.title}"     onchange="products[${i}].title=this.value"></td>
+          <td><input value="${p.platform}"  onchange="products[${i}].platform=this.value"></td>
+          <td><input value="${p.id}"        onchange="products[${i}].id=this.value"></td>
+          <td><input value="${p.image}"     onchange="products[${i}].image=this.value"></td>
         `;
-        // Catégorie statique
+
+        // category
         const catCell = document.createElement('td');
+        ['Mode Homme','Mode Femme','Accessoires','Chaussures']
+          .forEach(c => {
+            const o = document.createElement('option');
+            o.value = o.textContent = c;
+            if(p.category===c) o.selected = true;
+            catCell.appendChild(o);
+          });
         const catSelect = document.createElement('select');
-        ['Mode Homme','Mode Femme','Accessoires','Chaussures'].forEach(c => {
-          const opt = document.createElement('option'); opt.value = c; opt.textContent = c;
-          if (p.category === c) opt.selected = true;
-          catSelect.appendChild(opt);
-        });
         catSelect.onchange = e => products[i].category = e.target.value;
-        catCell.appendChild(catSelect);
-        row.appendChild(catCell);
-        // Marque dynamique
-        const brandCell = document.createElement('td');
+        catSelect.append(...catCell.children);
+        row.appendChild(catSelect);
+
+        // brand
         const brandSelect = document.createElement('select');
-        brands.forEach(br => {
-          const opt = document.createElement('option'); opt.value = br; opt.textContent = br;
-          if (p.brand === br) opt.selected = true;
-          brandSelect.appendChild(opt);
+        brands.forEach(b => {
+          const o = document.createElement('option');
+          o.value = o.textContent = b;
+          if(p.brand===b) o.selected = true;
+          brandSelect.appendChild(o);
         });
         brandSelect.onchange = e => products[i].brand = e.target.value;
-        brandCell.appendChild(brandSelect);
-        row.appendChild(brandCell);
-        // Prix
-        const priceCell = document.createElement('td');
+        row.appendChild(brandSelect);
+
+        // colors (multi-select)
+        const colorSelect = document.createElement('select');
+        colorSelect.multiple = true;
+        colorSelect.size = Math.min(6, colors.length);
+        colors.forEach(c => {
+          const o = document.createElement('option');
+          o.value = c.code;
+          o.textContent = c.name;
+          if(p.colors.includes(c.code)) o.selected = true;
+          colorSelect.appendChild(o);
+        });
+        colorSelect.onchange = e => {
+          products[i].colors = Array.from(e.target.selectedOptions).map(o=>o.value);
+        };
+        row.appendChild(colorSelect);
+
+        // price
         const priceInput = document.createElement('input');
-        priceInput.type = 'number'; priceInput.step = '0.01'; priceInput.value = p.price;
+        priceInput.type = 'number';
+        priceInput.step = '0.01';
+        priceInput.value = p.price;
         priceInput.onchange = e => products[i].price = parseFloat(e.target.value);
-        priceCell.appendChild(priceInput);
-        row.appendChild(priceCell);
-        // Actions
-        const actionCell = document.createElement('td');
-        const delBtn = document.createElement('button'); delBtn.textContent = '🗑 Supprimer';
-        delBtn.onclick = () => deleteProduct(i);
-        actionCell.appendChild(delBtn);
-        row.appendChild(actionCell);
+        row.appendChild(priceInput);
+
+        // action
+        const del = document.createElement('button');
+        del.textContent = '🗑 Supprimer';
+        del.onclick = () => deleteProduct(i);
+        row.appendChild(del);
 
         tbody.appendChild(row);
       });
@@ -105,9 +132,10 @@
     function enableDragAndDrop() {
       new Sortable(document.getElementById('productTableBody'), {
         animation: 150,
-        onEnd: evt => {
-          const [moved] = products.splice(evt.oldIndex, 1);
-          products.splice(evt.newIndex, 0, moved);
+        onEnd(evt) {
+          const [m] = products.splice(evt.oldIndex,1);
+          products.splice(evt.newIndex,0,m);
+          renderTable(); // re-render to sync selects
         }
       });
     }
@@ -115,25 +143,29 @@
     function addProduct() {
       products.push({
         title:'', platform:'', id:'', image:'',
-        category:'Mode Homme', brand: brands[0] || '',
-        price:0, cnfans_link:'', source:''
+        category:'Mode Homme',
+        brand: brands[0] || '',
+        colors: [],
+        price: 0,
+        cnfans_link:'', source:''
       });
       renderTable();
     }
 
     function deleteProduct(i) {
-      products.splice(i, 1);
-      renderTable();
+      products.splice(i,1); renderTable();
     }
 
     function downloadJSON() {
       products.forEach(p => {
         p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
-        p.source = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
+        p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
       });
-      const blob = new Blob([JSON.stringify(products, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-      a.download = 'jadeship_products.json'; a.click();
+      const blob = new Blob([JSON.stringify(products, null, 2)],{type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'jadeship_products.json';
+      a.click();
     }
   </script>
 </body>
