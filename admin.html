@@ -55,14 +55,14 @@
       tbody.innerHTML = '';
       products.forEach((p, i) => {
         const row = document.createElement('tr');
-        // Titre, Plateforme, ID, Image
+        // Champs texte
         row.innerHTML = `
           <td><input value="${p.title}" onchange="products[${i}].title=this.value"></td>
           <td><input value="${p.platform}" onchange="products[${i}].platform=this.value"></td>
           <td><input value="${p.id}" onchange="products[${i}].id=this.value"></td>
           <td><input value="${p.image}" onchange="products[${i}].image=this.value"></td>
         `;
-        // Catégorie select (statique)
+        // Catégorie statique
         const catCell = document.createElement('td');
         const catSelect = document.createElement('select');
         ['Mode Homme','Mode Femme','Accessoires','Chaussures'].forEach(c => {
@@ -70,10 +70,10 @@
           if (p.category === c) opt.selected = true;
           catSelect.appendChild(opt);
         });
-        catSelect.onchange = e => { products[i].category = e.target.value; };
+        catSelect.onchange = e => products[i].category = e.target.value;
         catCell.appendChild(catSelect);
         row.appendChild(catCell);
-        // Marque select (dynamique)
+        // Marque dynamique
         const brandCell = document.createElement('td');
         const brandSelect = document.createElement('select');
         brands.forEach(br => {
@@ -81,21 +81,19 @@
           if (p.brand === br) opt.selected = true;
           brandSelect.appendChild(opt);
         });
-        brandSelect.onchange = e => { products[i].brand = e.target.value; };
+        brandSelect.onchange = e => products[i].brand = e.target.value;
         brandCell.appendChild(brandSelect);
         row.appendChild(brandCell);
         // Prix
         const priceCell = document.createElement('td');
         const priceInput = document.createElement('input');
-        priceInput.type = 'number'; priceInput.step = '0.01';
-        priceInput.value = p.price;
-        priceInput.onchange = e => { products[i].price = parseFloat(e.target.value); };
+        priceInput.type = 'number'; priceInput.step = '0.01'; priceInput.value = p.price;
+        priceInput.onchange = e => products[i].price = parseFloat(e.target.value);
         priceCell.appendChild(priceInput);
         row.appendChild(priceCell);
         // Actions
         const actionCell = document.createElement('td');
-        const delBtn = document.createElement('button');
-        delBtn.textContent = '🗑 Supprimer';
+        const delBtn = document.createElement('button'); delBtn.textContent = '🗑 Supprimer';
         delBtn.onclick = () => deleteProduct(i);
         actionCell.appendChild(delBtn);
         row.appendChild(actionCell);
@@ -116,9 +114,9 @@
 
     function addProduct() {
       products.push({
-        title: '', platform: '', id: '', image: '',
-        category: 'Mode Homme', brand: brands[0] || '',
-        price: 0, cnfans_link: '', source: ''
+        title:'', platform:'', id:'', image:'',
+        category:'Mode Homme', brand: brands[0] || '',
+        price:0, cnfans_link:'', source:''
       });
       renderTable();
     }
@@ -134,10 +132,8 @@
         p.source = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
       });
       const blob = new Blob([JSON.stringify(products, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'jadeship_products.json';
-      a.click();
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = 'jadeship_products.json'; a.click();
     }
   </script>
 </body>
