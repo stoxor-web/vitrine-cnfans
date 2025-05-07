@@ -1,23 +1,11 @@
-
 [
-{
-  "title": "Balenciaga Track Black",
-  "id": "7312930174",
-  "platform": "WEIDIAN",
-  "image": "",
-  "category": "",
-  "price": 0.0,
-  "cnfans_link": "https://cnfans.com/product?id=7312930174&platform=WEIDIAN&ref=44529",
-  "source": "https://cnfans.com/product?id=7312930174&platform=WEIDIAN&ref=44529"
-}
-{
-  "title": "",
-  "id": "675330231400",
-  "platform": "TAOBAO",
-  "image": "",
-  "category": "",
-  "price": 0.0,
-  "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=675330231400&ref=212491",
-  "source": "https://item.taobao.com/item.htm?spm=fxg_1325870.all_page.0.0.360f1845rgxneY&id=675330231400"
-}
+  {
+    "title": "Balenciaga Track",
+    "platform": "Weidian",
+    "id": "7312930174",
+    "image": "https://images.cnfans.com/1626531767394082817/inbound-water-mark/aeddef4d7e85-45df-8871-2845d6ff8d17.jpg",
+    "category": "Mode Homme",
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7312930174&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7312930174&platform=Weidian"
+  }
 ]
