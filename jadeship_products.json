@@ -8,7 +8,10 @@
     "price": 23,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7233949100&ref=212491",
     "source": "https://www.cnfans.com/product?id=7233949100&platform=Weidian",
-    "brand": "Birkenstock"
+    "brand": "Birkenstock",
+    "colors": [
+      "#E53935"
+    ]
   },
   {
     "title": "Socks Nike ",
@@ -19,7 +22,10 @@
     "brand": "Nike",
     "price": 3.5,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=733761829621&ref=212491",
-    "source": "https://www.cnfans.com/product?id=733761829621&platform=ALI_1688"
+    "source": "https://www.cnfans.com/product?id=733761829621&platform=ALI_1688",
+    "colors": [
+      "#43A047"
+    ]
   },
   {
     "title": "Supreme Bag",
