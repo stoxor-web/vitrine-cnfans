@@ -1,8 +1,39 @@
 [
-  { "name": "Rouge",    "code": "#E53935" },
-  { "name": "Bleu",     "code": "#1E88E5" },
-  { "name": "Vert",     "code": "#43A047" },
-  { "name": "Jaune",    "code": "#FDD835" },
-  { "name": "Noir",     "code": "#212121" },
-  { "name": "Blanc",    "code": "#FAFAFA" }
+  { "name": "Rouge clair",      "code": "#EF5350" },
+  { "name": "Rouge moyen",      "code": "#E53935" },
+  { "name": "Rouge foncé",      "code": "#C62828" },
+  
+  { "name": "Bleu clair",       "code": "#42A5F5" },
+  { "name": "Bleu moyen",       "code": "#1E88E5" },
+  { "name": "Bleu foncé",       "code": "#1565C0" },
+  
+  { "name": "Vert clair",       "code": "#66BB6A" },
+  { "name": "Vert moyen",       "code": "#43A047" },
+  { "name": "Vert foncé",       "code": "#2E7D32" },
+  
+  { "name": "Jaune clair",      "code": "#FFF176" },
+  { "name": "Jaune moyen",      "code": "#FDD835" },
+  { "name": "Jaune foncé",      "code": "#F9A825" },
+  
+  { "name": "Orange clair",     "code": "#FFA726" },
+  { "name": "Orange moyen",     "code": "#FB8C00" },
+  { "name": "Orange foncé",     "code": "#EF6C00" },
+  
+  { "name": "Rose clair",       "code": "#F48FB1" },
+  { "name": "Rose moyen",       "code": "#D81B60" },
+  { "name": "Rose foncé",       "code": "#AD1457" },
+  
+  { "name": "Violet clair",     "code": "#BA68C8" },
+  { "name": "Violet moyen",     "code": "#8E24AA" },
+  { "name": "Violet foncé",     "code": "#6A1B9A" },
+  
+  { "name": "Cyan clair",       "code": "#4DD0E1" },
+  { "name": "Cyan moyen",       "code": "#00ACC1" },
+  { "name": "Cyan foncé",       "code": "#00838F" },
+  
+  { "name": "Noir",             "code": "#212121" },
+  { "name": "Gris foncé",       "code": "#424242" },
+  { "name": "Gris moyen",       "code": "#757575" },
+  { "name": "Gris clair",       "code": "#BDBDBD" },
+  { "name": "Blanc",            "code": "#FAFAFA" }
 ]
