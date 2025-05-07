@@ -158,28 +158,23 @@
       list.forEach(p => {
         const link = document.createElement('a');
         link.className = 'product';
-        // Sur desktop : simple new tab
         link.href   = p.cnfans_link;
         link.target = '_blank';
 
-        // Sur mobile : universal link
-        link.addEventListener('click', e => {
-          if (!isMobile()) return;
-          e.preventDefault();
-          const productWeb = p.cnfans_link;
-          // universal link (iOS) + Android intent
-          const intent =
-            // Android Intent URI
-            `intent://${new URL(productWeb).pathname}?${new URL(productWeb).searchParams.toString()}#Intent;package=com.cnfans.app;scheme=https;end`;
-          const t0 = Date.now();
-          window.location = intent;
-          setTimeout(() => {
-            if (Date.now() - t0 < 1500) {
-              // fallback vers le site web
-              window.location = productWeb;
-            }
-          }, 1000);
-        });
+        // Désactivation temporaire de l'ouverture dans l'appli mobile
+        // link.addEventListener('click', e => {
+        //   if (!isMobile()) return;
+        //   e.preventDefault();
+        //   const productWeb = p.cnfans_link;
+        //   const intent = `intent://${new URL(productWeb).pathname}?${new URL(productWeb).searchParams.toString()}#Intent;package=com.cnfans.app;scheme=https;end`;
+        //   const t0 = Date.now();
+        //   window.location = intent;
+        //   setTimeout(() => {
+        //     if (Date.now() - t0 < 1500) {
+        //       window.location = productWeb;
+        //     }
+        //   }, 1000);
+        // });
 
         link.innerHTML = `
           <img src="${p.image}" alt="${p.title}">
