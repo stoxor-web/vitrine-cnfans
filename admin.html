@@ -66,6 +66,7 @@
               <option value="Mode Homme" ${p.category === 'Mode Homme' ? 'selected' : ''}>Mode Homme</option>
               <option value="Mode Femme" ${p.category === 'Mode Femme' ? 'selected' : ''}>Mode Femme</option>
               <option value="Accessoires" ${p.category === 'Accessoires' ? 'selected' : ''}>Accessoires</option>
+              <option value="Chaussures" ${p.category === 'Chaussures' ? 'selected' : ''}>Chaussures</option>
             </select>
           </td>
           <td>
@@ -74,6 +75,8 @@
               <option value="Adidas" ${p.brand === 'Adidas' ? 'selected' : ''}>Adidas</option>
               <option value="Puma" ${p.brand === 'Puma' ? 'selected' : ''}>Puma</option>
               <option value="Balenciaga" ${p.brand === 'Balenciaga' ? 'selected' : ''}>Balenciaga</option>
+              <option value="Hermes" ${p.brand === 'Hermes' ? 'selected' : ''}>Hermes</option>
+              <option value="Under Armor" ${p.brand === 'Under Armo' ? 'selected' : ''}>Under Armo</option>
             </select>
           </td>
           <td><input type="number" value="${p.price}" onchange="products[${i}].price = parseFloat(this.value)" step="0.01"></td>
