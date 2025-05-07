@@ -6,7 +6,7 @@
     "platform": "1688",
     "image": "https://image_url.jpg",
     "category": "Mode Homme",
-    "price": 29.99,
+    "price": 29.99 €,
     "cnfans_link": "https://cnfans.com/product?platform=1688&id=123456789&ref=212491",
     "source": "https://www.1688.com/offer/123456789.html"
   },
@@ -16,7 +16,7 @@
     "platform": "TAOBAO",
     "image": "https://image_url.jpg",
     "category": "Mode Femme",
-    "price": 19.99,
+    "price": 19.99 €,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=987654321&ref=212491",
     "source": "https://www.taobao.com/item.htm?id=987654321"
   }
