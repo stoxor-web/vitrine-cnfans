@@ -55,39 +55,50 @@
     <h1>Produits Tendance Français 2025</h1>
   </header>
 
+  <div style="padding: 20px; text-align: center;">
+    <select id="categoryFilter" onchange="filterByCategory()">
+      <option value="all">Toutes les catégories</option>
+      <option value="Mode Homme">Mode Homme</option>
+      <option value="Mode Femme">Mode Femme</option>
+      <option value="Accessoires">Accessoires</option>
+    </select>
+  </div>
+
   <div class="grid" id="productGrid"></div>
 
   <script>
+    let products = [];
+
     fetch('jadeship_products.json')
       .then(res => res.json())
       .then(data => {
-        const grid = document.getElementById('productGrid');
-        data.forEach(product => {
-          const card = document.createElement('div');
-          card.className = 'product';
-          card.innerHTML = `
-            <a href="${product.cnfans_link}" target="_blank">
-              <img src="${product.image}" alt="${product.title}" />
-              <div class="product-title">${product.title}</div>
-            </a>
-          `;
-          grid.appendChild(card);
-        });
+        products = data;
+        filterByCategory();  // Afficher tous les produits au début
       });
+
+    function filterByCategory() {
+      const selectedCategory = document.getElementById('categoryFilter').value;
+      const filteredProducts = selectedCategory === 'all' 
+        ? products 
+        : products.filter(product => product.category === selectedCategory);
+      displayProducts(filteredProducts);
+    }
+
+    function displayProducts(products) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = ''; // Clear current products
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product';
+        card.innerHTML = `
+          <a href="${product.cnfans_link}" target="_blank">
+            <img src="${product.image}" alt="${product.title}" />
+            <div class="product-title">${product.title}</div>
+          </a>
+        `;
+        grid.appendChild(card);
+      });
+    }
   </script>
-
-  <footer style="background-color: #f5f5f5; text-align: center; padding: 30px 10px; font-size: 13px; color: #555;">
-    </div>
-    <p>Ce site est géré automatiquement. Merci de ne pas répondre.</p>
-    <p>&copy; CNFANS 2025. Tous droits réservés.</p>
-    <p>Nous traitons vos données uniquement pour vous informer sur les produits tendances.</p>
-    <p><a href="#" style="color: #007bff; text-decoration: none;">En savoir plus sur vos droits</a></p>
-  </footer>
-
-<div style="position: fixed; bottom: 10px; right: 10px;">
-  <a href="admin.html" style="font-size: 12px; color: #888;">🔐 Admin</a>
-</div>
 </body>
 </html>
-
-

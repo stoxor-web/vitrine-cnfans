@@ -11,6 +11,7 @@
     th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
     input[type="text"] { width: 100%; padding: 5px; }
     button { margin: 5px; padding: 6px 12px; }
+    select { width: 100%; padding: 5px; }
   </style>
 </head>
 <body>
@@ -27,6 +28,7 @@
         <th>Plateforme</th>
         <th>ID</th>
         <th>Image</th>
+        <th>Catégorie</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -56,15 +58,20 @@
           <td><input type="text" value="${p.id}" onchange="products[${i}].id = this.value"></td>
           <td><input type="text" value="${p.image}" onchange="products[${i}].image = this.value"></td>
           <td>
-            <button onclick="deleteProduct(${i})">🗑 Supprimer</button>
+            <select onchange="products[${i}].category = this.value">
+              <option value="Mode Homme" ${p.category === 'Mode Homme' ? 'selected' : ''}>Mode Homme</option>
+              <option value="Mode Femme" ${p.category === 'Mode Femme' ? 'selected' : ''}>Mode Femme</option>
+              <option value="Accessoires" ${p.category === 'Accessoires' ? 'selected' : ''}>Accessoires</option>
+            </select>
           </td>
+          <td><button onclick="deleteProduct(${i})">🗑 Supprimer</button></td>
         `;
         tbody.appendChild(row);
       });
     }
 
     function addProduct() {
-      products.push({ title: "", platform: "", id: "", image: "", cnfans_link: "", source: "" });
+      products.push({ title: "", platform: "", id: "", image: "", category: "Mode Homme", cnfans_link: "", source: "" });
       renderTable();
     }
 
