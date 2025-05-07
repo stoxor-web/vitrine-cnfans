@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Produits Tendance Français 2025</title>
+  <title>BEST ITEMS 2025</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -19,14 +19,42 @@
       text-align: center;
       position: relative;
     }
+    /* Style de l'icône du cadenas en haut à gauche */
     .admin-link {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      color: #007bff;
+      top: 10px;
+      left: 10px;
+      background-color: transparent;
+      color: white;
+      font-size: 24px;
       text-decoration: none;
-      font-size: 14px;
+      cursor: pointer;
     }
+    .admin-link:hover {
+      color: #007bff;
+    }
+
+    /* Message déroulant */
+    .marquee {
+      background-color: red;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 5px 0;
+      text-align: center;
+      position: relative;
+      animation: scroll 10s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -35,6 +63,7 @@
       max-width: 1200px;
       margin: auto;
     }
+
     .product {
       background-color: white;
       border-radius: 10px;
@@ -43,34 +72,122 @@
       text-align: center;
       transition: transform 0.2s ease;
     }
+
     .product:hover {
       transform: translateY(-5px);
     }
+
     .product img {
       width: 100%;
       height: 220px;
       object-fit: cover;
     }
+
     .product-title {
       padding: 10px;
       font-size: 16px;
       font-weight: bold;
       color: #333;
+      text-decoration: none;
+    }
+
+    .product-price {
+      padding: 10px;
+      font-size: 14px;
+      font-weight: normal;
+      color: #000;
+      text-decoration: none;
+    }
+
+    /* Style pour la bannière des réseaux sociaux */
+    .social-banner {
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+    .social-banner a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 24px;
+      transition: color 0.3s ease;
+    }
+    .social-banner a:hover {
+      color: #007bff;
+    }
+
+    /* Suppression du soulignement des liens des produits */
+    .product a {
+      text-decoration: none;
+    }
+
+    /* Style des sélecteurs de catégories et de marques */
+    select {
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: 2px solid #ddd;
+      background-color: #ffffff;
+      color: #333;
+      width: 250px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      margin: 10px 0;
+    }
+
+    select:hover {
+      border-color: #007bff;
+      background-color: #f0f8ff;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #0056b3;
+      background-color: #e6f7ff;
+    }
+
+    option {
+      padding: 10px;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Produits Tendance Français 2025</h1>
-    <a href="admin.html" class="admin-link">🔐 Accès Admin</a>
+    <h1>BEST ITEMS 2025</h1>
+    <!-- Message déroulant en rouge -->
+    <div class="marquee">Attention, les prix affichés ne comprennent pas les frais de livraison.</div>
+    <!-- Icône cadenas en haut à gauche pour accéder à l'admin -->
+    <a href="admin.html" class="admin-link">🔒</a>
   </header>
 
+  <!-- Bannière des réseaux sociaux avec icônes -->
+  <div class="social-banner">
+    <a href="https://www.instagram.com/trendy_world_off/" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 40px; height: 40px;">
+    </a>
+    <a href="https://www.tiktok.com/@trendy_world_off" target="_blank">
+      <img src="https://cdn.pixabay.com/photo/2021/01/30/06/43/tiktok-5962993_1280.png" alt="TikTok" style="width: 45px; height: 45px;">
+    </a>
+  </div>
+
   <div style="padding: 20px; text-align: center;">
-    <select id="categoryFilter" onchange="filterByCategory()">
+    <select id="categoryFilter" onchange="filterProducts()">
       <option value="all">Toutes les catégories</option>
-      <option value="Mode Homme">Mode Homme</option>
-      <option value="Mode Femme">Mode Femme</option>
+      <option value="Mode Homme">Homme</option>
+      <option value="Mode Femme">Femme</option>
+      <option value="Chaussures">Chaussures</option>
       <option value="Accessoires">Accessoires</option>
+    </select>
+
+    <select id="brandFilter" onchange="filterProducts()">
+      <option value="all">Toutes les marques</option>
+      <option value="Adidas">Adidas</option>
+      <option value="Balenciaga">Balenciaga</option>
+      <option value="Nike">Nike</option>
+      <option value="Nike">Under Armor</option>
+      <option value="Nike">Hermes</option>
+      <option value="Puma">Puma</option>
     </select>
   </div>
 
@@ -83,14 +200,19 @@
       .then(res => res.json())
       .then(data => {
         products = data;
-        filterByCategory();  // Afficher tous les produits au début
+        filterProducts();  // Afficher tous les produits au début
       });
 
-    function filterByCategory() {
+    function filterProducts() {
       const selectedCategory = document.getElementById('categoryFilter').value;
-      const filteredProducts = selectedCategory === 'all' 
-        ? products 
-        : products.filter(product => product.category === selectedCategory);
+      const selectedBrand = document.getElementById('brandFilter').value;
+
+      const filteredProducts = products.filter(product => {
+        const categoryMatch = selectedCategory === 'all' || product.category === selectedCategory;
+        const brandMatch = selectedBrand === 'all' || product.brand === selectedBrand;
+        return categoryMatch && brandMatch;
+      });
+
       displayProducts(filteredProducts);
     }
 
@@ -104,11 +226,13 @@
           <a href="${product.cnfans_link}" target="_blank">
             <img src="${product.image}" alt="${product.title}" />
             <div class="product-title">${product.title}</div>
+            <div class="product-price">${product.price} €</div>
           </a>
         `;
         grid.appendChild(card);
       });
     }
   </script>
+
 </body>
 </html>
