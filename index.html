@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -126,88 +125,45 @@
     </select>
     <select id="brandFilter" onchange="filterProducts()">
       <option value="all">Toutes les marques</option>
-      <option>Adidas</option>
-      <option>Ami</option>
-      <option>Apple</option>
-      <option>Arc'teryx</option>
-      <option>Asics</option>
-      <option>Balenciaga</option>
-      <option>Birkenstock</option>
-      <option>Burberry</option>
-      <option>C.P Company</option>
-      <option>Calvin Klein</option>
-      <option>Carhartt</option>
-      <option>Coach</option>
-      <option>Corteiz</option>
-      <option>Diesel</option>
-      <option>Dior</option>
-      <option>DR Martens</option>
-      <option>Enfants</option>
-      <option>Essentials</option>
-      <option>Fred Perry</option>
-      <option>G-Shock</option>
-      <option>Gallery Dept</option>
-      <option>Golden Goose</option>
-      <option>Goyard</option>
-      <option>Gucci</option>
-      <option>Hermès</option>
-      <option>Jacquemus</option>
-      <option>K-Way</option>
-      <option>Kaws</option>
-      <option>Lacoste</option>
-      <option>Lanvin</option>
-      <option>Lego</option>
-      <option>Louis Vuitton</option>
-      <option>Moncler</option>
-      <option>Mont Blanc</option>
-      <option>New Balance</option>
-      <option>New Era</option>
-      <option>Nike</option>
-      <option>Oakley</option>
-      <option>Others</option>
-      <option>Palace</option>
-      <option>Pokemon</option>
-      <option>Ralph Lauren</option>
-      <option>Rolex</option>
-      <option>Salomon</option>
-      <option>Seiko</option>
-      <option>Stone Island</option>
-      <option>Stussy</option>
-      <option>Supreme</option>
-      <option>The North Face</option>
-      <option>Thom Browne</option>
-      <option>Tissot</option>
-      <option>Ugg</option>
-      <option>Under Armour</option>
-      <option>Van Cleef</option>
-      <option>Veja</option>
-      <option>Venum</option>
-      <option>Yeezy</option>
-      <option>Yves Saint Laurent</option>
     </select>
   </div>
 
   <div class="grid" id="productGrid"></div>
 
-  <!-- Grille produits -->
-  <div class="grid" id="productGrid"></div>
-
   <script>
     let products = [];
+    let brands = [];
+
+    // Charger les marques dynamiquement
+    fetch('brands.json')
+      .then(r => r.json())
+      .then(data => {
+        brands = data;
+        const bf = document.getElementById('brandFilter');
+        brands.forEach(b => {
+          const opt = document.createElement('option');
+          opt.value = b;
+          opt.textContent = b;
+          bf.appendChild(opt);
+        });
+      })
+      .catch(e => console.error('Erreur chargement brands.json', e));
+
+    // Charger les produits
     fetch('jadeship_products.json')
       .then(r => r.json())
-      .then(data => { products = data; filterProducts(); });
+      .then(data => { products = data; filterProducts(); })
+      .catch(e => console.error('Erreur chargement products', e));
 
     function filterProducts() {
       const cat = document.getElementById('categoryFilter').value;
       const br  = document.getElementById('brandFilter').value;
-      const filtered = products.filter(p => 
-        (cat==='all'|| p.category===cat) &&
-        (br==='all' || p.brand===br)
+      const filtered = products.filter(p =>
+        (cat==='all' || p.category===cat) &&
+        (br==='all'  || p.brand===br)
       );
       displayProducts(filtered);
     }
-
 
     function displayProducts(list) {
       const grid = document.getElementById('productGrid');
@@ -218,22 +174,15 @@
         link.href   = p.cnfans_link;
         link.target = '_blank';
 
-        // Désactivation temporaire de l'ouverture dans l'appli mobile
-        // link.addEventListener('click', e => {
-        //   if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
-        //   e.preventDefault();
-        //   const productWeb = p.cnfans_link;
-        //   const intent = `intent://${new URL(productWeb).pathname}?${new URL(productWeb).searchParams.toString()}#Intent;package=com.cnfans.app;scheme=https;end`;
-        //   const t0 = Date.now();
-        //   window.location = intent;
-        //   setTimeout(() => {
-        //     if (Date.now() - t0 < 1500) {
-        //       window.location = productWeb;
-        //     }
-        //   }, 1000);
-        // });
-
         link.innerHTML = `
           <img src="${p.image}" alt="${p.title}">
           <div class="product-title">${p.title}</div>
-          <div class="product-price">${p.price
+          <div class="product-price">${p.price} €</div>
+        `;
+        grid.appendChild(link);
+      });
+    }
+  </script>
+
+</body>
+</html>
