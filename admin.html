@@ -11,32 +11,14 @@
     input, select { width: 100%; padding: 5px; box-sizing: border-box; }
     select[multiple] { height: 100px; }
     button { margin: 5px; padding: 6px 12px; }
-
-    /* Colonne prix */
     th.price-column, td.price-column { width: 80px; max-width: 80px; }
-
-    /* Bouton flottant */
     #addBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: #007bff;
-      color: white;
-      font-size: 24px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      transition: background-color 0.2s;
+      position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+      width: 50px; height: 50px; border-radius: 50%; background-color: #007bff;
+      color: white; font-size: 24px; border: none; cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3); transition: background-color 0.2s;
     }
-    #addBtn:hover {
-      background-color: #0056b3;
-    }
-
-    /* Overlay mot de passe */
+    #addBtn:hover { background-color: #0056b3; }
     #pw-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0,0,0,0.8); display: flex;
@@ -65,7 +47,6 @@
   <header><h1>🛠️ Interface Admin – Produits CNFANS</h1></header>
 
   <input type="file" id="fileInput" accept=".json"><br><br>
-  <!-- Le bouton flottant -->
   <button id="addBtn" title="Ajouter un produit" onclick="addProduct()">＋</button>
   <button onclick="downloadJSON()">💾 Télécharger JSON</button>
 
@@ -73,34 +54,60 @@
     <thead>
       <tr>
         <th>Titre</th><th>Plateforme</th><th>ID</th><th>Image</th>
-        <th>Catégorie</th><th>Marque</th><th>Couleurs</th><th class="price-column">Prix (€)</th><th>Actions</th>
+        <th>Catégorie</th><th>Marque</th><th>Couleurs</th>
+        <th class="price-column">Prix (€)</th><th>Actions</th>
       </tr>
     </thead>
     <tbody id="productTableBody"></tbody>
   </table>
 
   <script>
+    // --- Gestion du mot de passe ---
     const correctPwd = '123456';
     let pwdTimer;
     window.onload = () => {
-      pwdTimer = setTimeout(()=>{ window.location.href='index.html'; },15000);
+      pwdTimer = setTimeout(()=>{
+        alert('Temps écoulé, accès refusé.');
+        window.location.href = 'index.html';
+      }, 15000);
     };
     function checkPwd(){
-      if(document.getElementById('adminPwd').value===correctPwd){
+      if(document.getElementById('adminPwd').value === correctPwd){
         clearTimeout(pwdTimer);
-        document.getElementById('pw-overlay').style.display='none';
-      } else alert('Mot de passe incorrect');
+        document.getElementById('pw-overlay').style.display = 'none';
+      } else {
+        alert('Mot de passe incorrect');
+      }
     }
 
-    let products = [], brands = [], colors = [];
-    fetch('brands.json').then(r=>r.json()).then(d=>brands=d.sort((a,b)=>a.localeCompare(b,'fr')));
-    fetch('colors.json').then(r=>r.json()).then(d=>colors=d);
+    // --- Données dynamiques ---
+    let products = [], brands = [], categories = [], colors = [];
 
-    document.getElementById('fileInput').addEventListener('change', e=>{
+    // Charger catégories
+    fetch('categories.json')
+      .then(r => r.json())
+      .then(d => categories = d.sort((a,b)=>a.localeCompare(b,'fr')))
+      .catch(console.error);
+
+    // Charger marques
+    fetch('brands.json')
+      .then(r => r.json())
+      .then(d => brands = d.sort((a,b)=>a.localeCompare(b,'fr')))
+      .catch(console.error);
+
+    // Charger couleurs
+    fetch('colors.json')
+      .then(r => r.json())
+      .then(d => colors = d)
+      .catch(console.error);
+
+    // Charger produits
+    document.getElementById('fileInput').addEventListener('change', e => {
       const reader = new FileReader();
-      reader.onload = ()=>{
+      reader.onload = () => {
         products = JSON.parse(reader.result);
-        renderTable(); enableDragAndDrop();
+        renderTable();
+        enableDragAndDrop();
       };
       reader.readAsText(e.target.files[0]);
     });
@@ -108,103 +115,125 @@
     function renderTable(){
       const tbody = document.getElementById('productTableBody');
       tbody.innerHTML = '';
-      products.forEach((p,i)=>{
+
+      products.forEach((p, i) => {
         const row = document.createElement('tr');
-        row.innerHTML = `
-          <td><input value="${p.title||''}" onchange="products[${i}].title=this.value"></td>
-          <td><input value="${p.platform||''}" onchange="products[${i}].platform=this.value"></td>
-          <td><input value="${p.id||''}" onchange="products[${i}].id=this.value"></td>
-          <td><input value="${p.image||''}" onchange="products[${i}].image=this.value"></td>
-        `;
-        // catégorie
-        const catCell = document.createElement('td');
-        const catSelect = document.createElement('select');
-        ['Mode Homme','Mode Femme','Accessoires','Chaussures','Parfums'].forEach(v=>{
-          const o=document.createElement('option'); o.value=o.textContent=v;
-          if(p.category===v) o.selected=true;
-          catSelect.appendChild(o);
+
+        // Colonnes texte
+        ['title','platform','id','image'].forEach(field => {
+          const td = document.createElement('td');
+          const inp = document.createElement('input');
+          inp.value = p[field] || '';
+          inp.onchange = e => products[i][field] = e.target.value;
+          td.appendChild(inp);
+          row.appendChild(td);
         });
-        catSelect.onchange=e=>products[i].category=e.target.value;
-        catCell.appendChild(catSelect);
-        row.appendChild(catCell);
-        // marque
-        const brandCell=document.createElement('td');
-        const brandSelect=document.createElement('select');
-        brands.forEach(br=>{
-          const o=document.createElement('option'); o.value=o.textContent=br;
-          if(p.brand===br) o.selected=true;
-          brandSelect.appendChild(o);
+
+        // Catégorie (dynamic)
+        const catTd = document.createElement('td');
+        const catSel = document.createElement('select');
+        categories.forEach(c => {
+          const o = document.createElement('option');
+          o.value = o.textContent = c;
+          if(p.category === c) o.selected = true;
+          catSel.appendChild(o);
         });
-        brandSelect.onchange=e=>products[i].brand=e.target.value;
-        brandCell.appendChild(brandSelect);
-        row.appendChild(brandCell);
-        // couleurs multiples
-        const colorCell=document.createElement('td');
-        const colorSelect=document.createElement('select');
-        colorSelect.multiple=true;
-        colors.forEach(c=>{
-          const o=document.createElement('option');
-          o.value=c.code; o.textContent=c.name;
-          if(Array.isArray(p.colors)&&p.colors.includes(c.code)) o.selected=true;
-          colorSelect.appendChild(o);
+        catSel.onchange = e => products[i].category = e.target.value;
+        catTd.appendChild(catSel);
+        row.appendChild(catTd);
+
+        // Marque (dynamic)
+        const brTd = document.createElement('td');
+        const brSel = document.createElement('select');
+        brands.forEach(b => {
+          const o = document.createElement('option');
+          o.value = o.textContent = b;
+          if(p.brand === b) o.selected = true;
+          brSel.appendChild(o);
         });
-        colorSelect.onchange=e=>{
-          products[i].colors=Array.from(e.target.selectedOptions).map(o=>o.value);
+        brSel.onchange = e => products[i].brand = e.target.value;
+        brTd.appendChild(brSel);
+        row.appendChild(brTd);
+
+        // Couleurs (multi-select)
+        const colTd = document.createElement('td');
+        const colSel = document.createElement('select');
+        colSel.multiple = true;
+        colors.forEach(c => {
+          const o = document.createElement('option');
+          o.value = c.code;
+          o.textContent = c.name;
+          if(Array.isArray(p.colors) && p.colors.includes(c.code)) o.selected = true;
+          colSel.appendChild(o);
+        });
+        colSel.onchange = e => {
+          products[i].colors = Array.from(e.target.selectedOptions).map(x=>x.value);
         };
-        colorCell.appendChild(colorSelect);
-        row.appendChild(colorCell);
-        // prix
-        const priceCell=document.createElement('td');
-        priceCell.classList.add('price-column');
-        const priceInput=document.createElement('input');
-        priceInput.type='number'; priceInput.step='0.01'; priceInput.value=p.price||0;
-        priceInput.onchange=e=>products[i].price=parseFloat(e.target.value);
-        priceCell.appendChild(priceInput);
-        row.appendChild(priceCell);
-        // actions
-        const ac=document.createElement('td');
-        const del=document.createElement('button');
-        del.textContent='🗑 Supprimer';
-        del.onclick=()=>deleteProduct(i);
-        ac.appendChild(del);
-        row.appendChild(ac);
+        colTd.appendChild(colSel);
+        row.appendChild(colTd);
+
+        // Prix
+        const prTd = document.createElement('td');
+        prTd.classList.add('price-column');
+        const prInp = document.createElement('input');
+        prInp.type = 'number';
+        prInp.step = '0.01';
+        prInp.value = p.price || 0;
+        prInp.onchange = e => products[i].price = parseFloat(e.target.value);
+        prTd.appendChild(prInp);
+        row.appendChild(prTd);
+
+        // Actions
+        const actTd = document.createElement('td');
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '🗑 Supprimer';
+        delBtn.onclick = () => deleteProduct(i);
+        actTd.appendChild(delBtn);
+        row.appendChild(actTd);
+
         tbody.appendChild(row);
       });
     }
 
+    // Drag & drop
     function enableDragAndDrop(){
-      new Sortable(document.getElementById('productTableBody'),{
-        animation:150,onEnd:e=>{
-          const [m]=products.splice(e.oldIndex,1);
-          products.splice(e.newIndex,0,m);
+      new Sortable(document.getElementById('productTableBody'), {
+        animation: 150,
+        onEnd: evt => {
+          const [moved] = products.splice(evt.oldIndex, 1);
+          products.splice(evt.newIndex, 0, moved);
         }
       });
     }
 
+    // Ajouter un produit
     function addProduct(){
       products.push({
-        title:'',platform:'',id:'',image:'',
-        category:'Mode Homme',
-        brand:brands[0]||'',
-        colors:[], price:0, cnfans_link:'', source:''
+        title: '', platform: '', id: '', image: '',
+        category: categories[0] || '',
+        brand: brands[0] || '',
+        colors: [], price: 0,
+        cnfans_link:'', source:''
       });
       renderTable();
     }
 
+    // Supprimer
     function deleteProduct(i){
       products.splice(i,1);
       renderTable();
     }
 
+    // Télécharger JSON
     function downloadJSON(){
-      products.forEach(p=>{
-        p.cnfans_link=`https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
-        p.source=`https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
+      products.forEach(p => {
+        p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
+        p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
       });
-      const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
-      const a=document.createElement('a');
-      a.href=URL.createObjectURL(blob);
-      a.download='jadeship_products.json';
+      const blob = new Blob([JSON.stringify(products, null, 2)], { type:'application/json' });
+      const a    = document.createElement('a');
+      a.href     = URL.createObjectURL(blob);
+      a.download = 'jadeship_products.json';
       a.click();
     }
   </script>
