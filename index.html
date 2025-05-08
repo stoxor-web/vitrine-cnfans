@@ -6,7 +6,8 @@
   <title>TRENDY WORLD SHOP</title>
   <style>
     :root {
-      --marquee-duration: 50s; /* Ajustez ici la durée du cycle (plus c'est long, plus c'est lent) */
+      --marquee-duration: 50s; /* Durée d'un cycle */
+      --marquee-gap: 100px;    /* Espace entre les messages */
     }
     /* Reset link underline */
     a { text-decoration: none !important; color: inherit; }
@@ -17,22 +18,23 @@
     .admin-link:hover { color:#007bff; }
 
     /* Marquee */
-    .marquee { 
-      background: red; 
-      overflow: hidden; 
-      white-space: nowrap; 
+    .marquee {
+      background: red;
+      overflow: hidden;
+      white-space: nowrap;
     }
-    .marquee span {
+    .marquee .msg {
       display: inline-block;
       padding-left: 100%;
+      margin-right: var(--marquee-gap);
       animation: scroll var(--marquee-duration) linear infinite;
       color: white;
       font-size: 14px;
       font-weight: bold;
     }
     @keyframes scroll {
-      from   { transform: translateX(0); }
-      to     { transform: translateX(-100%); }
+      from { transform: translateX(0); }
+      to   { transform: translateX(-100%); }
     }
 
     .filters { text-align:center; padding:20px; }
@@ -57,13 +59,10 @@
   <header>
     <h1>TRENDY WORLD SHOP</h1>
     <div class="marquee">
-      <span>
-        En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS&nbsp;&middot;&nbsp;
-        Clicking on an article will automatically redirect you to the CNFANS website&nbsp;&middot;&nbsp;
-        &nbsp;&middot;&nbsp;
-        Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;&middot;&nbsp;
-        Please note that the prices shown do not include delivery costs
-      </span>
+      <span class="msg">En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS&nbsp;&middot;</span>
+      <span class="msg">Clicking on an article will automatically redirect you to the CNFANS website&nbsp;&middot;</span>
+      <span class="msg">Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;&middot;</span>
+      <span class="msg">Please note that the prices shown do not include delivery costs&nbsp;&middot;</span>
     </div>
     <a href="admin.html" class="admin-link">🔒</a>
   </header>
@@ -95,7 +94,7 @@
 
     <select id="brandFilter" onchange="filterProducts()">
       <option value="all">Toutes les marques</option>
-      <!-- options remplies dynamiquement -->
+      <!-- remplit dynamiquement -->
     </select>
 
     <select id="sortSelect" onchange="filterProducts()">
@@ -110,7 +109,7 @@
   <script>
     let products = [], brands = [], colors = [];
 
-    // charger & trier marques
+    // Charger et trier marques
     fetch('brands.json')
       .then(r=>r.json())
       .then(data=>{
@@ -123,21 +122,21 @@
         });
       });
 
-    // charger couleurs
+    // Charger couleurs
     fetch('colors.json')
       .then(r=>r.json())
       .then(data=>{ colors = data; })
       .catch(console.error);
 
-    // charger produits
+    // Charger produits
     fetch('jadeship_products.json')
       .then(r=>r.json())
       .then(data=>{ products = data; filterProducts(); })
       .catch(console.error);
 
     function filterProducts(){
-      const cat  = document.getElementById('categoryFilter').value;
-      const br   = document.getElementById('brandFilter').value;
+      const cat = document.getElementById('categoryFilter').value;
+      const br  = document.getElementById('brandFilter').value;
       const sort = document.getElementById('sortSelect').value;
 
       let filtered = products.filter(p=>
@@ -145,8 +144,7 @@
         (br==='all'||p.brand===br)
       );
 
-      // tri
-      if(sort==='price-asc')    filtered.sort((a,b)=>a.price - b.price);
+      if(sort==='price-asc')     filtered.sort((a,b)=>a.price - b.price);
       else if(sort==='price-desc') filtered.sort((a,b)=>b.price - a.price);
 
       displayProducts(filtered);
