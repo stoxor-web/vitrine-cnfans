@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>TRENDY WORLD SHOP</title>
   <style>
+    :root {
+      --marquee-duration: 40s; /* Ajustez ici la durée du cycle (plus c'est long, plus c'est lent) */
+    }
     /* Reset link underline */
     a { text-decoration: none !important; color: inherit; }
     html, body { overflow-x: hidden; margin: 0; padding: 0; width: 100%; }
@@ -12,9 +15,26 @@
     header { background-color: #111827; color: white; padding: 20px; text-align: center; position: relative; }
     .admin-link { position: absolute; top:5px; left:5px; font-size:24px; color:white; }
     .admin-link:hover { color:#007bff; }
-    .marquee { background:red; overflow:hidden; white-space:nowrap; }
-    .marquee span { display:inline-block; padding-left:100%; animation:scroll 20s linear infinite; color:white; font-size:14px; font-weight:bold; }
-    @keyframes scroll { from { transform:translateX(0); } to { transform:translateX(-100%); } }
+
+    /* Marquee */
+    .marquee { 
+      background: red; 
+      overflow: hidden; 
+      white-space: nowrap; 
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll var(--marquee-duration) linear infinite;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    @keyframes scroll {
+      from   { transform: translateX(0); }
+      to     { transform: translateX(-100%); }
+    }
+
     .filters { text-align:center; padding:20px; }
     .filters select { padding:12px 20px; font-size:16px; border-radius:25px; border:2px solid #ddd; margin:0 10px 20px; transition:.3s; }
     .filters select:hover { border-color:#007bff; background:#f0f8ff; }
@@ -36,11 +56,14 @@
 
   <header>
     <h1>TRENDY WORLD SHOP</h1>
-<div class="marquee">
-  <span class="msg">En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS  •  Clicking on an article will automatically redirect you to the CNFANS website
-  <span class="msg">Attention, les prix affichés ne comprennent pas les frais de livraison  •
-  Please note that the prices shown do not include delivery costs
-</div>
+    <div class="marquee">
+      <span>
+        En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS&nbsp;&middot;&nbsp;
+        Clicking on an article will automatically redirect you to the CNFANS website&nbsp;&middot;&nbsp;
+        Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;&middot;&nbsp;
+        Please note that the prices shown do not include delivery costs
+      </span>
+    </div>
     <a href="admin.html" class="admin-link">🔒</a>
   </header>
 
@@ -71,6 +94,7 @@
 
     <select id="brandFilter" onchange="filterProducts()">
       <option value="all">Toutes les marques</option>
+      <!-- options remplies dynamiquement -->
     </select>
 
     <select id="sortSelect" onchange="filterProducts()">
@@ -111,8 +135,8 @@
       .catch(console.error);
 
     function filterProducts(){
-      const cat = document.getElementById('categoryFilter').value;
-      const br  = document.getElementById('brandFilter').value;
+      const cat  = document.getElementById('categoryFilter').value;
+      const br   = document.getElementById('brandFilter').value;
       const sort = document.getElementById('sortSelect').value;
 
       let filtered = products.filter(p=>
@@ -120,12 +144,9 @@
         (br==='all'||p.brand===br)
       );
 
-      // appliquer le tri
-      if(sort==='price-asc'){
-        filtered.sort((a,b)=>a.price - b.price);
-      } else if(sort==='price-desc'){
-        filtered.sort((a,b)=>b.price - a.price);
-      }
+      // tri
+      if(sort==='price-asc')    filtered.sort((a,b)=>a.price - b.price);
+      else if(sort==='price-desc') filtered.sort((a,b)=>b.price - a.price);
 
       displayProducts(filtered);
     }
@@ -134,11 +155,9 @@
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
       list.forEach(p=>{
-        // cercles de couleur
         const circles = (p.colors||[]).map(code=>
           `<span class="color-circle" style="background:${code}"></span>`
         ).join('');
-
         const card = document.createElement('a');
         card.className = 'product';
         card.href = p.cnfans_link;
