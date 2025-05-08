@@ -263,5 +263,29 @@
     "price": 10,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=826199623450&ref=212491",
     "source": "https://www.cnfans.com/product?id=826199623450&platform=TAOBAO"
+  },
+  {
+    "title": "Caps Pink",
+    "platform": "Weidian",
+    "id": "7432297027",
+    "image": "https://media.gucci.com/style/DarkGray_Center_0_0_490x490/1683221433/748475_4HG62_5872_001_100_0000_Light.jpg",
+    "category": "Accessoires",
+    "brand": "Gucci",
+    "colors": [],
+    "price": 19,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7432297027&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7432297027&platform=Weidian"
+  },
+  {
+    "title": "Caps TB",
+    "platform": "Weidian",
+    "id": "7432297027",
+    "image": "https://www.mycompanero.com/cdn/shop/files/000013062200_1_testCM1584_1.jpg?v=1686322032",
+    "category": "Accessoires",
+    "brand": "Burberry",
+    "colors": [],
+    "price": 0,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7432297027&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7432297027&platform=Weidian"
   }
 ]
