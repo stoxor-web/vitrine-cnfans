@@ -119,7 +119,7 @@
         // catégorie
         const catCell = document.createElement('td');
         const catSelect = document.createElement('select');
-        ['Mode Homme','Mode Femme','Accessoires','Chaussures'].forEach(v=>{
+        ['Mode Homme','Mode Femme','Accessoires','Chaussures','Parfums'].forEach(v=>{
           const o=document.createElement('option'); o.value=o.textContent=v;
           if(p.category===v) o.selected=true;
           catSelect.appendChild(o);
