@@ -236,8 +236,32 @@
     "category": "Chaussures",
     "brand": "Dior",
     "colors": [],
-    "price": 0,
+    "price": 42,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7247518149&ref=212491",
     "source": "https://www.cnfans.com/product?id=7247518149&platform=Weidian"
+  },
+  {
+    "title": "LV Hat",
+    "platform": "Weidian",
+    "id": "7301481751",
+    "image": "https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-bonnet-my-monogram-eclipse--M73469_PM2_Front%20view.jpg",
+    "category": "Accessoires",
+    "brand": "Louis Vuitton",
+    "colors": [],
+    "price": 14,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7301481751&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7301481751&platform=Weidian"
+  },
+  {
+    "title": "RL Short",
+    "platform": "TAOBAO",
+    "id": "826199623450",
+    "image": "https://media-cdn.citadium.com/image/25/2/7547252.png?fit=bounds&bg-color=EBEDEF&width=634&height=950&canvas=634-950",
+    "category": "Vêtements",
+    "brand": "Ralph Lauren",
+    "colors": [],
+    "price": 10,
+    "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=826199623450&ref=212491",
+    "source": "https://www.cnfans.com/product?id=826199623450&platform=TAOBAO"
   }
 ]
