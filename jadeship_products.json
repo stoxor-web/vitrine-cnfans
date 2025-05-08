@@ -203,5 +203,41 @@
     "price": 15,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7407518126&ref=212491",
     "source": "https://www.cnfans.com/product?id=7407518126&platform=Weidian"
+  },
+  {
+    "title": "Air Max DN",
+    "platform": "Weidian",
+    "id": "7337598318",
+    "image": "https://graalspotter.com/cdn/shop/files/nike-air-max-dn-black-dark-smoke-grey2.webp?v=1711680312&width=910",
+    "category": "Accesoires",
+    "brand": "Nike",
+    "colors": [],
+    "price": 29,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7337598318&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7337598318&platform=Weidian"
+  },
+  {
+    "title": "Samba OG",
+    "platform": "Weidian",
+    "id": "7264887364",
+    "image": "https://images.footlocker.com/is/image/FLEU/314310389904?wid=200&hei=200&fmt=png-alpha",
+    "category": "Accesoires",
+    "brand": "Adidas",
+    "colors": [],
+    "price": 21,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7264887364&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7264887364&platform=Weidian"
+  },
+  {
+    "title": "CD B30",
+    "platform": "Weidian",
+    "id": "7247518149",
+    "image": "https://assets.christiandior.com/is/image/diorprod/3SN279ZRFH900_E03?$default_GHC$&crop=260,706,1460,851&wid=1850&hei=2000&scale=0.875",
+    "category": "Accesoires",
+    "brand": "Dior",
+    "colors": [],
+    "price": 0,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7247518149&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7247518149&platform=Weidian"
   }
 ]
