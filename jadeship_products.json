@@ -275,5 +275,29 @@
     "price": 10,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=826199623450&ref=212491",
     "source": "https://www.cnfans.com/product?id=826199623450&platform=TAOBAO"
+  },
+  {
+    "title": "Pul AMI",
+    "platform": "Weidian",
+    "id": "7309430868",
+    "image": "https://si.geilicdn.com/pcitem901903642079-74a200000193534d495b0a23111a_1080_1080.jpg",
+    "category": "Vêtements",
+    "brand": "Ami",
+    "colors": [],
+    "price": 9,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7309430868&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7309430868&platform=Weidian"
+  },
+  {
+    "title": "RL Pull Torsadé",
+    "platform": "Weidian",
+    "id": "7309430868",
+    "image": "https://si.geilicdn.com/pcitem901905319315-2d8000000193aa44ba150a2396f4_800_800.jpg",
+    "category": "Vêtements",
+    "brand": "Ralph Lauren",
+    "colors": [],
+    "price": 10,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7309430868&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7309430868&platform=Weidian"
   }
 ]
