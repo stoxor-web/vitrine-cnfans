@@ -36,12 +36,12 @@
 
   <header>
     <h1>TRENDY WORLD SHOP</h1>
-  <div class="marquee">
-    <span>
-      Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;•&nbsp;
-      Please note that the prices shown do not include delivery costs
-    </span>
-  </div>
+    <div class="marquee">
+      <span>
+        Attention, les prix affichés ne comprennent pas les frais de livraison • 
+        Please note that the prices shown do not include delivery costs
+      </span>
+    </div>
     <a href="admin.html" class="admin-link">🔒</a>
   </header>
 
@@ -68,8 +68,15 @@
       <option value="Chaussures">Chaussures</option>
       <option value="Accessoires">Accessoires</option>
     </select>
+
     <select id="brandFilter" onchange="filterProducts()">
       <option value="all">Toutes les marques</option>
+    </select>
+
+    <select id="sortSelect" onchange="filterProducts()">
+      <option value="none">Trier par</option>
+      <option value="price-asc">Prix croissant</option>
+      <option value="price-desc">Prix décroissant</option>
     </select>
   </div>
 
@@ -78,26 +85,26 @@
   <script>
     let products = [], brands = [], colors = [];
 
-    // load & sort brands
+    // charger & trier marques
     fetch('brands.json')
       .then(r=>r.json())
       .then(data=>{
         brands = data.sort((a,b)=>a.localeCompare(b,'fr'));
         const bf = document.getElementById('brandFilter');
         brands.forEach(b=>{
-          const o=document.createElement('option');
-          o.value=o.textContent=b;
+          const o = document.createElement('option');
+          o.value = o.textContent = b;
           bf.appendChild(o);
         });
       });
 
-    // load colors
+    // charger couleurs
     fetch('colors.json')
       .then(r=>r.json())
       .then(data=>{ colors = data; })
       .catch(console.error);
 
-    // load products
+    // charger produits
     fetch('jadeship_products.json')
       .then(r=>r.json())
       .then(data=>{ products = data; filterProducts(); })
@@ -105,11 +112,21 @@
 
     function filterProducts(){
       const cat = document.getElementById('categoryFilter').value;
-      const br = document.getElementById('brandFilter').value;
-      const filtered = products.filter(p=>
+      const br  = document.getElementById('brandFilter').value;
+      const sort = document.getElementById('sortSelect').value;
+
+      let filtered = products.filter(p=>
         (cat==='all'||p.category===cat) &&
         (br==='all'||p.brand===br)
       );
+
+      // appliquer le tri
+      if(sort==='price-asc'){
+        filtered.sort((a,b)=>a.price - b.price);
+      } else if(sort==='price-desc'){
+        filtered.sort((a,b)=>b.price - a.price);
+      }
+
       displayProducts(filtered);
     }
 
@@ -117,16 +134,15 @@
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
       list.forEach(p=>{
-        const card = document.createElement('a');
-        card.className='product';
-        card.href=p.cnfans_link;
-        card.target='_blank';
-
-        // color circles
-        const circles = (p.colors || []).map(code=>
+        // cercles de couleur
+        const circles = (p.colors||[]).map(code=>
           `<span class="color-circle" style="background:${code}"></span>`
         ).join('');
 
+        const card = document.createElement('a');
+        card.className = 'product';
+        card.href = p.cnfans_link;
+        card.target = '_blank';
         card.innerHTML = `
           <img src="${p.image}" alt="${p.title}">
           <div class="product-title">${p.title}</div>
