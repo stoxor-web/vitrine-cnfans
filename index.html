@@ -50,8 +50,15 @@
     .color-circle { display:inline-block; width:14px; height:14px; border-radius:50%; margin:0 3px; border:1px solid #ccc; }
     .social-banner { background:#808080; text-align:center; padding:10px 0; }
     .social-banner a img { width:40px; height:40px; margin:0 10px; vertical-align:middle; }
-    @media(max-width:768px) { .grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:15px; } .product-title{font-size:14px;} .product-price{font-size:12px;} }
-    @media(max-width:480px) { .grid{grid-template-columns:1fr;gap:10px;} .filters select{width:160px;margin-bottom:15px;} }
+    @media(max-width:768px) {
+      .grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:15px; }
+      .product-title{font-size:14px;}
+      .product-price{font-size:12px;}
+    }
+    @media(max-width:480px) {
+      .grid{grid-template-columns:1fr;gap:10px;}
+      .filters select{width:160px;margin-bottom:15px;}
+    }
   </style>
 </head>
 <body>
@@ -59,10 +66,10 @@
   <header>
     <h1>TRENDY WORLD SHOP</h1>
     <div class="marquee">
-      <span class="msg">En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS&nbsp;&middot;
-      Clicking on an article will automatically redirect you to the CNFANS website
-      <span class="msg">Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;&middot;
-      Please note that the prices shown do not include delivery costs&nbsp;&middot;</span>
+      <span class="msg">En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS&nbsp;&middot;</span>
+      <span class="msg">Clicking on an article will automatically redirect you to the CNFANS website&nbsp;&middot;</span>
+      <span class="msg">Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;&middot;</span>
+      <span class="msg">Please note that the prices shown do not include delivery costs&nbsp;&middot;</span>
     </div>
     <a href="admin.html" class="admin-link">🔒</a>
   </header>
@@ -135,8 +142,8 @@
       .catch(console.error);
 
     function filterProducts(){
-      const cat = document.getElementById('categoryFilter').value;
-      const br  = document.getElementById('brandFilter').value;
+      const cat  = document.getElementById('categoryFilter').value;
+      const br   = document.getElementById('brandFilter').value;
       const sort = document.getElementById('sortSelect').value;
 
       let filtered = products.filter(p=>
@@ -144,7 +151,7 @@
         (br==='all'||p.brand===br)
       );
 
-      if(sort==='price-asc')     filtered.sort((a,b)=>a.price - b.price);
+      if(sort==='price-asc')      filtered.sort((a,b)=>a.price - b.price);
       else if(sort==='price-desc') filtered.sort((a,b)=>b.price - a.price);
 
       displayProducts(filtered);
@@ -159,8 +166,8 @@
         ).join('');
         const card = document.createElement('a');
         card.className = 'product';
-        card.href = p.cnfans_link;
-        card.target = '_blank';
+        card.href      = p.cnfans_link;
+        card.target    = '_blank';
         card.innerHTML = `
           <img src="${p.image}" alt="${p.title}">
           <div class="product-title">${p.title}</div>
