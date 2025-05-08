@@ -66,10 +66,8 @@
   <header>
     <h1>TRENDY WORLD SHOP</h1>
     <div class="marquee">
-      <span class="msg">En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS&nbsp;&middot;
-      Clicking on an article will automatically redirect you to the CNFANS website</span>
-      Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;&middot;</span>
-      Please note that the prices shown do not include delivery costs</span>
+      <span class="msg">En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS&nbsp;&middot; Clicking on an article will automatically redirect you to the CNFANS website</span>
+      <span class="msg">Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;&middot; Please note that the prices shown do not include delivery costs</span>
     </div>
     <a href="admin.html" class="admin-link">🔒</a>
   </header>
@@ -92,16 +90,10 @@
   <div class="filters">
     <select id="categoryFilter" onchange="filterProducts()">
       <option value="all">Toutes les catégories</option>
-      <option value="Mode Homme">Homme</option>
-      <option value="Mode Femme">Femme</option>
-      <option value="Chaussures">Chaussures</option>
-      <option value="Parfums">Parfums</option>
-      <option value="Accessoires">Accessoires</option>
     </select>
 
     <select id="brandFilter" onchange="filterProducts()">
       <option value="all">Toutes les marques</option>
-      <!-- remplit dynamiquement -->
     </select>
 
     <select id="sortSelect" onchange="filterProducts()">
@@ -114,12 +106,25 @@
   <div class="grid" id="productGrid"></div>
 
   <script>
-    let products = [], brands = [], colors = [];
+    let products = [], brands = [], colors = [], categories = [];
+
+    // Charger et trier catégories
+    fetch('categories.json')
+      .then(r => r.json())
+      .then(data => {
+        categories = data.sort((a,b) => a.localeCompare(b,'fr'));
+        const cf = document.getElementById('categoryFilter');
+        categories.forEach(c => {
+          const o = document.createElement('option');
+          o.value = o.textContent = c;
+          cf.appendChild(o);
+        });
+      });
 
     // Charger et trier marques
     fetch('brands.json')
-      .then(r=>r.json())
-      .then(data=>{
+      .then(r => r.json())
+      .then(data => {
         brands = data.sort((a,b)=>a.localeCompare(b,'fr'));
         const bf = document.getElementById('brandFilter');
         brands.forEach(b=>{
@@ -129,7 +134,7 @@
         });
       });
 
-    // Charger couleurs
+    // Charger couleurs (pour affichage, pas de filtre ici)
     fetch('colors.json')
       .then(r=>r.json())
       .then(data=>{ colors = data; })
@@ -166,8 +171,8 @@
         ).join('');
         const card = document.createElement('a');
         card.className = 'product';
-        card.href      = p.cnfans_link;
-        card.target    = '_blank';
+        card.href   = p.cnfans_link;
+        card.target = '_blank';
         card.innerHTML = `
           <img src="${p.image}" alt="${p.title}">
           <div class="product-title">${p.title}</div>
