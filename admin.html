@@ -60,10 +60,7 @@
 
   <header><h1>🛠️ Interface Admin – Produits CNFANS</h1></header>
 
-  <!-- 3) Chargement JSON local -->
-  <input type="file" id="fileInput" accept=".json"><br><br>
-
-  <!-- 4) Boutons d’action -->
+  <!-- 3) Boutons d’action -->
   <button id="addBtn" title="Ajouter un produit" onclick="addProduct()">＋</button>
   <button onclick="downloadJSON()">💾 Télécharger JSON</button>
   <button onclick="commitToGitHub()">🚀 Commit to GitHub</button>
@@ -101,6 +98,8 @@
       document.getElementById('pw-overlay').style.display = 'none';
       if (!localStorage.getItem('ghToken')) {
         document.getElementById('token-overlay').style.display = 'flex';
+      } else {
+        loadFromGitHub();
       }
     } else {
       alert('Mot de passe incorrect');
@@ -113,9 +112,30 @@
     if (!t) return alert('Token requis');
     localStorage.setItem('ghToken', t);
     document.getElementById('token-overlay').style.display = 'none';
+    loadFromGitHub();
   }
   function getToken(){
     return localStorage.getItem('ghToken');
+  }
+
+  // ─── CHARGEMENT FROM GITHUB ──────────────────────────────────────────────
+  async function loadFromGitHub(){
+    try {
+      const token = getToken();
+      if(!token) throw new Error('Token manquant');
+      const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
+      const res = await fetch(url, {
+        headers: { 'Authorization': `token ${token}` }
+      });
+      if (!res.ok) throw new Error('Impossible de charger le JSON depuis GitHub');
+      const { content } = await res.json();
+      const jsonStr = atob(content);
+      products = JSON.parse(jsonStr);
+      renderTable();
+      enableDragAndDrop();
+    } catch(err) {
+      alert(err.message);
+    }
   }
 
   // ─── CHARGEMENT DES LISTES ───────────────────────────────────────────────
@@ -136,17 +156,6 @@
     .then(d=>colors = d)
     .catch(()=>alert('Erreur loading colors.json'));
 
-  document.getElementById('fileInput')
-    .addEventListener('change', e=>{
-      const reader = new FileReader();
-      reader.onload = ()=>{
-        products = JSON.parse(reader.result);
-        renderTable();
-        enableDragAndDrop();
-      };
-      reader.readAsText(e.target.files[0]);
-    });
-
   // ─── RENDER TABLEAU ──────────────────────────────────────────────────────
   function renderTable(){
     const tbody = document.getElementById('productTableBody');
@@ -154,7 +163,7 @@
     products.forEach((p,i)=>{
       const row = document.createElement('tr');
 
-      // 1) Champs texte
+      // Champs texte
       ['title','platform','id','image'].forEach(f=>{
         const td = document.createElement('td');
         const inp = document.createElement('input');
@@ -164,7 +173,7 @@
         row.append(td);
       });
 
-      // 2) Catégorie
+      // Catégorie
       const catTd = document.createElement('td');
       const catSel = document.createElement('select');
       categories.forEach(c=>{
@@ -175,7 +184,7 @@
       catTd.append(catSel);
       row.append(catTd);
 
-      // 3) Marque
+      // Marque
       const brTd = document.createElement('td');
       const brSel = document.createElement('select');
       brands.forEach(b=>{
@@ -186,7 +195,7 @@
       brTd.append(brSel);
       row.append(brTd);
 
-      // 4) Couleurs (multi-select)
+      // Couleurs
       const colTd = document.createElement('td');
       const colSel = document.createElement('select');
       colSel.multiple = true;
@@ -201,17 +210,17 @@
       colTd.append(colSel);
       row.append(colTd);
 
-      // 5) Prix
+      // Prix
       const prTd = document.createElement('td');
       prTd.classList.add('price-column');
       const prInp = document.createElement('input');
-      prInp.type = 'number'; prInp.step = '0.01';
+      prInp.type='number'; prInp.step='0.01';
       prInp.value = p.price||0;
       prInp.onchange = e=> products[i].price = parseFloat(e.target.value);
       prTd.append(prInp);
       row.append(prTd);
 
-      // 6) Supprimer
+      // Actions
       const actTd = document.createElement('td');
       const delBtn = document.createElement('button');
       delBtn.textContent = '🗑 Supprimer';
@@ -238,9 +247,7 @@
   function addProduct(){
     products.push({
       title:'', platform:'', id:'', image:'',
-      category: categories[0]||'',
-      brand:     brands[0]||'',
-      colors:    [], price:0,
+      category: categories[0]||'', brand: brands[0]||'', colors:[], price:0,
       cnfans_link:'', source:''
     });
     renderTable();
@@ -271,13 +278,13 @@
       const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
 
       // GET SHA actuel
-      let res = await fetch(url, {
-        headers: { 'Authorization': `token ${token}` }
+      let res = await fetch(url,{
+        headers:{ 'Authorization': `token ${token}` }
       });
       if(!res.ok) throw Error('GET SHA échoué');
       const { sha } = await res.json();
 
-      // Préparer le contenu Base64
+      // Préparer contenu base64
       products.forEach(p=>{
         p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
         p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
@@ -285,9 +292,9 @@
       const content = btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
 
       // PUT update
-      res = await fetch(url, {
-        method: 'PUT',
-        headers: {
+      res = await fetch(url,{
+        method:'PUT',
+        headers:{
           'Authorization': `token ${token}`,
           'Content-Type':  'application/json'
         },
@@ -297,8 +304,8 @@
         })
       });
       if(!res.ok) throw Error('PUT échoué');
-      alert('✅ jadeship_products.json mis à jour sur GitHub !');
-    } catch(err) {
+      alert('✅ JSON mis à jour sur GitHub !');
+    } catch(err){
       console.error(err);
       alert('Erreur GitHub : '+err.message);
     }
