@@ -389,7 +389,7 @@
     "platform": "ALI_1688",
     "id": "776098722641",
     "image": "https://xclusivejerseys.com/cdn/shop/files/IMG-1930_1024x1024_2x_d50567fb-e8c2-49eb-b2b6-3d90e938a88b.jpg?v=1724177851",
-    "category": "VÃÂªtements",
+    "category": "Football",
     "brand": "Nike",
     "colors": [],
     "price": 40,
@@ -539,5 +539,17 @@
     "price": 240,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7315116901&ref=212491",
     "source": "https://www.cnfans.com/product?id=7315116901&platform=WEIDIAN"
+  },
+  {
+    "title": "Jersey Football Edition Limited",
+    "platform": "WEIDIAN",
+    "id": "7452490388",
+    "image": "https://planetjersey.fr/cdn/shop/files/maillot-concept-ajax-bleu-van-gogh.jpg?v=1745033061&width=1946",
+    "category": "Football",
+    "brand": "Nike",
+    "colors": [],
+    "price": 139,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7452490388&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7452490388&platform=WEIDIAN"
   }
 ]
