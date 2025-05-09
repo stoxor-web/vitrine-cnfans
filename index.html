@@ -94,8 +94,7 @@
   <header>
     <h1>TRENDY WORLD SHOP</h1>
     <div class="marquee">
-      <span class="msg">En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS · Clicking on an article will automatically redirect you to the CNFANS website
-</span>
+      <span class="msg">En cliquant sur un article → redirection CNFANS · Clicking on an article → CNFANS</span>
       <span class="msg">Attention, les prix affichés ne comprennent pas les frais de livraison · Prices exclude shipping</span>
     </div>
   </header>
@@ -222,19 +221,19 @@
       shuffled.forEach(p=>{
         const priceEUR = (p.price * rateEUR).toFixed(1).replace('.', ',');
         const circles = (p.colors||[]).map(c=>
-          <span class="color-circle" style="background:${c}"></span>
+          `<span class="color-circle" style="background:${c}"></span>`
         ).join('');
         const card = document.createElement('a');
         card.className  = 'product';
         card.href       = p.cnfans_link;
         card.target     = '_blank';
-        card.innerHTML  = 
+        card.innerHTML  = `
           <div class="product-brand">${p.brand}</div>
           <img src="${p.image}" alt="${p.title}">
           <div class="product-title">${p.title}</div>
           <div class="product-price">${priceEUR} €</div>
           <div class="product-colors">${circles}</div>
-        ;
+        `;
         grid.appendChild(card);
       });
     }
@@ -242,5 +241,3 @@
 
 </body>
 </html>
-
-
