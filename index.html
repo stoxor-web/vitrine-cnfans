@@ -220,7 +220,7 @@
       grid.innerHTML = '';
       const shuffled = seededShuffle(list, blockIndex);
       shuffled.forEach(p=>{
-        const priceEUR = (p.price * rateEUR).toFixed(2);
+        const priceEUR = (p.price * rateEUR).toFixed(1).replace('.', ',');
         const circles = (p.colors||[]).map(c=>
           `<span class="color-circle" style="background:${c}"></span>`
         ).join('');
