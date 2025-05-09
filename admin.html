@@ -12,43 +12,61 @@
     select[multiple] { height: 100px; }
     button { margin: 5px; padding: 6px 12px; }
     th.price-column, td.price-column { width: 80px; max-width: 80px; }
+
+    /* Bouton flottant */
     #addBtn {
       position: fixed; bottom: 20px; right: 20px; z-index: 1000;
-      width: 50px; height: 50px; border-radius: 50%; background-color: #007bff;
-      color: white; font-size: 24px; border: none; cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3); transition: background-color 0.2s;
+      width: 50px; height: 50px; border-radius: 50%;
+      background-color: #007bff; color: white; font-size: 24px;
+      border: none; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.2s;
     }
     #addBtn:hover { background-color: #0056b3; }
-    #pw-overlay {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+
+    /* Overlays */
+    #pw-overlay, #token-overlay {
+      position: fixed; top:0; left:0; right:0; bottom:0;
       background: rgba(0,0,0,0.8); display: flex;
       justify-content: center; align-items: center; z-index:1000;
     }
-    #pw-prompt {
+    .prompt-box {
       background: #fff; padding: 20px; border-radius: 8px;
       text-align: center; width: 300px;
     }
-    #pw-prompt input { width: calc(100% - 20px); padding: 8px; margin-bottom: 10px; }
+    .prompt-box input { width: calc(100% - 20px); padding: 8px; margin-bottom: 10px; }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
 <body>
-  <!-- Overlay mot de passe -->
+  <!-- 1) Overlay mot de passe -->
   <div id="pw-overlay">
-    <div id="pw-prompt">
+    <div class="prompt-box">
       <h2>Accès Admin</h2>
-      <input type="password" id="adminPwd" placeholder="Entrez le mot de passe">
-      <br>
+      <input type="password" id="adminPwd" placeholder="Entrez le mot de passe"><br>
       <button onclick="checkPwd()">Valider</button>
-      <p id="timerMsg">Vous avez 15 secondes pour saisir le mot de passe...</p>
+      <p>Vous avez 15 secondes pour saisir...</p>
+    </div>
+  </div>
+
+  <!-- 2) Overlay GitHub Token -->
+  <div id="token-overlay" style="display:none">
+    <div class="prompt-box">
+      <h2>GitHub Token</h2>
+      <p>Entrez un <em>Personal Access Token</em> (scope <code>repo</code>) :</p>
+      <input type="password" id="ghToken" placeholder="ghp_xxx…"><br>
+      <button onclick="saveToken()">Enregistrer</button>
     </div>
   </div>
 
   <header><h1>🛠️ Interface Admin – Produits CNFANS</h1></header>
 
+  <!-- 3) Chargement JSON local -->
   <input type="file" id="fileInput" accept=".json"><br><br>
+
+  <!-- 4) Boutons d’action -->
   <button id="addBtn" title="Ajouter un produit" onclick="addProduct()">＋</button>
   <button onclick="downloadJSON()">💾 Télécharger JSON</button>
+  <button onclick="commitToGitHub()">🚀 Commit to GitHub</button>
 
   <table id="productTable">
     <thead>
@@ -62,49 +80,66 @@
   </table>
 
   <script>
-    // --- Gestion du mot de passe ---
-    const correctPwd = '123456';
-    let pwdTimer;
-    window.onload = () => {
-      pwdTimer = setTimeout(()=>{
-        alert('Temps écoulé, accès refusé.');
-        window.location.href = 'index.html';
-      }, 15000);
-    };
-    function checkPwd(){
-      if(document.getElementById('adminPwd').value === correctPwd){
-        clearTimeout(pwdTimer);
-        document.getElementById('pw-overlay').style.display = 'none';
-      } else {
-        alert('Mot de passe incorrect');
+  // ─── CONFIGURATION GITHUB ────────────────────────────────────────────────
+  const githubConfig = {
+    owner:  'stoxor-web',         // votre user/org GitHub
+    repo:   'vitrine-cnfans',     // nom du repo
+    path:   'jadeship_products.json',
+    branch: 'main'
+  };
+
+  // ─── OVERLAY MOT DE PASSE ────────────────────────────────────────────────
+  const correctPwd = '123456';
+  let pwdTimer = setTimeout(()=>{
+    alert('Temps écoulé – accès refusé');
+    window.location.href = 'index.html';
+  }, 15000);
+
+  function checkPwd(){
+    if (document.getElementById('adminPwd').value === correctPwd) {
+      clearTimeout(pwdTimer);
+      document.getElementById('pw-overlay').style.display = 'none';
+      if (!localStorage.getItem('ghToken')) {
+        document.getElementById('token-overlay').style.display = 'flex';
       }
+    } else {
+      alert('Mot de passe incorrect');
     }
+  }
 
-    // --- Données dynamiques ---
-    let products = [], brands = [], categories = [], colors = [];
+  // ─── GESTION DU GITHUB TOKEN ─────────────────────────────────────────────
+  function saveToken(){
+    const t = document.getElementById('ghToken').value.trim();
+    if (!t) return alert('Token requis');
+    localStorage.setItem('ghToken', t);
+    document.getElementById('token-overlay').style.display = 'none';
+  }
+  function getToken(){
+    return localStorage.getItem('ghToken');
+  }
 
-    // Charger catégories
-    fetch('categories.json')
-      .then(r => r.json())
-      .then(d => categories = d.sort((a,b)=>a.localeCompare(b,'fr')))
-      .catch(console.error);
+  // ─── CHARGEMENT DES LISTES ───────────────────────────────────────────────
+  let products = [], brands = [], categories = [], colors = [];
 
-    // Charger marques
-    fetch('brands.json')
-      .then(r => r.json())
-      .then(d => brands = d.sort((a,b)=>a.localeCompare(b,'fr')))
-      .catch(console.error);
+  fetch('categories.json')
+    .then(r=>r.json())
+    .then(d=>categories = d.sort((a,b)=>a.localeCompare(b,'fr')))
+    .catch(()=>alert('Erreur loading categories.json'));
 
-    // Charger couleurs
-    fetch('colors.json')
-      .then(r => r.json())
-      .then(d => colors = d)
-      .catch(console.error);
+  fetch('brands.json')
+    .then(r=>r.json())
+    .then(d=>brands = d.sort((a,b)=>a.localeCompare(b,'fr')))
+    .catch(()=>alert('Erreur loading brands.json'));
 
-    // Charger produits
-    document.getElementById('fileInput').addEventListener('change', e => {
+  fetch('colors.json')
+    .then(r=>r.json())
+    .then(d=>colors = d)
+    .catch(()=>alert('Erreur loading colors.json'));
+
+  document.getElementById('fileInput')
+    .addEventListener('change', e=>{
       const reader = new FileReader();
-      reader.onload = () => {
+      reader.onload = ()=>{
         products = JSON.parse(reader.result);
         renderTable();
         enableDragAndDrop();
@@ -112,130 +147,162 @@
       reader.readAsText(e.target.files[0]);
     });
 
-    function renderTable(){
-      const tbody = document.getElementById('productTableBody');
-      tbody.innerHTML = '';
+  // ─── RENDER TABLEAU ──────────────────────────────────────────────────────
+  function renderTable(){
+    const tbody = document.getElementById('productTableBody');
+    tbody.innerHTML = '';
+    products.forEach((p,i)=>{
+      const row = document.createElement('tr');
 
-      products.forEach((p, i) => {
-        const row = document.createElement('tr');
-
-        // Colonnes texte
-        ['title','platform','id','image'].forEach(field => {
-          const td = document.createElement('td');
-          const inp = document.createElement('input');
-          inp.value = p[field] || '';
-          inp.onchange = e => products[i][field] = e.target.value;
-          td.appendChild(inp);
-          row.appendChild(td);
-        });
-
-        // Catégorie (dynamic)
-        const catTd = document.createElement('td');
-        const catSel = document.createElement('select');
-        categories.forEach(c => {
-          const o = document.createElement('option');
-          o.value = o.textContent = c;
-          if(p.category === c) o.selected = true;
-          catSel.appendChild(o);
-        });
-        catSel.onchange = e => products[i].category = e.target.value;
-        catTd.appendChild(catSel);
-        row.appendChild(catTd);
-
-        // Marque (dynamic)
-        const brTd = document.createElement('td');
-        const brSel = document.createElement('select');
-        brands.forEach(b => {
-          const o = document.createElement('option');
-          o.value = o.textContent = b;
-          if(p.brand === b) o.selected = true;
-          brSel.appendChild(o);
-        });
-        brSel.onchange = e => products[i].brand = e.target.value;
-        brTd.appendChild(brSel);
-        row.appendChild(brTd);
-
-        // Couleurs (multi-select)
-        const colTd = document.createElement('td');
-        const colSel = document.createElement('select');
-        colSel.multiple = true;
-        colors.forEach(c => {
-          const o = document.createElement('option');
-          o.value = c.code;
-          o.textContent = c.name;
-          if(Array.isArray(p.colors) && p.colors.includes(c.code)) o.selected = true;
-          colSel.appendChild(o);
-        });
-        colSel.onchange = e => {
-          products[i].colors = Array.from(e.target.selectedOptions).map(x=>x.value);
-        };
-        colTd.appendChild(colSel);
-        row.appendChild(colTd);
-
-        // Prix
-        const prTd = document.createElement('td');
-        prTd.classList.add('price-column');
-        const prInp = document.createElement('input');
-        prInp.type = 'number';
-        prInp.step = '0.01';
-        prInp.value = p.price || 0;
-        prInp.onchange = e => products[i].price = parseFloat(e.target.value);
-        prTd.appendChild(prInp);
-        row.appendChild(prTd);
-
-        // Actions
-        const actTd = document.createElement('td');
-        const delBtn = document.createElement('button');
-        delBtn.textContent = '🗑 Supprimer';
-        delBtn.onclick = () => deleteProduct(i);
-        actTd.appendChild(delBtn);
-        row.appendChild(actTd);
-
-        tbody.appendChild(row);
+      // 1) Champs texte
+      ['title','platform','id','image'].forEach(f=>{
+        const td = document.createElement('td');
+        const inp = document.createElement('input');
+        inp.value = p[f]||'';
+        inp.onchange = e=> products[i][f] = e.target.value;
+        td.append(inp);
+        row.append(td);
       });
-    }
 
-    // Drag & drop
-    function enableDragAndDrop(){
-      new Sortable(document.getElementById('productTableBody'), {
-        animation: 150,
-        onEnd: evt => {
-          const [moved] = products.splice(evt.oldIndex, 1);
-          products.splice(evt.newIndex, 0, moved);
-        }
+      // 2) Catégorie
+      const catTd = document.createElement('td');
+      const catSel = document.createElement('select');
+      categories.forEach(c=>{
+        const o = new Option(c, c, p.category===c, p.category===c);
+        catSel.append(o);
       });
-    }
+      catSel.onchange = e=> products[i].category = e.target.value;
+      catTd.append(catSel);
+      row.append(catTd);
 
-    // Ajouter un produit
-    function addProduct(){
-      products.push({
-        title: '', platform: '', id: '', image: '',
-        category: categories[0] || '',
-        brand: brands[0] || '',
-        colors: [], price: 0,
-        cnfans_link:'', source:''
+      // 3) Marque
+      const brTd = document.createElement('td');
+      const brSel = document.createElement('select');
+      brands.forEach(b=>{
+        const o = new Option(b, b, p.brand===b, p.brand===b);
+        brSel.append(o);
       });
-      renderTable();
-    }
+      brSel.onchange = e=> products[i].brand = e.target.value;
+      brTd.append(brSel);
+      row.append(brTd);
 
-    // Supprimer
-    function deleteProduct(i){
-      products.splice(i,1);
-      renderTable();
-    }
+      // 4) Couleurs (multi-select)
+      const colTd = document.createElement('td');
+      const colSel = document.createElement('select');
+      colSel.multiple = true;
+      colors.forEach(c=>{
+        const o = new Option(c.name, c.code, Array.isArray(p.colors)&&p.colors.includes(c.code), false);
+        o.value = c.code;
+        colSel.append(o);
+      });
+      colSel.onchange = e=>{
+        products[i].colors = Array.from(e.target.selectedOptions).map(o=>o.value);
+      };
+      colTd.append(colSel);
+      row.append(colTd);
 
-    // Télécharger JSON
-    function downloadJSON(){
-      products.forEach(p => {
+      // 5) Prix
+      const prTd = document.createElement('td');
+      prTd.classList.add('price-column');
+      const prInp = document.createElement('input');
+      prInp.type = 'number'; prInp.step = '0.01';
+      prInp.value = p.price||0;
+      prInp.onchange = e=> products[i].price = parseFloat(e.target.value);
+      prTd.append(prInp);
+      row.append(prTd);
+
+      // 6) Supprimer
+      const actTd = document.createElement('td');
+      const delBtn = document.createElement('button');
+      delBtn.textContent = '🗑 Supprimer';
+      delBtn.onclick = ()=> deleteProduct(i);
+      actTd.append(delBtn);
+      row.append(actTd);
+
+      tbody.append(row);
+    });
+  }
+
+  // ─── DRAG & DROP ─────────────────────────────────────────────────────────
+  function enableDragAndDrop(){
+    new Sortable(document.getElementById('productTableBody'),{
+      animation:150,
+      onEnd: evt=>{
+        const [item] = products.splice(evt.oldIndex,1);
+        products.splice(evt.newIndex,0,item);
+      }
+    });
+  }
+
+  // ─── AJOUT / SUPPRESSION ─────────────────────────────────────────────────
+  function addProduct(){
+    products.push({
+      title:'', platform:'', id:'', image:'',
+      category: categories[0]||'',
+      brand:     brands[0]||'',
+      colors:    [], price:0,
+      cnfans_link:'', source:''
+    });
+    renderTable();
+  }
+  function deleteProduct(idx){
+    products.splice(idx,1);
+    renderTable();
+  }
+
+  // ─── EXPORT LOCAL ────────────────────────────────────────────────────────
+  function downloadJSON(){
+    products.forEach(p=>{
+      p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
+      p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
+    });
+    const blob = new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
+    const a = document.createElement('a');
+    a.href     = URL.createObjectURL(blob);
+    a.download = 'jadeship_products.json';
+    a.click();
+  }
+
+  // ─── COMMIT TO GITHUB ─────────────────────────────────────────────────────
+  async function commitToGitHub(){
+    try {
+      const token = getToken();
+      if(!token) return alert('Token GitHub manquant');
+      const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
+
+      // GET SHA actuel
+      let res = await fetch(url, {
+        headers: { 'Authorization': `token ${token}` }
+      });
+      if(!res.ok) throw Error('GET SHA échoué');
+      const { sha } = await res.json();
+
+      // Préparer le contenu Base64
+      products.forEach(p=>{
         p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
         p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
       });
-      const blob = new Blob([JSON.stringify(products, null, 2)], { type:'application/json' });
-      const a    = document.createElement('a');
-      a.href     = URL.createObjectURL(blob);
-      a.download = 'jadeship_products.json';
-      a.click();
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
+
+      // PUT update
+      res = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${token}`,
+          'Content-Type':  'application/json'
+        },
+        body: JSON.stringify({
+          message: `Mise à jour via admin (${new Date().toISOString()})`,
+          content, sha, branch: githubConfig.branch
+        })
+      });
+      if(!res.ok) throw Error('PUT échoué');
+      alert('✅ jadeship_products.json mis à jour sur GitHub !');
+    } catch(err) {
+      console.error(err);
+      alert('Erreur GitHub : '+err.message);
     }
+  }
   </script>
 </body>
 </html>
