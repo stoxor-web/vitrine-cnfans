@@ -491,5 +491,29 @@
     "price": 280,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=729899345462&ref=212491",
     "source": "https://www.cnfans.com/product?id=729899345462&platform=TAOBAO"
+  },
+  {
+    "title": "ON Cloudtilt",
+    "platform": "WEIDIAN",
+    "id": "7241578280",
+    "image": "https://images.footlocker.com/is/image/FLEU/315215539602_01?wid=500&hei=500&fmt=png-alpha",
+    "category": "Chaussures",
+    "brand": "On Running",
+    "colors": [],
+    "price": 190,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7241578280&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7241578280&platform=WEIDIAN"
+  },
+  {
+    "title": "ON Cloudmonster",
+    "platform": "WEIDIAN",
+    "id": "7444670705",
+    "image": "https://images.ctfassets.net/hnk2vsx53n6l/5NJjNhQEaMEJl9HMKd8x0T/282dd4e1dac65ccc9455ad91ec92c961/b7523a68d970fde0b6eb314a938d3dee1a699839.png?fm=webp",
+    "category": "Chaussures",
+    "brand": "On Running",
+    "colors": [],
+    "price": 230,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7444670705&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7444670705&platform=WEIDIAN"
   }
 ]
