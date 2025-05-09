@@ -409,7 +409,7 @@
     "source": "https://www.cnfans.com/product?id=723691701263&platform=ALI_1688"
   },
   {
-    "title": "UGG Boot, ",
+    "title": "UGG Boot & Tasman",
     "platform": "WEIDIAN",
     "id": "7279814141",
     "image": "https://merci-merci.com/cdn/shop/files/2_64b909eb-c90b-4b03-ba7d-80a3f4e49ff2.jpg?v=1734091520",
@@ -419,5 +419,29 @@
     "price": 160,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7279814141&ref=212491",
     "source": "https://www.cnfans.com/product?id=7279814141&platform=WEIDIAN"
+  },
+  {
+    "title": "UGG Boot ",
+    "platform": "WEIDIAN",
+    "id": "4433451427",
+    "image": "https://02.cdn37.se/ak1/images/2.687124/ugg-classic-ultra-mini-boot-m-chestnut.jpeg",
+    "category": "Chaussures",
+    "brand": "Ugg",
+    "colors": [],
+    "price": 209,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=4433451427&ref=212491",
+    "source": "https://www.cnfans.com/product?id=4433451427&platform=WEIDIAN"
+  },
+  {
+    "title": "",
+    "platform": "",
+    "id": "",
+    "image": "",
+    "category": "Accessoires",
+    "brand": "Adidas",
+    "colors": [],
+    "price": 0,
+    "cnfans_link": "https://cnfans.com/product?platform=&id=&ref=212491",
+    "source": "https://www.cnfans.com/product?id=&platform="
   }
 ]
