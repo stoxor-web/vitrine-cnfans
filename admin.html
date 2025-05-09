@@ -13,15 +13,21 @@
     button { margin: 5px; padding: 6px 12px; }
     th.price-column, td.price-column { width: 80px; max-width: 80px; }
 
-    /* Bouton flottant */
-    #addBtn {
-      position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+    /* Boutons flottants */
+    #addBtn, #commitBtn {
+      position: fixed; bottom: 20px; z-index: 1000;
       width: 50px; height: 50px; border-radius: 50%;
       background-color: #007bff; color: white; font-size: 24px;
       border: none; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       transition: background-color 0.2s;
     }
+    #addBtn { right: 20px; }
     #addBtn:hover { background-color: #0056b3; }
+    #commitBtn {
+      right: 80px;
+      background-color: #28a745;
+    }
+    #commitBtn:hover { background-color: #1e7e34; }
 
     /* Overlays */
     #pw-overlay, #token-overlay {
@@ -60,10 +66,11 @@
 
   <header><h1>🛠️ Interface Admin – Produits CNFANS</h1></header>
 
-  <!-- 3) Boutons d’action -->
+  <!-- 3) Boutons flottants d’action -->
   <button id="addBtn" title="Ajouter un produit" onclick="addProduct()">＋</button>
+  <button id="commitBtn" title="Commit to GitHub" onclick="commitToGitHub()">🚀</button>
+
   <button onclick="downloadJSON()">💾 Télécharger JSON</button>
-  <button onclick="commitToGitHub()">🚀 Commit to GitHub</button>
 
   <table id="productTable">
     <thead>
@@ -114,9 +121,7 @@
     document.getElementById('token-overlay').style.display = 'none';
     loadFromGitHub();
   }
-  function getToken(){
-    return localStorage.getItem('ghToken');
-  }
+  function getToken(){ return localStorage.getItem('ghToken'); }
 
   // ─── CHARGEMENT FROM GITHUB ──────────────────────────────────────────────
   async function loadFromGitHub(){
@@ -129,8 +134,7 @@
       });
       if (!res.ok) throw new Error('Impossible de charger le JSON depuis GitHub');
       const { content } = await res.json();
-      const jsonStr = atob(content);
-      products = JSON.parse(jsonStr);
+      products = JSON.parse(atob(content));
       renderTable();
       enableDragAndDrop();
     } catch(err) {
@@ -140,21 +144,9 @@
 
   // ─── CHARGEMENT DES LISTES ───────────────────────────────────────────────
   let products = [], brands = [], categories = [], colors = [];
-
-  fetch('categories.json')
-    .then(r=>r.json())
-    .then(d=>categories = d.sort((a,b)=>a.localeCompare(b,'fr')))
-    .catch(()=>alert('Erreur loading categories.json'));
-
-  fetch('brands.json')
-    .then(r=>r.json())
-    .then(d=>brands = d.sort((a,b)=>a.localeCompare(b,'fr')))
-    .catch(()=>alert('Erreur loading brands.json'));
-
-  fetch('colors.json')
-    .then(r=>r.json())
-    .then(d=>colors = d)
-    .catch(()=>alert('Erreur loading colors.json'));
+  fetch('categories.json').then(r=>r.json()).then(d=>categories=d.sort((a,b)=>a.localeCompare(b,'fr')));
+  fetch('brands.json')    .then(r=>r.json()).then(d=>brands    =d.sort((a,b)=>a.localeCompare(b,'fr')));
+  fetch('colors.json')    .then(r=>r.json()).then(d=>colors    =d);
 
   // ─── RENDER TABLEAU ──────────────────────────────────────────────────────
   function renderTable(){
@@ -162,72 +154,46 @@
     tbody.innerHTML = '';
     products.forEach((p,i)=>{
       const row = document.createElement('tr');
-
-      // Champs texte
       ['title','platform','id','image'].forEach(f=>{
         const td = document.createElement('td');
         const inp = document.createElement('input');
-        inp.value = p[f]||'';
-        inp.onchange = e=> products[i][f] = e.target.value;
-        td.append(inp);
-        row.append(td);
+        inp.value = p[f]||''; inp.onchange = e=> products[i][f] = e.target.value;
+        td.append(inp); row.append(td);
       });
-
       // Catégorie
       const catTd = document.createElement('td');
       const catSel = document.createElement('select');
-      categories.forEach(c=>{
-        const o = new Option(c, c, p.category===c, p.category===c);
-        catSel.append(o);
-      });
+      categories.forEach(c=> catSel.append(new Option(c,c,p.category===c,p.category===c)));
       catSel.onchange = e=> products[i].category = e.target.value;
-      catTd.append(catSel);
-      row.append(catTd);
-
+      catTd.append(catSel); row.append(catTd);
       // Marque
       const brTd = document.createElement('td');
       const brSel = document.createElement('select');
-      brands.forEach(b=>{
-        const o = new Option(b, b, p.brand===b, p.brand===b);
-        brSel.append(o);
-      });
+      brands.forEach(b=> brSel.append(new Option(b,b,p.brand===b,p.brand===b)));
       brSel.onchange = e=> products[i].brand = e.target.value;
-      brTd.append(brSel);
-      row.append(brTd);
-
+      brTd.append(brSel); row.append(brTd);
       // Couleurs
       const colTd = document.createElement('td');
       const colSel = document.createElement('select');
       colSel.multiple = true;
       colors.forEach(c=>{
-        const o = new Option(c.name, c.code, Array.isArray(p.colors)&&p.colors.includes(c.code), false);
-        o.value = c.code;
-        colSel.append(o);
+        const o = new Option(c.name,c.code,Array.isArray(p.colors)&&p.colors.includes(c.code),false);
+        o.value = c.code; colSel.append(o);
       });
-      colSel.onchange = e=>{
-        products[i].colors = Array.from(e.target.selectedOptions).map(o=>o.value);
-      };
-      colTd.append(colSel);
-      row.append(colTd);
-
+      colSel.onchange = e=> products[i].colors = Array.from(e.target.selectedOptions).map(o=>o.value);
+      colTd.append(colSel); row.append(colTd);
       // Prix
       const prTd = document.createElement('td');
       prTd.classList.add('price-column');
       const prInp = document.createElement('input');
-      prInp.type='number'; prInp.step='0.01';
-      prInp.value = p.price||0;
+      prInp.type='number'; prInp.step='0.01'; prInp.value=p.price||0;
       prInp.onchange = e=> products[i].price = parseFloat(e.target.value);
-      prTd.append(prInp);
-      row.append(prTd);
-
+      prTd.append(prInp); row.append(prTd);
       // Actions
       const actTd = document.createElement('td');
       const delBtn = document.createElement('button');
-      delBtn.textContent = '🗑 Supprimer';
-      delBtn.onclick = ()=> deleteProduct(i);
-      actTd.append(delBtn);
-      row.append(actTd);
-
+      delBtn.textContent='🗑 Supprimer'; delBtn.onclick=()=>deleteProduct(i);
+      actTd.append(delBtn); row.append(actTd);
       tbody.append(row);
     });
   }
@@ -265,7 +231,7 @@
     });
     const blob = new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
     const a = document.createElement('a');
-    a.href     = URL.createObjectURL(blob);
+    a.href = URL.createObjectURL(blob);
     a.download = 'jadeship_products.json';
     a.click();
   }
@@ -276,28 +242,20 @@
       const token = getToken();
       if(!token) return alert('Token GitHub manquant');
       const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
-
       // GET SHA actuel
-      let res = await fetch(url,{
-        headers:{ 'Authorization': `token ${token}` }
-      });
+      let res = await fetch(url,{ headers:{ 'Authorization': `token ${token}` } });
       if(!res.ok) throw Error('GET SHA échoué');
       const { sha } = await res.json();
-
-      // Préparer contenu base64
+      // Préparer contenu
       products.forEach(p=>{
         p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
         p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
       });
       const content = btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
-
       // PUT update
       res = await fetch(url,{
         method:'PUT',
-        headers:{
-          'Authorization': `token ${token}`,
-          'Content-Type':  'application/json'
-        },
+        headers:{ 'Authorization': `token ${token}`, 'Content-Type':'application/json' },
         body: JSON.stringify({
           message: `Mise à jour via admin (${new Date().toISOString()})`,
           content, sha, branch: githubConfig.branch
