@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TRENDY WORLD SHOP</title>
   <style>
-    /* Reset & layout */
-    * { box-sizing: border-box; }
+    /* Reset et layout global */
     html, body {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       overflow-x: hidden;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       font-family: Arial, sans-serif;
       background: #f2f2f2;
     }
@@ -19,113 +20,77 @@
       --marquee-gap: 100px;
     }
     a { text-decoration: none !important; color: inherit; }
+    header { background-color: #111827; color: white; padding: 20px; text-align: center; position: relative; }
+    .admin-link { position: absolute; top:5px; left:5px; font-size:24px; color:white; }
+    .admin-link:hover { color:#007bff; }
 
-    /* Header & marquee */
-    header {
-      background: #111827; color: #fff;
-      padding: 20px; text-align: center;
-      position: relative;
-    }
-    .marquee {
-      background: red; overflow: hidden; white-space: nowrap;
-    }
+    /* Marquee */
+    .marquee { background: red; overflow: hidden; white-space: nowrap; }
     .marquee .msg {
       display: inline-block;
       padding-left: 100%;
       margin-right: var(--marquee-gap);
       animation: scroll var(--marquee-duration) linear infinite;
-      color: #fff; font-size: 14px; font-weight: bold;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
     }
     @keyframes scroll {
       from { transform: translateX(0); }
       to   { transform: translateX(-100%); }
     }
 
-    /* Social banner */
-    .social-banner {
-      background: #808080; text-align: center; padding: 10px 0;
-    }
-    .social-banner a img {
-      width: 40px; height: 40px; margin: 0 10px;
-      vertical-align: middle;
-    }
-
-    /* Filters */
-    .filters {
-      text-align: center; padding: 20px;
-    }
+    .filters { text-align:center; padding:20px; }
     .filters select {
-      padding: 12px 20px;
-      font-size: 16px;
-      border-radius: 25px;
-      border: 2px solid #ddd;
-      margin: 0 10px 20px;
-      transition: border-color .3s, background .3s;
+      padding:12px 20px; font-size:16px; border-radius:25px; border:2px solid #ddd;
+      margin:0 10px 20px; transition:.3s;
     }
-    .filters select:hover {
-      border-color: #007bff; background: #f0f8ff;
-    }
+    .filters select:hover { border-color:#007bff; background:#f0f8ff; }
 
-    /* Grid & cards */
     .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
+      display:grid;
+      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+      gap:20px; padding:20px; max-width:1200px; margin:auto;
     }
     .product {
-      background: #fff; border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,.05);
-      text-align: center;
-      transition: transform .2s ease;
-      position: relative;
+      background:#fff; border-radius:10px; overflow:hidden;
+      box-shadow:0 2px 10px rgba(0,0,0,.05); text-align:center;
+      transition:transform .2s ease; position: relative;
     }
-    .product:hover {
-      transform: translateY(-5px);
-    }
+    .product:hover { transform:translateY(-5px); }
+
     .product-brand {
-      position: absolute; top: 10px; left: 10px;
-      background: rgba(0,0,0,.6); color: #fff;
-      padding: 3px 8px; font-size: 12px;
-      font-weight: bold; border-radius: 4px;
-    }
-    .product img {
-      width: 100%; height: 220px; object-fit: contain;
-    }
-    .product-title {
-      padding: 10px; font-size: 16px;
-      font-weight: bold; color: #333;
-    }
-    .product-price {
-      padding: 10px; font-size: 16px;
-      font-weight: bold; color: #000;
-    }
-    .product-colors {
-      padding: 5px 0;
-    }
-    .color-circle {
-      display: inline-block;
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      margin: 0 3px;
-      border: 1px solid #ccc;
+      position: absolute; top:10px; left:10px;
+      background:rgba(0,0,0,0.6); color:#fff; padding:3px 8px;
+      font-size:12px; font-weight:bold; border-radius:4px;
     }
 
-    /* Responsives */
-    @media (max-width: 768px) {
-      .grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-        gap: 15px;
-      }
-      .product-title { font-size: 14px; }
-      .product-price { font-size: 12px; }
+    .product img {
+      width:100%; height:220px; object-fit:contain;
     }
-    @media (max-width: 480px) {
-      .grid { grid-template-columns: 1fr; gap: 10px; }
-      .filters select { width: 160px; margin-bottom: 15px; }
+    .product-title { padding:10px; font-size:16px; font-weight:bold; color:#333; }
+    .product-price { padding:10px; font-size:16px; font-weight:bold; color:#000; }
+    .product-colors { padding:5px 0; }
+    .color-circle {
+      display:inline-block; width:14px; height:14px;
+      border-radius:50%; margin:0 3px; border:1px solid #ccc;
+    }
+
+    .social-banner {
+      background:#808080; text-align:center; padding:10px 0;
+    }
+    .social-banner a img {
+      width:40px; height:40px; margin:0 10px; vertical-align:middle;
+    }
+
+    @media(max-width:768px) {
+      .grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:15px; }
+      .product-title{font-size:14px;}
+      .product-price{font-size:12px;}
+    }
+    @media(max-width:480px) {
+      .grid{grid-template-columns:1fr;gap:10px;}
+      .filters select{width:160px;margin-bottom:15px;}
     }
   </style>
 </head>
@@ -134,17 +99,27 @@
   <header>
     <h1>TRENDY WORLD SHOP</h1>
     <div class="marquee">
-      <span class="msg">
-        En cliquant un article → redirection CNFANS · Clicking an item → CNFANS
-      </span>
-      <span class="msg">
-        Les prix n’incluent pas la livraison · Prices exclude shipping
-      </span>
+      <span class="msg">En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS&nbsp;&middot; Clicking on an article will automatically redirect you to the CNFANS website</span>
+      <span class="msg">Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;&middot; Please note that the prices shown do not include delivery costs</span>
     </div>
   </header>
 
   <div class="social-banner">
-    <!-- vos icônes sociales... -->
+    <a href="https://cnfans.com/register?ref=212491" target="_blank" title="Inscription CNFANS">
+      <img src="https://spreadsheetcnfans.my.canva.site/_assets/media/2ee61dcee3eb5c104658e8ee50dd3ba2.png" alt="CNFANS">
+    </a>
+    <a href="https://www.tiktok.com/@trendy_world_off" target="_blank" title="TikTok">
+      <img src="https://cdn.pixabay.com/photo/2021/01/30/06/43/tiktok-5962993_1280.png" alt="TikTok">
+    </a>
+    <a href="https://www.instagram.com/trendy_world_off/" target="_blank" title="Instagram">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+    </a>
+    <a href="https://youtu.be/n_2sIEApRhk?si=wGym7D6Deui_vARg&t=12" target="_blank" title="YouTube">
+      <img src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-104-432560.png?f=webp" alt="YouTube">
+    </a>
+    <a href="https://chromewebstore.google.com/detail/ljipkdpcjbmhkdjjmbbaggebcednbbme" target="_blank" title="Extension Chrome">
+      <img src="https://lh3.googleusercontent.com/gQPpVsreSTA080X1qhyxMUJ5YGqJGHnbhaw-Xm9sG-iHRrNvKVi-bvlPEyJRjrlpeKAEPz6igxqqIvTlml5MSHSm1m0=s120" alt="Extension">
+    </a>
   </div>
 
   <div class="filters">
@@ -156,117 +131,125 @@
     </select>
     <select id="sortSelect" onchange="filterProducts()">
       <option value="none">Trier par</option>
-      <option value="price-asc">Prix ↑</option>
-      <option value="price-desc">Prix ↓</option>
+      <option value="price-asc">Prix croissant</option>
+      <option value="price-desc">Prix décroissant</option>
     </select>
   </div>
 
   <div class="grid" id="productGrid"></div>
 
   <script>
-    // 1) Calcul bloc 12 h (00h & 12h Paris)
+    // --- 1) Calcul du "block" de 12h selon l'heure de Paris ---
     const MS12H = 12 * 3600 * 1000;
-    function parisMs(){
-      const fmt = new Intl.DateTimeFormat('sv-SE',{
-        timeZone:'Europe/Paris',
-        year:'numeric',month:'2-digit',day:'2-digit',
-        hour:'2-digit',minute:'2-digit',second:'2-digit',
+    function getParisTimestamp() {
+      // récupère date/heure au format sv (YYYY-MM-DD HH:mm:ss)
+      const parts = new Intl.DateTimeFormat('sv-SE', {
+        timeZone: 'Europe/Paris',
+        year:'numeric', month:'2-digit', day:'2-digit',
+        hour:'2-digit', minute:'2-digit', second:'2-digit',
         hour12:false
       }).format(new Date()).replace(' ', 'T');
-      return new Date(fmt).getTime();
+      return new Date(parts).getTime();
     }
-    const block = Math.floor(parisMs()/MS12H);
+    const blockIndex = Math.floor(getParisTimestamp() / MS12H);
 
-    // 2) Pseudo‐alea déterministe
-    function mulberry32(a){return function(){
-      let t = a += 0x6D2B79F5;
-      t = Math.imul(t^(t>>>15),t|1);
-      t ^= t + Math.imul(t^(t>>>7),t|61);
-      return ((t^(t>>>14))>>>0)/4294967296;
-    }}
-    function seededShuffle(a,seed){
-      const rand = mulberry32(seed), arr = a.slice();
-      for(let i=arr.length-1;i>0;i--){
-        const j=Math.floor(rand()*(i+1));
-        [arr[i],arr[j]]=[arr[j],arr[i]];
+    // --- 2) Générateur de nombre pseudo‐aléatoire déterministe ---
+    function mulberry32(a) {
+      return function() {
+        let t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
       }
-      return arr;
+    }
+    function seededShuffle(arr, seed) {
+      const rand = mulberry32(seed);
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(rand() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
     }
 
-    // 3) Data & taux de change
-    let products=[], categories=[], brands=[];
-    let rateEUR=1;
+    // --- 3) Chargement et affichage des données ---
+    let products = [], brands = [], categories = [], colors = [];
 
-    // Charger taux CNY→EUR
-    fetch('https://api.exchangerate.host/latest?base=CNY&symbols=EUR')
-      .then(r=>r.json())
-      .then(j=>{ rateEUR = j.rates.EUR; })
-      .catch(()=>{ console.warn('Impossible de charger le taux'); });
-
-    // Charger catégories
-    fetch('categories.json').then(r=>r.json()).then(data=>{
-      categories=data.sort((a,b)=>a.localeCompare(b,'fr'));
-      const cf=document.getElementById('categoryFilter');
-      categories.forEach(c=>{
-        const o=new Option(c,c);
-        cf.add(o);
+    // Catégories
+    fetch('categories.json')
+      .then(r => r.json())
+      .then(data => {
+        categories = data.sort((a,b) => a.localeCompare(b,'fr'));
+        const cf = document.getElementById('categoryFilter');
+        categories.forEach(c => {
+          const o = document.createElement('option');
+          o.value = o.textContent = c;
+          cf.appendChild(o);
+        });
       });
-    });
 
-    // Charger marques
-    fetch('brands.json').then(r=>r.json()).then(data=>{
-      brands=data.sort((a,b)=>a.localeCompare(b,'fr'));
-      const bf=document.getElementById('brandFilter');
-      brands.forEach(b=>{
-        const o=new Option(b,b);
-        bf.add(o);
+    // Marques
+    fetch('brands.json')
+      .then(r => r.json())
+      .then(data => {
+        brands = data.sort((a,b) => a.localeCompare(b,'fr'));
+        const bf = document.getElementById('brandFilter');
+        brands.forEach(b => {
+          const o = document.createElement('option');
+          o.value = o.textContent = b;
+          bf.appendChild(o);
+        });
       });
-    });
 
-    // Charger produits
+    // Couleurs (si besoin)
+    fetch('colors.json')
+      .then(r => r.json())
+      .then(data => colors = data)
+      .catch(console.error);
+
+    // Produits
     fetch('jadeship_products.json')
-      .then(r=>r.json())
-      .then(data=>{
+      .then(r => r.json())
+      .then(data => {
         products = data;
         filterProducts();
       })
       .catch(console.error);
 
-    // Filtrer & trier
-    function filterProducts(){
+    function filterProducts() {
       const cat = document.getElementById('categoryFilter').value;
       const br  = document.getElementById('brandFilter').value;
-      const sort = document.getElementById('sortSelect').value;
+      const sort= document.getElementById('sortSelect').value;
 
-      let list = products.filter(p=>
+      let list = products.filter(p =>
         (cat==='all'||p.category===cat) &&
         (br==='all'||p.brand===br)
       );
-      if(sort==='price-asc')      list.sort((a,b)=>a.price-b.price);
-      else if(sort==='price-desc') list.sort((a,b)=>b.price-a.price);
+
+      if (sort==='price-asc')      list.sort((a,b)=>a.price - b.price);
+      else if (sort==='price-desc') list.sort((a,b)=>b.price - a.price);
 
       displayProducts(list);
     }
 
-    // Afficher avec shuffle & conversion
-    function displayProducts(list){
-      const grid=document.getElementById('productGrid');
-      grid.innerHTML='';
-      const shuffled = seededShuffle(list, block);
-      shuffled.forEach(p=>{
-        const € = (p.price * rateEUR).toFixed(2);
-        const circles = (p.colors||[]).map(c=>
-          `<span class="color-circle" style="background:${c}"></span>`
+    function displayProducts(list) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      // on shuffle avec le blockIndex pour changer l'ordre toutes les 12h
+      const shuffled = seededShuffle(list, blockIndex);
+      shuffled.forEach(p => {
+        const circles = (p.colors||[]).map(code =>
+          `<span class="color-circle" style="background:${code}"></span>`
         ).join('');
         const card = document.createElement('a');
-        card.className='product';
-        card.href=p.cnfans_link;
-        card.target='_blank';
-        card.innerHTML=`
+        card.className  = 'product';
+        card.href       = p.cnfans_link;
+        card.target     = '_blank';
+        card.innerHTML  = `
           <div class="product-brand">${p.brand}</div>
           <img src="${p.image}" alt="${p.title}">
           <div class="product-title">${p.title}</div>
-          <div class="product-price">${€} €</div>
+          <div class="product-price">${p.price} €</div>
           <div class="product-colors">${circles}</div>
         `;
         grid.appendChild(card);
