@@ -311,5 +311,17 @@
     "price": 5,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=737797986447&ref=212491",
     "source": "https://www.cnfans.com/product?id=737797986447&platform=TAOBAO"
+  },
+  {
+    "title": "AirPods 2,3 & 4",
+    "platform": "Weidian",
+    "id": "7092173628",
+    "image": "https://www.dimprice.fr/image/cache/product/header/apple-airpods-3-header-936x936.png",
+    "category": "High-Tech",
+    "brand": "Apple",
+    "colors": [],
+    "price": 17,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7092173628&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7092173628&platform=Weidian"
   }
 ]
