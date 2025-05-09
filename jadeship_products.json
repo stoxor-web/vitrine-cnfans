@@ -294,10 +294,22 @@
     "id": "7271978872",
     "image": "https://m.media-amazon.com/images/I/710zRcinqnL.jpg",
     "category": "High-Tech",
+    "brand": "Jacquemus",
+    "colors": [],
+    "price": 16,
+    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7271978872&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7271978872&platform=Weidian"
+  },
+  {
+    "title": "",
+    "platform": "",
+    "id": "",
+    "image": "",
+    "category": "Accessoires",
     "brand": "Adidas",
     "colors": [],
     "price": 0,
-    "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7271978872&ref=212491",
-    "source": "https://www.cnfans.com/product?id=7271978872&platform=Weidian"
+    "cnfans_link": "https://cnfans.com/product?platform=&id=&ref=212491",
+    "source": "https://www.cnfans.com/product?id=&platform="
   }
 ]
