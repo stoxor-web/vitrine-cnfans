@@ -467,5 +467,29 @@
     "price": 211,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=683956832775&ref=212491",
     "source": "https://www.cnfans.com/product?id=683956832775&platform=TAOBAO"
+  },
+  {
+    "title": "CP Jacket Nylon",
+    "platform": "TAOBAO",
+    "id": "831011568787",
+    "image": "https://www.careofcarl.com/bilder/artiklar/zoom/24425511r_1.jpg?m=1671178763",
+    "category": "Vêtements",
+    "brand": "C.P Company",
+    "colors": [],
+    "price": 195,
+    "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=831011568787&ref=212491",
+    "source": "https://www.cnfans.com/product?id=831011568787&platform=TAOBAO"
+  },
+  {
+    "title": "SI Jacket Nylon",
+    "platform": "TAOBAO",
+    "id": "729899345462",
+    "image": "",
+    "category": "Vêtements",
+    "brand": "Stone Island",
+    "colors": [],
+    "price": 280,
+    "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=729899345462&ref=212491",
+    "source": "https://www.cnfans.com/product?id=729899345462&platform=TAOBAO"
   }
 ]
