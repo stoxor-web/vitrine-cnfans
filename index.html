@@ -107,7 +107,6 @@
   </header>
 
   <div class="social-banner">
-    <!-- Exemple : adaptez vos liens et icônes -->
     <a href="https://cnfans.com/register?ref=212491" target="_blank"><img src="https://spreadsheetcnfans.my.canva.site/_assets/media/2ee61dcee3eb5c104658e8ee50dd3ba2.png" alt="CNFANS"></a>
     <a href="https://www.tiktok.com/@trendy_world_off" target="_blank"><img src="https://cdn.pixabay.com/photo/2021/01/30/06/43/tiktok-5962993_1280.png" alt="TikTok"></a>
     <a href="https://www.instagram.com/trendy_world_off/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
@@ -161,42 +160,33 @@
       return a;
     }
 
-    // --- 3) Chargement JSON & taux de change ---
+    // --- 3) Chargement JSON & conversion fixe ---
     let products = [], categories = [], brands = [], colors = [];
-    let rateEUR = 1;  // taux CNY→EUR
-
-    const fetchRate = fetch('https://api.exchangerate.host/latest?base=CNY&symbols=EUR')
-      .then(r=>r.json()).then(j=>{ rateEUR = j.rates.EUR; })
-      .catch(()=>{ console.warn('Erreur chargement taux de change'); });
+    const rateEUR = 0.13;  // conversion fixe CNY→EUR
 
     const fetchCategories = fetch('categories.json')
       .then(r=>r.json()).then(data=>{
         categories = data.sort((a,b)=>a.localeCompare(b,'fr'));
         const cf = document.getElementById('categoryFilter');
-        categories.forEach(c=>{
-          cf.appendChild(new Option(c,c));
-        });
+        categories.forEach(c=> cf.appendChild(new Option(c,c)));
       }).catch(console.error);
 
     const fetchBrands = fetch('brands.json')
       .then(r=>r.json()).then(data=>{
         brands = data.sort((a,b)=>a.localeCompare(b,'fr'));
         const bf = document.getElementById('brandFilter');
-        brands.forEach(b=>{
-          bf.appendChild(new Option(b,b));
-        });
+        brands.forEach(b=> bf.appendChild(new Option(b,b)));
       }).catch(console.error);
 
     const fetchColors = fetch('colors.json')
-      .then(r=>r.json()).then(data=>colors=data)
+      .then(r=>r.json()).then(data=> colors = data)
       .catch(console.warn);
 
     const fetchProducts = fetch('jadeship_products.json')
-      .then(r=>r.json()).then(data=>products=data)
+      .then(r=>r.json()).then(data=> products = data)
       .catch(console.error);
 
-    // Une fois tout chargé, on filtre et affiche
-    Promise.all([fetchRate, fetchCategories, fetchBrands, fetchColors, fetchProducts])
+    Promise.all([fetchCategories, fetchBrands, fetchColors, fetchProducts])
       .then(filterProducts)
       .catch(console.error);
 
@@ -216,14 +206,16 @@
       displayProducts(list);
     }
 
-    // --- 5) Affichage avec conversion €
+    // --- 5) Affichage avec conversion (€ fixe) ---
     function displayProducts(list){
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
       const shuffled = seededShuffle(list, blockIndex);
       shuffled.forEach(p=>{
         const priceEUR = (p.price * rateEUR).toFixed(2);
-        const circles = (p.colors||[]).map(c=>`<span class="color-circle" style="background:${c}"></span>`).join('');
+        const circles = (p.colors||[]).map(c=>
+          `<span class="color-circle" style="background:${c}"></span>`
+        ).join('');
         const card = document.createElement('a');
         card.className  = 'product';
         card.href       = p.cnfans_link;
