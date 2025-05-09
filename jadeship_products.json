@@ -551,5 +551,17 @@
     "price": 139,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7452490388&ref=212491",
     "source": "https://www.cnfans.com/product?id=7452490388&platform=WEIDIAN"
+  },
+  {
+    "title": "ZIP Technical Fleece",
+    "platform": "ALI_1688",
+    "id": "833533306853",
+    "image": "https://eu.patagonia.com/dw/image/v2/BDJB_PRD/on/demandware.static/-/Sites-patagonia-master/default/dwdb0fde67/images/hi-res/40245_FEGY.jpg?sw=768&sh=768&sfrm=png&q=95&bgcolor=f3f4ef",
+    "category": "Vêtements",
+    "brand": "Puma",
+    "colors": [],
+    "price": 95,
+    "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=833533306853&ref=212491",
+    "source": "https://www.cnfans.com/product?id=833533306853&platform=ALI_1688"
   }
 ]
