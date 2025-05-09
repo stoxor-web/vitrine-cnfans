@@ -40,6 +40,15 @@
       to   { transform: translateX(-100%); }
     }
 
+    /* Réseaux sociaux */
+    .social-banner {
+      background:#808080; text-align:center; padding:10px 0;
+    }
+    .social-banner a img {
+      width:40px; height:40px; margin:0 10px; vertical-align:middle;
+    }
+
+    /* Filtres */
     .filters { text-align:center; padding:20px; }
     .filters select {
       padding:12px 20px; font-size:16px; border-radius:25px; border:2px solid #ddd;
@@ -47,6 +56,7 @@
     }
     .filters select:hover { border-color:#007bff; background:#f0f8ff; }
 
+    /* Grille & cartes */
     .grid {
       display:grid;
       grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
@@ -58,13 +68,11 @@
       transition:transform .2s ease; position: relative;
     }
     .product:hover { transform:translateY(-5px); }
-
     .product-brand {
-      position: absolute; top:10px; left:10px;
+      position:absolute; top:10px; left:10px;
       background:rgba(0,0,0,0.6); color:#fff; padding:3px 8px;
       font-size:12px; font-weight:bold; border-radius:4px;
     }
-
     .product img {
       width:100%; height:220px; object-fit:contain;
     }
@@ -76,13 +84,7 @@
       border-radius:50%; margin:0 3px; border:1px solid #ccc;
     }
 
-    .social-banner {
-      background:#808080; text-align:center; padding:10px 0;
-    }
-    .social-banner a img {
-      width:40px; height:40px; margin:0 10px; vertical-align:middle;
-    }
-
+    /* Responsives */
     @media(max-width:768px) {
       .grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:15px; }
       .product-title{font-size:14px;}
@@ -99,27 +101,18 @@
   <header>
     <h1>TRENDY WORLD SHOP</h1>
     <div class="marquee">
-      <span class="msg">En cliquant sur un article, vous serez automatiquement redirigé vers le site CNFANS&nbsp;&middot; Clicking on an article will automatically redirect you to the CNFANS website</span>
-      <span class="msg">Attention, les prix affichés ne comprennent pas les frais de livraison&nbsp;&middot; Please note that the prices shown do not include delivery costs</span>
+      <span class="msg">En cliquant sur un article → redirection CNFANS · Clicking on an article → CNFANS</span>
+      <span class="msg">Attention, les prix affichés ne comprennent pas les frais de livraison · Prices exclude shipping</span>
     </div>
   </header>
 
   <div class="social-banner">
-    <a href="https://cnfans.com/register?ref=212491" target="_blank" title="Inscription CNFANS">
-      <img src="https://spreadsheetcnfans.my.canva.site/_assets/media/2ee61dcee3eb5c104658e8ee50dd3ba2.png" alt="CNFANS">
-    </a>
-    <a href="https://www.tiktok.com/@trendy_world_off" target="_blank" title="TikTok">
-      <img src="https://cdn.pixabay.com/photo/2021/01/30/06/43/tiktok-5962993_1280.png" alt="TikTok">
-    </a>
-    <a href="https://www.instagram.com/trendy_world_off/" target="_blank" title="Instagram">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-    </a>
-    <a href="https://youtu.be/n_2sIEApRhk?si=wGym7D6Deui_vARg&t=12" target="_blank" title="YouTube">
-      <img src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-104-432560.png?f=webp" alt="YouTube">
-    </a>
-    <a href="https://chromewebstore.google.com/detail/ljipkdpcjbmhkdjjmbbaggebcednbbme" target="_blank" title="Extension Chrome">
-      <img src="https://lh3.googleusercontent.com/gQPpVsreSTA080X1qhyxMUJ5YGqJGHnbhaw-Xm9sG-iHRrNvKVi-bvlPEyJRjrlpeKAEPz6igxqqIvTlml5MSHSm1m0=s120" alt="Extension">
-    </a>
+    <!-- Exemple : adaptez vos liens et icônes -->
+    <a href="https://cnfans.com/register?ref=212491" target="_blank"><img src="https://spreadsheetcnfans.my.canva.site/_assets/media/2ee61dcee3eb5c104658e8ee50dd3ba2.png" alt="CNFANS"></a>
+    <a href="https://www.tiktok.com/@trendy_world_off" target="_blank"><img src="https://cdn.pixabay.com/photo/2021/01/30/06/43/tiktok-5962993_1280.png" alt="TikTok"></a>
+    <a href="https://www.instagram.com/trendy_world_off/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+    <a href="https://youtu.be/n_2sIEApRhk?si=wGym7D6Deui_vARg&t=12" target="_blank"><img src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-104-432560.png?f=webp" alt="YouTube"></a>
+    <a href="https://chromewebstore.google.com/detail/ljipkdpcjbmhkdjjmbbaggebcednbbme" target="_blank"><img src="https://lh3.googleusercontent.com/gQPpVsreSTA080X1qhyxMUJ5YGqJGHnbhaw-Xm9sG-iHRrNvKVi-bvlPEyJRjrlpeKAEPz6igxqqIvTlml5MSHSm1m0=s120" alt="Extension Chrome"></a>
   </div>
 
   <div class="filters">
@@ -139,108 +132,98 @@
   <div class="grid" id="productGrid"></div>
 
   <script>
-    // --- 1) Calcul du "block" de 12h selon l'heure de Paris ---
+    // --- 1) Bloc de 12 h selon l'heure de Paris ---
     const MS12H = 12 * 3600 * 1000;
-    function getParisTimestamp() {
-      // récupère date/heure au format sv (YYYY-MM-DD HH:mm:ss)
-      const parts = new Intl.DateTimeFormat('sv-SE', {
+    function getParisMs() {
+      const fmt = new Intl.DateTimeFormat('sv-SE', {
         timeZone: 'Europe/Paris',
         year:'numeric', month:'2-digit', day:'2-digit',
         hour:'2-digit', minute:'2-digit', second:'2-digit',
         hour12:false
       }).format(new Date()).replace(' ', 'T');
-      return new Date(parts).getTime();
+      return new Date(fmt).getTime();
     }
-    const blockIndex = Math.floor(getParisTimestamp() / MS12H);
+    const blockIndex = Math.floor(getParisMs() / MS12H);
 
-    // --- 2) Générateur de nombre pseudo‐aléatoire déterministe ---
-    function mulberry32(a) {
-      return function() {
-        let t = a += 0x6D2B79F5;
-        t = Math.imul(t ^ (t >>> 15), t | 1);
-        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-      }
-    }
-    function seededShuffle(arr, seed) {
-      const rand = mulberry32(seed);
-      const a = arr.slice();
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(rand() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+    // --- 2) Pseudo‐aléatoire déterministe ---
+    function mulberry32(a){ return function(){
+      let t = a += 0x6D2B79F5;
+      t = Math.imul(t^(t>>>15), t|1);
+      t ^= t + Math.imul(t^(t>>>7), t|61);
+      return ((t^(t>>>14))>>>0)/4294967296;
+    }}
+    function seededShuffle(arr, seed){
+      const rand = mulberry32(seed), a = arr.slice();
+      for(let i=a.length-1; i>0; i--){
+        const j = Math.floor(rand() * (i+1));
+        [a[i],a[j]] = [a[j],a[i]];
       }
       return a;
     }
 
-    // --- 3) Chargement et affichage des données ---
-    let products = [], brands = [], categories = [], colors = [];
+    // --- 3) Chargement JSON & taux de change ---
+    let products = [], categories = [], brands = [], colors = [];
+    let rateEUR = 1;  // taux CNY→EUR
 
-    // Catégories
-    fetch('categories.json')
-      .then(r => r.json())
-      .then(data => {
-        categories = data.sort((a,b) => a.localeCompare(b,'fr'));
+    const fetchRate = fetch('https://api.exchangerate.host/latest?base=CNY&symbols=EUR')
+      .then(r=>r.json()).then(j=>{ rateEUR = j.rates.EUR; })
+      .catch(()=>{ console.warn('Erreur chargement taux de change'); });
+
+    const fetchCategories = fetch('categories.json')
+      .then(r=>r.json()).then(data=>{
+        categories = data.sort((a,b)=>a.localeCompare(b,'fr'));
         const cf = document.getElementById('categoryFilter');
-        categories.forEach(c => {
-          const o = document.createElement('option');
-          o.value = o.textContent = c;
-          cf.appendChild(o);
+        categories.forEach(c=>{
+          cf.appendChild(new Option(c,c));
         });
-      });
+      }).catch(console.error);
 
-    // Marques
-    fetch('brands.json')
-      .then(r => r.json())
-      .then(data => {
-        brands = data.sort((a,b) => a.localeCompare(b,'fr'));
+    const fetchBrands = fetch('brands.json')
+      .then(r=>r.json()).then(data=>{
+        brands = data.sort((a,b)=>a.localeCompare(b,'fr'));
         const bf = document.getElementById('brandFilter');
-        brands.forEach(b => {
-          const o = document.createElement('option');
-          o.value = o.textContent = b;
-          bf.appendChild(o);
+        brands.forEach(b=>{
+          bf.appendChild(new Option(b,b));
         });
-      });
+      }).catch(console.error);
 
-    // Couleurs (si besoin)
-    fetch('colors.json')
-      .then(r => r.json())
-      .then(data => colors = data)
+    const fetchColors = fetch('colors.json')
+      .then(r=>r.json()).then(data=>colors=data)
+      .catch(console.warn);
+
+    const fetchProducts = fetch('jadeship_products.json')
+      .then(r=>r.json()).then(data=>products=data)
       .catch(console.error);
 
-    // Produits
-    fetch('jadeship_products.json')
-      .then(r => r.json())
-      .then(data => {
-        products = data;
-        filterProducts();
-      })
+    // Une fois tout chargé, on filtre et affiche
+    Promise.all([fetchRate, fetchCategories, fetchBrands, fetchColors, fetchProducts])
+      .then(filterProducts)
       .catch(console.error);
 
-    function filterProducts() {
-      const cat = document.getElementById('categoryFilter').value;
-      const br  = document.getElementById('brandFilter').value;
-      const sort= document.getElementById('sortSelect').value;
+    // --- 4) Filtres & tris ---
+    function filterProducts(){
+      const cat  = document.getElementById('categoryFilter').value;
+      const br   = document.getElementById('brandFilter').value;
+      const sort = document.getElementById('sortSelect').value;
 
-      let list = products.filter(p =>
+      let list = products.filter(p=>
         (cat==='all'||p.category===cat) &&
         (br==='all'||p.brand===br)
       );
-
-      if (sort==='price-asc')      list.sort((a,b)=>a.price - b.price);
-      else if (sort==='price-desc') list.sort((a,b)=>b.price - a.price);
+      if(sort==='price-asc')      list.sort((a,b)=>a.price - b.price);
+      else if(sort==='price-desc') list.sort((a,b)=>b.price - a.price);
 
       displayProducts(list);
     }
 
-    function displayProducts(list) {
+    // --- 5) Affichage avec conversion €
+    function displayProducts(list){
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
-      // on shuffle avec le blockIndex pour changer l'ordre toutes les 12h
       const shuffled = seededShuffle(list, blockIndex);
-      shuffled.forEach(p => {
-        const circles = (p.colors||[]).map(code =>
-          `<span class="color-circle" style="background:${code}"></span>`
-        ).join('');
+      shuffled.forEach(p=>{
+        const priceEUR = (p.price * rateEUR).toFixed(2);
+        const circles = (p.colors||[]).map(c=>`<span class="color-circle" style="background:${c}"></span>`).join('');
         const card = document.createElement('a');
         card.className  = 'product';
         card.href       = p.cnfans_link;
@@ -249,7 +232,7 @@
           <div class="product-brand">${p.brand}</div>
           <img src="${p.image}" alt="${p.title}">
           <div class="product-title">${p.title}</div>
-          <div class="product-price">${p.price} €</div>
+          <div class="product-price">${priceEUR} €</div>
           <div class="product-colors">${circles}</div>
         `;
         grid.appendChild(card);
