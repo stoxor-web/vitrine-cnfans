@@ -733,15 +733,27 @@
     "source": "https://www.cnfans.com/product?id=7221408737&platform=WEIDIAN"
   },
   {
-    "title": "",
-    "platform": "",
-    "id": "",
-    "image": "",
-    "category": "Accessoires",
+    "title": "Waffle long sleeves",
+    "platform": "WEIDIAN",
+    "id": "7411637815",
+    "image": "https://dripkorner.com/cdn/shop/products/330967646_595101952046058_1974811205246060796_n.jpg?v=1676462061",
+    "category": "Vêtements",
+    "brand": "Corteiz",
+    "colors": [],
+    "price": 100,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7411637815&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7411637815&platform=WEIDIAN"
+  },
+  {
+    "title": "Spider Hoodie",
+    "platform": "TAOBAO",
+    "id": "822757716668",
+    "image": "https://i.ebayimg.com/images/g/tg8AAOSwtKhh1xkO/s-l1200.jpg",
+    "category": "Vêtements",
     "brand": "Adidas",
     "colors": [],
-    "price": 0,
-    "cnfans_link": "https://cnfans.com/product?platform=&id=&ref=212491",
-    "source": "https://www.cnfans.com/product?id=&platform="
+    "price": 130,
+    "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=822757716668&ref=212491",
+    "source": "https://www.cnfans.com/product?id=822757716668&platform=TAOBAO"
   }
 ]
