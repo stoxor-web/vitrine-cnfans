@@ -695,5 +695,17 @@
     "price": 128,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=4438430445&ref=212491",
     "source": "https://www.cnfans.com/product?id=4438430445&platform=WEIDIAN"
+  },
+  {
+    "title": "T-Shirt Tendency",
+    "platform": "ALI_1688",
+    "id": "729458250237",
+    "image": "https://global-img-cdn.1688.com/img/ibank/O1CN01BEfHNJ2C3xKt7eBSc_!!2206818368419-0-cib.jpg",
+    "category": "Vêtements",
+    "brand": "Maison Margiela",
+    "colors": [],
+    "price": 66,
+    "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=729458250237&ref=212491",
+    "source": "https://www.cnfans.com/product?id=729458250237&platform=ALI_1688"
   }
 ]
