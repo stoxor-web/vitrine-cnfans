@@ -683,5 +683,17 @@
     "price": 99,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7306942667&ref=212491",
     "source": "https://www.cnfans.com/product?id=7306942667&platform=WEIDIAN"
+  },
+  {
+    "title": "Air Force 1",
+    "platform": "WEIDIAN",
+    "id": "4438430445",
+    "image": "https://cdn-images.farfetch-contents.com/18/97/78/99/18977899_41274226_600.jpg",
+    "category": "Chaussures",
+    "brand": "Nike",
+    "colors": [],
+    "price": 128,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=4438430445&ref=212491",
+    "source": "https://www.cnfans.com/product?id=4438430445&platform=WEIDIAN"
   }
 ]
