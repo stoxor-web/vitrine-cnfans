@@ -2,8 +2,7 @@ name: Mise à jour jadeship_products.json
 
 on:
   schedule:
-    # tous les jours à 10h00 Paris → 08:00 UTC
-    - cron: '0 8 * * *'
+    - cron: '0 8 * * *'        # tous les jours à 10h00 Paris (08:00 UTC)
   workflow_dispatch:
 
 jobs:
@@ -21,6 +20,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Lancer le scraper
+        # si vous avez défini un secret AFFIL_CODE → passez-le
         env:
           AFFIL_CODE: ${{ secrets.AFFIL_CODE }}
         run: python scraper/run_scraper.py
