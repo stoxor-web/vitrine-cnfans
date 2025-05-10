@@ -659,5 +659,29 @@
     "price": 55,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7454549812&ref=212491",
     "source": "https://www.cnfans.com/product?id=7454549812&platform=WEIDIAN"
+  },
+  {
+    "title": "T-Shirt Moncler FR",
+    "platform": "WEIDIAN",
+    "id": "7272029448",
+    "image": "https://si.geilicdn.com/pcitem1463117904-532a000001905dd234b40a20e35c_1200_1200.jpg",
+    "category": "Vêtements",
+    "brand": "Moncler",
+    "colors": [],
+    "price": 80,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7272029448&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7272029448&platform=WEIDIAN"
+  },
+  {
+    "title": "Sweat SI",
+    "platform": "WEIDIAN",
+    "id": "7306942667",
+    "image": "https://statics-cdn-v2.fashionette.net/transform/a2a38ba1-df89-44b5-90b6-b6e7fe11ddf7/A0259349-PDP-1?io=transform:extend,width:728,height:728,background:white&quality=100",
+    "category": "Vêtements",
+    "brand": "Stone Island",
+    "colors": [],
+    "price": 99,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7306942667&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7306942667&platform=WEIDIAN"
   }
 ]
