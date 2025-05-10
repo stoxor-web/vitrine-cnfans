@@ -641,11 +641,23 @@
     "platform": "WEIDIAN",
     "id": "7336130172",
     "image": "https://si.geilicdn.com/pcitem901908374288-1da400000194daf935bd0a2301b4-unadjust_616_613.png",
-    "category": "VÃªtements",
+    "category": "Vêtements",
     "brand": "Louis Vuitton",
     "colors": [],
     "price": 110,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7336130172&ref=212491",
     "source": "https://www.cnfans.com/product?id=7336130172&platform=WEIDIAN"
+  },
+  {
+    "title": "T-Shirt Moncler",
+    "platform": "WEIDIAN",
+    "id": "7454549812",
+    "image": "https://www.mytheresa.com/media/1094/1238/100/25/P00959422.jpg",
+    "category": "Vêtements",
+    "brand": "Moncler",
+    "colors": [],
+    "price": 55,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7454549812&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7454549812&platform=WEIDIAN"
   }
 ]
