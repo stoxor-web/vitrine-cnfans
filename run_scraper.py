@@ -2,7 +2,8 @@
 import os, json, time, random
 from scraper.fetcher import fetch_product_jadeship
 
-AFFIL = os.environ['AFFIL_CODE']  # à configurer en Secret GitHub
+# Si vous voulez garder la flexibilité d'un secret GitHub, conservez os.getenv :
+AFFIL = os.getenv('AFFIL_CODE', '212491')
 
 # 1) Charger le JSON existant
 with open('jadeship_products.json', encoding='utf-8') as f:
@@ -10,7 +11,7 @@ with open('jadeship_products.json', encoding='utf-8') as f:
 
 updated = []
 for p in products:
-    info = fetch_product_jadeship(p['source'])  # titre, supplier, id, source_url
+    info = fetch_product_jadeship(p['source'])
     # Mettre à jour les champs dynamiques
     p.update({
         'title':      info['title'],
@@ -18,10 +19,10 @@ for p in products:
         'id':         info['article_id'],
         'source':     info['source_url'],
         'cnfans_link': (
-          f"https://cnfans.com/product?"
-          f"platform={info['supplier']}"
-          f"&id={info['article_id']}"
-          f"&ref={AFFIL}"
+            f"https://cnfans.com/product?"
+            f"platform={info['supplier']}"
+            f"&id={info['article_id']}"
+            f"&ref={AFFIL}"
         )
     })
     updated.append(p)
