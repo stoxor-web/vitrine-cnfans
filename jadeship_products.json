@@ -815,5 +815,17 @@
     "price": 40,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7218772621&ref=212491",
     "source": "https://www.cnfans.com/product?id=7218772621&platform=WEIDIAN"
+  },
+  {
+    "title": "Sunglasses",
+    "platform": "ALI_1688",
+    "id": "794501487339",
+    "image": "https://cdn1.visiofactory.com/104453-thickbox/prada-pr17ws-1ab07z-49-20-noir.jpg",
+    "category": "Accessoires",
+    "brand": "Prada",
+    "colors": [],
+    "price": 20,
+    "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=794501487339&ref=212491",
+    "source": "https://www.cnfans.com/product?id=794501487339&platform=ALI_1688"
   }
 ]
