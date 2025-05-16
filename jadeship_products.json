@@ -863,5 +863,77 @@
     "price": 200,
     "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7288361965&ref=212491",
     "source": "https://www.cnfans.com/product?id=7288361965&platform=WEIDIAN"
+  },
+  {
+    "title": "Pants 'SKI'",
+    "platform": "WEIDIAN",
+    "id": "7385733773",
+    "image": "https://images.arcteryx.com/F22/1350x1710/Ski-Guide-Pant-Black.jpg",
+    "category": "Vetements",
+    "brand": "Arc'teryx",
+    "colors": [],
+    "price": 300,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7385733773&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7385733773&platform=WEIDIAN"
+  },
+  {
+    "title": "GAMMA LT",
+    "platform": "WEIDIAN",
+    "id": "7385677113",
+    "image": "https://cdn.etrias.nl/media/cache/product_thumb_xs/F/1/F18-Gamma-AR-Pant-Black.jpg",
+    "category": "Vetements",
+    "brand": "Arc'teryx",
+    "colors": [],
+    "price": 250,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7385677113&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7385677113&platform=WEIDIAN"
+  },
+  {
+    "title": "Gamma Jogger",
+    "platform": "WEIDIAN",
+    "id": "7399689389",
+    "image": "https://images.arcteryx.com/F23/1350x1710/Gamma-Jogger-Black.jpg",
+    "category": "Vetements",
+    "brand": "Arc'teryx",
+    "colors": [],
+    "price": 280,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7399689389&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7399689389&platform=WEIDIAN"
+  },
+  {
+    "title": "Bird Word Toque",
+    "platform": "WEIDIAN",
+    "id": "7387603774",
+    "image": "https://alternatifshop.com/29783-large_default/bonnet-arc-teryx-bird-word-toque-orca.jpg",
+    "category": "Accessoires",
+    "brand": "Arc'teryx",
+    "colors": [],
+    "price": 66,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7387603774&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7387603774&platform=WEIDIAN"
+  },
+  {
+    "title": "Bird Head Toque Orca ",
+    "platform": "WEIDIAN",
+    "id": "7385694137",
+    "image": "https://images.snowleader.com/cdn-cgi/image/f=auto,fit=scale-down,q=85/https://images.snowleader.com/media/catalog/product/cache/1/image/0dc2d03fe217f8c83829496872af24a0/A/R/ARCT01342_01_202405140437.jpg",
+    "category": "Accessoires",
+    "brand": "Arc'teryx",
+    "colors": [],
+    "price": 67,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7385694137&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7385694137&platform=WEIDIAN"
+  },
+  {
+    "title": "Grotto Toque",
+    "platform": "WEIDIAN",
+    "id": "7387605838",
+    "image": "https://media-assets.grailed.com/prd/listing/40403823/5da495e90a2045ce9ae54a234466ea5c",
+    "category": "Accessoires",
+    "brand": "Arc'teryx",
+    "colors": [],
+    "price": 86,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7387605838&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7387605838&platform=WEIDIAN"
   }
 ]
