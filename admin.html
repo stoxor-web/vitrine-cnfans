@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Produits CNFANS</title>
+  <title>Admin TRENDY WORLD</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
     h1 { text-align: center; }
@@ -50,7 +50,7 @@
       <h2>Accès Admin</h2>
       <input type="password" id="adminPwd" placeholder="Entrez le mot de passe"><br>
       <button onclick="checkPwd()">Valider</button>
-      <p>Vous avez 15 secondes pour saisir.</p>
+      <p>Vous avez 15 secondes pour saisir...</p>
     </div>
   </div>
 
@@ -69,6 +69,7 @@
   <!-- 3) Boutons flottants d’action -->
   <button id="addBtn" title="Ajouter un produit" onclick="addProduct()">＋</button>
   <button id="commitBtn" title="Commit to GitHub" onclick="commitToGitHub()">🚀</button>
+
   <button onclick="downloadJSON()">💾 Télécharger JSON</button>
 
   <table id="productTable">
@@ -83,7 +84,7 @@
   </table>
 
   <script>
-  // ─── CONFIGURATION GITHUB ────────────────────────────────────────────────
+  // ─── CONFIGURATION GITHUB────────────────────────────────────────────────
   const githubConfig = {
     owner:  'stoxor-web',
     repo:   'vitrine-cnfans',
@@ -93,7 +94,7 @@
 
   // ─── OVERLAY MOT DE PASSE ────────────────────────────────────────────────
   const correctPwd = '123456';
-  let pwdTimer = setTimeout(() => {
+  let pwdTimer = setTimeout(()=>{
     alert('Temps écoulé – accès refusé');
     window.location.href = 'index.html';
   }, 15000);
@@ -130,7 +131,7 @@
   async function loadFromGitHub(){
     try {
       const token = getToken();
-      if (!token) throw new Error('Token manquant');
+      if(!token) throw new Error('Token manquant');
       const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
       const res = await fetch(url, {
         headers: { 'Authorization': `token ${token}` }
@@ -151,24 +152,111 @@
   // ─── CHARGEMENT DES LISTES ───────────────────────────────────────────────
   let products = [], brands = [], categories = [], colors = [];
   fetch('categories.json').then(r=>r.json()).then(d=>categories=d.sort((a,b)=>a.localeCompare(b,'fr')));
-  fetch('brands.json').then(r=>r.json()).then(d=>brands=d.sort((a,b)=>a.localeCompare(b,'fr')));
-  fetch('colors.json').then(r=>r.json()).then(d=>colors=d);
+  fetch('brands.json')    .then(r=>r.json()).then(d=>brands    =d.sort((a,b)=>a.localeCompare(b,'fr')));
+  fetch('colors.json')    .then(r=>r.json()).then(d=>colors    =d);
 
   // ─── RENDER TABLEAU ──────────────────────────────────────────────────────
-  function renderTable(){ /* ... existing renderTable code unchanged ... */ }
+  function renderTable(){
+    const tbody = document.getElementById('productTableBody');
+    tbody.innerHTML = '';
+    products.forEach((p,i)=>{
+      const row = document.createElement('tr');
+      ['title','platform','id','image'].forEach(f=>{
+        const td = document.createElement('td');
+        const inp = document.createElement('input');
+        inp.value = p[f]||''; inp.onchange = e=> products[i][f] = e.target.value;
+        td.append(inp); row.append(td);
+      });
+      const catTd = document.createElement('td');
+      const catSel = document.createElement('select');
+      categories.forEach(c=> catSel.append(new Option(c,c,p.category===c,p.category===c)));
+      catSel.onchange = e=> products[i].category = e.target.value;
+      catTd.append(catSel); row.append(catTd);
+      const brTd = document.createElement('td');
+      const brSel = document.createElement('select');
+      brands.forEach(b=> brSel.append(new Option(b,b,p.brand===b,p.brand===b)));
+      brSel.onchange = e=> products[i].brand = e.target.value;
+      brTd.append(brSel); row.append(brTd);
+      const colTd = document.createElement('td');
+      const colSel = document.createElement('select'); colSel.multiple = true;
+      colors.forEach(c=>{
+        const o = new Option(c.name,c.code,Array.isArray(p.colors)&&p.colors.includes(c.code),false);
+        o.value = c.code; colSel.append(o);
+      });
+      colSel.onchange = e=> products[i].colors = Array.from(e.target.selectedOptions).map(o=>o.value);
+      colTd.append(colSel); row.append(colTd);
+      const prTd = document.createElement('td'); prTd.classList.add('price-column');
+      const prInp = document.createElement('input'); prInp.type='number'; prInp.step='0.01'; prInp.value=p.price||0;
+      prInp.onchange = e=> products[i].price = parseFloat(e.target.value);
+      prTd.append(prInp); row.append(prTd);
+      const actTd = document.createElement('td');
+      const delBtn = document.createElement('button'); delBtn.textContent='🗑 Supprimer'; delBtn.onclick=()=>deleteProduct(i);
+      actTd.append(delBtn); row.append(actTd);
+      tbody.append(row);
+    });
+  }
 
   // ─── DRAG & DROP ─────────────────────────────────────────────────────────
-  function enableDragAndDrop(){ /* ... existing drag & drop code unchanged ... */ }
+  function enableDragAndDrop(){
+    new Sortable(document.getElementById('productTableBody'),{
+      animation:150,
+      onEnd: evt=>{
+        const [item] = products.splice(evt.oldIndex,1);
+        products.splice(evt.newIndex,0,item);
+      }
+    });
+  }
 
   // ─── AJOUT / SUPPRESSION ─────────────────────────────────────────────────
-  function addProduct(){ /* ... */ }
-  function deleteProduct(idx){ /* ... */ }
+  function addProduct(){
+    products.push({
+      title:'', platform:'', id:'', image:'',
+      category: categories[0]||'', brand: brands[0]||'', colors:[], price:0,
+      cnfans_link:'', source:''
+    });
+    renderTable();
+  }
+  function deleteProduct(idx){ products.splice(idx,1); renderTable(); }
 
   // ─── EXPORT LOCAL ────────────────────────────────────────────────────────
-  function downloadJSON(){ /* ... */ }
+  function downloadJSON(){
+    products.forEach(p=>{
+      p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
+      p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
+    });
+    const blob = new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'jadeship_products.json';
+    a.click();
+  }
 
   // ─── COMMIT TO GITHUB ─────────────────────────────────────────────────────
-  async function commitToGitHub(){ /* ... */ }
+  async function commitToGitHub(){
+    try {
+      const token = getToken();
+      if(!token) return alert('Token GitHub manquant');
+      const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
+      let res = await fetch(url,{ headers:{ 'Authorization': `token ${token}` } });
+      if(!res.ok) throw Error('GET SHA échoué');
+      const { sha } = await res.json();
+      products.forEach(p=>{
+        p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
+        p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
+      });
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
+      res = await fetch(url,{
+        method:'PUT',
+        headers:{ 'Authorization': `token ${token}`, 'Content-Type':'application/json' },
+        body: JSON.stringify({ message: `Mise à jour via admin (${new Date().toISOString()})`, content, sha, branch: githubConfig.branch })
+      });
+      if(!res.ok) throw Error('PUT échoué');
+      alert('✅ JSON mis à jour sur GitHub !');
+    } catch(err){
+      console.error(err);
+      alert('Erreur GitHub : '+err.message);
+    }
+  }
   </script>
 </body>
 </html>
