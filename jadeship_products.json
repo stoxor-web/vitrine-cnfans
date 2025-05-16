@@ -827,5 +827,29 @@
     "price": 20,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=794501487339&ref=212491",
     "source": "https://www.cnfans.com/product?id=794501487339&platform=ALI_1688"
+  },
+  {
+    "title": "Alpha SV",
+    "platform": "WEIDIAN",
+    "id": "7385674341",
+    "image": "https://images.arcteryx.com/F24/1350x1710/Alpha-SV-Jacket-Vitality.jpg",
+    "category": "Vetements",
+    "brand": "Arc'teryx",
+    "colors": [],
+    "price": 410,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7385674341&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7385674341&platform=WEIDIAN"
+  },
+  {
+    "title": "",
+    "platform": "",
+    "id": "",
+    "image": "",
+    "category": "Accessoires",
+    "brand": "Adidas",
+    "colors": [],
+    "price": 0,
+    "cnfans_link": "https://cnfans.com/product?platform=&id=&ref=212491",
+    "source": "https://www.cnfans.com/product?id=&platform="
   }
 ]
