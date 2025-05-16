@@ -123,57 +123,26 @@
   }
   function getToken(){ return localStorage.getItem('ghToken'); }
 
-  function showGitHubTokenOverlay() {
-    document.getElementById('token-overlay').style.display = 'flex';
+  // ─── CHARGEMENT FROM GITHUB ──────────────────────────────────────────────
+  async function loadFromGitHub(){
+    try {
+      const token = getToken();
+      if(!token) throw new Error('Token manquant');
+      const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
+      const res = await fetch(url, {
+        headers: { 'Authorization': `token ${token}` }
+      });
+      if (!res.ok) throw new Error('Impossible de charger le JSON depuis GitHub');
+      const { content } = await res.json();
+      products = JSON.parse(atob(content));
+      renderTable();
+      enableDragAndDrop();
+    } catch(err) {
+      alert(err.message);
+    }
   }
 
-  // ─── CHARGEMENT GitHub API (avec fallback raw) ───────────────────────────────────
-async function loadFromGitHub(){
-  try {
-    const token = getToken();
-    if(!token) throw new Error('Token manquant');
-    const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
-    console.log('GitHub API URL:', url);
-    const res = await fetch(url, {
-      headers: {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3.raw'
-      }
-    });
-    console.log('GitHub API response:', res);
-    if (!res.ok) throw new Error(`Échec GitHub API ${res.status} ${res.statusText}`);
-    products = await res.json();
-    renderTable();
-    enableDragAndDrop();
-  } catch(err) {
-    console.warn('GitHub API fetch failed, attempting raw.githubusercontent.com fallback', err);
-    loadFromGitHubRaw();
-  }
-}
-
-// ─── CHARGEMENT RAW GitHub (sans token) ──────────────────────────────────
-async function loadFromGitHubRaw(){
-  try {
-    const { owner, repo, branch, path } = githubConfig;
-    const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
-    console.log('Raw URL:', rawUrl);
-    const res = await fetch(rawUrl);
-    console.log('Raw response:', res);
-    if (!res.ok) throw new Error(`Échec raw ${res.status} ${res.statusText}`);
-    products = await res.json();
-    renderTable();
-    enableDragAndDrop();
-  } catch(err) {
-    console.error('Raw fetch failed', err);
-    alert(err.message + '
-Vérifiez votre URL ou votre token.');
-    // en cas d'erreur, forcer saisie nouveau token
-    localStorage.removeItem('ghToken');
-    showGitHubTokenOverlay();
-  }
-}
-
-// ─── CHARGEMENT DES LISTES ─────────────────────────────────────────────── ───────────────────────────────────────────────
+  // ─── CHARGEMENT DES LISTES ───────────────────────────────────────────────
   let products = [], brands = [], categories = [], colors = [];
   fetch('categories.json').then(r=>r.json()).then(d=>categories=d.sort((a,b)=>a.localeCompare(b,'fr')));
   fetch('brands.json')    .then(r=>r.json()).then(d=>brands    =d.sort((a,b)=>a.localeCompare(b,'fr')));
@@ -191,30 +160,39 @@ Vérifiez votre URL ou votre token.');
         inp.value = p[f]||''; inp.onchange = e=> products[i][f] = e.target.value;
         td.append(inp); row.append(td);
       });
+      // Catégorie
       const catTd = document.createElement('td');
       const catSel = document.createElement('select');
       categories.forEach(c=> catSel.append(new Option(c,c,p.category===c,p.category===c)));
       catSel.onchange = e=> products[i].category = e.target.value;
       catTd.append(catSel); row.append(catTd);
+      // Marque
       const brTd = document.createElement('td');
       const brSel = document.createElement('select');
       brands.forEach(b=> brSel.append(new Option(b,b,p.brand===b,p.brand===b)));
       brSel.onchange = e=> products[i].brand = e.target.value;
       brTd.append(brSel); row.append(brTd);
+      // Couleurs
       const colTd = document.createElement('td');
-      const colSel = document.createElement('select'); colSel.multiple = true;
+      const colSel = document.createElement('select');
+      colSel.multiple = true;
       colors.forEach(c=>{
         const o = new Option(c.name,c.code,Array.isArray(p.colors)&&p.colors.includes(c.code),false);
         o.value = c.code; colSel.append(o);
       });
       colSel.onchange = e=> products[i].colors = Array.from(e.target.selectedOptions).map(o=>o.value);
       colTd.append(colSel); row.append(colTd);
-      const prTd = document.createElement('td'); prTd.classList.add('price-column');
-      const prInp = document.createElement('input'); prInp.type='number'; prInp.step='0.01'; prInp.value=p.price||0;
+      // Prix
+      const prTd = document.createElement('td');
+      prTd.classList.add('price-column');
+      const prInp = document.createElement('input');
+      prInp.type='number'; prInp.step='0.01'; prInp.value=p.price||0;
       prInp.onchange = e=> products[i].price = parseFloat(e.target.value);
       prTd.append(prInp); row.append(prTd);
+      // Actions
       const actTd = document.createElement('td');
-      const delBtn = document.createElement('button'); delBtn.textContent='🗑 Supprimer'; delBtn.onclick=()=>deleteProduct(i);
+      const delBtn = document.createElement('button');
+      delBtn.textContent='🗑 Supprimer'; delBtn.onclick=()=>deleteProduct(i);
       actTd.append(delBtn); row.append(actTd);
       tbody.append(row);
     });
@@ -240,7 +218,10 @@ Vérifiez votre URL ou votre token.');
     });
     renderTable();
   }
-  function deleteProduct(idx){ products.splice(idx,1); renderTable(); }
+  function deleteProduct(idx){
+    products.splice(idx,1);
+    renderTable();
+  }
 
   // ─── EXPORT LOCAL ────────────────────────────────────────────────────────
   function downloadJSON(){
@@ -261,18 +242,24 @@ Vérifiez votre URL ou votre token.');
       const token = getToken();
       if(!token) return alert('Token GitHub manquant');
       const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
+      // GET SHA actuel
       let res = await fetch(url,{ headers:{ 'Authorization': `token ${token}` } });
       if(!res.ok) throw Error('GET SHA échoué');
       const { sha } = await res.json();
+      // Préparer contenu
       products.forEach(p=>{
         p.cnfans_link = `https://cnfans.com/product?platform=${p.platform}&id=${p.id}&ref=212491`;
         p.source     = `https://www.cnfans.com/product?id=${p.id}&platform=${p.platform}`;
       });
       const content = btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
+      // PUT update
       res = await fetch(url,{
         method:'PUT',
         headers:{ 'Authorization': `token ${token}`, 'Content-Type':'application/json' },
-        body: JSON.stringify({ message: `Mise à jour via admin (${new Date().toISOString()})`, content, sha, branch: githubConfig.branch })
+        body: JSON.stringify({
+          message: `Mise à jour via admin (${new Date().toISOString()})`,
+          content, sha, branch: githubConfig.branch
+        })
       });
       if(!res.ok) throw Error('PUT échoué');
       alert('✅ JSON mis à jour sur GitHub !');
