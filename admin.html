@@ -127,29 +127,53 @@
     document.getElementById('token-overlay').style.display = 'flex';
   }
 
-  // ─── CHARGEMENT FROM GITHUB ──────────────────────────────────────────────
-  async function loadFromGitHub(){
-    try {
-      const token = getToken();
-      if(!token) throw new Error('Token manquant');
-      const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
-      const res = await fetch(url, {
-        headers: { 'Authorization': `token ${token}` }
-      });
-      if (!res.ok) throw new Error(`Impossible de charger le JSON depuis GitHub (${res.status} ${res.statusText})`);
-      const { content } = await res.json();
-      products = JSON.parse(atob(content));
-      renderTable();
-      enableDragAndDrop();
-    } catch(err) {
-      console.error(err);
-      localStorage.removeItem('ghToken');
-      alert(err.message + '\nVeuillez saisir un nouveau token.');
-      showGitHubTokenOverlay();
-    }
+  // ─── CHARGEMENT GitHub API (avec fallback raw) ───────────────────────────────────
+async function loadFromGitHub(){
+  try {
+    const token = getToken();
+    if(!token) throw new Error('Token manquant');
+    const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
+    console.log('GitHub API URL:', url);
+    const res = await fetch(url, {
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3.raw'
+      }
+    });
+    console.log('GitHub API response:', res);
+    if (!res.ok) throw new Error(`Échec GitHub API ${res.status} ${res.statusText}`);
+    products = await res.json();
+    renderTable();
+    enableDragAndDrop();
+  } catch(err) {
+    console.warn('GitHub API fetch failed, attempting raw.githubusercontent.com fallback', err);
+    loadFromGitHubRaw();
   }
+}
 
-  // ─── CHARGEMENT DES LISTES ───────────────────────────────────────────────
+// ─── CHARGEMENT RAW GitHub (sans token) ──────────────────────────────────
+async function loadFromGitHubRaw(){
+  try {
+    const { owner, repo, branch, path } = githubConfig;
+    const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+    console.log('Raw URL:', rawUrl);
+    const res = await fetch(rawUrl);
+    console.log('Raw response:', res);
+    if (!res.ok) throw new Error(`Échec raw ${res.status} ${res.statusText}`);
+    products = await res.json();
+    renderTable();
+    enableDragAndDrop();
+  } catch(err) {
+    console.error('Raw fetch failed', err);
+    alert(err.message + '
+Vérifiez votre URL ou votre token.');
+    // en cas d'erreur, forcer saisie nouveau token
+    localStorage.removeItem('ghToken');
+    showGitHubTokenOverlay();
+  }
+}
+
+// ─── CHARGEMENT DES LISTES ─────────────────────────────────────────────── ───────────────────────────────────────────────
   let products = [], brands = [], categories = [], colors = [];
   fetch('categories.json').then(r=>r.json()).then(d=>categories=d.sort((a,b)=>a.localeCompare(b,'fr')));
   fetch('brands.json')    .then(r=>r.json()).then(d=>brands    =d.sort((a,b)=>a.localeCompare(b,'fr')));
