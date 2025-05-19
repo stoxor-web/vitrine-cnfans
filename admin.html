@@ -106,7 +106,9 @@
       if (!localStorage.getItem('ghToken')) {
         document.getElementById('token-overlay').style.display = 'flex';
       } else {
-        loadFromGitHub();
+        fetch('jadeship_products.json')
+  .then(r => r.json())
+  .then(d => { products = d; renderTable(); enableDragAndDrop(); });
       }
     } else {
       alert('Mot de passe incorrect');
