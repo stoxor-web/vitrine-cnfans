@@ -1007,5 +1007,17 @@
     "price": 195,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=560944706826&ref=212491",
     "source": "https://www.cnfans.com/product?id=560944706826&platform=TAOBAO"
+  },
+  {
+    "title": "Belt LV",
+    "platform": "ALI_1688",
+    "id": "783959210130",
+    "image": "https://media.monogramparis.com/232340/en-louis-vuitton.webp",
+    "category": "Accessoires",
+    "brand": "Louis Vuitton",
+    "colors": [],
+    "price": 20,
+    "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=783959210130&ref=212491",
+    "source": "https://www.cnfans.com/product?id=783959210130&platform=ALI_1688"
   }
 ]
