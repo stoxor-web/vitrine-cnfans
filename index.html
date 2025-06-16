@@ -154,20 +154,25 @@
   const shuffled = seededShuffle(list, blockIndex);
   shuffled.forEach(p=>{
     const priceEUR = (p.price * rateEUR).toFixed(1).replace('.', ',');
-    const qcLink = p.qc ? `<span style="margin-left: 8px; padding: 4px 8px; background-color: #007bff; color: #fff; border-radius: 6px; font-size: 12px;">Product QC</span>` : '';
-    const card = document.createElement('a');
+
+    const qcButton = p.qc 
+      ? `<a href="${p.qc}" target="_blank" style="margin-left:10px; padding:4px 10px; background:#007bff; color:white; border-radius:5px; font-size:16px; text-decoration:none;">Product QC</a>`
+      : '';
+
+    const card = document.createElement('div');  // ⚠ Ici on ne met plus "a" pour éviter que tout soit cliquable
     card.className  = 'product';
-    card.href       = p.cnfans_link;
-    card.target     = '_blank';
     card.innerHTML  = `
       <div class="product-brand">${p.brand}</div>
-      <img src="${p.image}" alt="${p.title}">
-      <div class="product-title">${p.title}</div>
-      <div class="product-price">${priceEUR} € ${qcLink}</div>
+      <a href="${p.cnfans_link}" target="_blank">
+        <img src="${p.image}" alt="${p.title}">
+        <div class="product-title">${p.title}</div>
+      </a>
+      <div class="product-price">${priceEUR} € ${qcButton}</div>
     `;
     grid.appendChild(card);
   });
 }
+
   </script>
 
 </body>
