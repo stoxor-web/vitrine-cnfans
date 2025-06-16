@@ -71,7 +71,8 @@
     "price": 195,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=6990966530&ref=212491",
     "source": "https://www.cnfans.com/product?id=6990966530&platform=Weidian",
-    "colors": []
+    "colors": [],
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1853648438090596353"
   },
   {
     "title": "Running T-Shirt",
@@ -145,7 +146,8 @@
     "colors": [],
     "price": 115,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7304785809&ref=212491",
-    "source": "https://www.cnfans.com/product?id=7304785809&platform=Weidian"
+    "source": "https://www.cnfans.com/product?id=7304785809&platform=Weidian",
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1872830991862697985"
   },
   {
     "title": "Wallet Victoire",
@@ -170,7 +172,8 @@
     "colors": [],
     "price": 95,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7241324393&ref=212491",
-    "source": "https://www.cnfans.com/product?id=7241324393&platform=Weidian"
+    "source": "https://www.cnfans.com/product?id=7241324393&platform=Weidian",
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1853614323962281985"
   },
   {
     "title": "Sacoche GY",
@@ -308,7 +311,8 @@
     "colors": [],
     "price": 155,
     "cnfans_link": "https://cnfans.com/product?platform=Weidian&id=7271978872&ref=212491",
-    "source": "https://www.cnfans.com/product?id=7271978872&platform=Weidian"
+    "source": "https://www.cnfans.com/product?id=7271978872&platform=Weidian",
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1855158616313102338"
   },
   {
     "title": "Hello Kitty Pyjama",
@@ -320,7 +324,8 @@
     "colors": [],
     "price": 28,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=737797986447&ref=212491",
-    "source": "https://www.cnfans.com/product?id=737797986447&platform=TAOBAO"
+    "source": "https://www.cnfans.com/product?id=737797986447&platform=TAOBAO",
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1856245785202626562"
   },
   {
     "title": "AirPods 2,3 & 4",
@@ -479,7 +484,8 @@
     "colors": [],
     "price": 211,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=683956832775&ref=212491",
-    "source": "https://www.cnfans.com/product?id=683956832775&platform=TAOBAO"
+    "source": "https://www.cnfans.com/product?id=683956832775&platform=TAOBAO",
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1853614695233683458"
   },
   {
     "title": "CP Jacket Nylon",
@@ -608,18 +614,6 @@
     "qc": "https://www.uufinds.com/goodItemDetail/qc/1909861442254901250"
   },
   {
-    "title": "Belt Diesel",
-    "platform": "TAOBAO",
-    "id": "721469125675",
-    "image": "https://cdn-images.farfetch-contents.com/18/06/72/59/18067259_52099939_1000.jpg",
-    "category": "Accessoires",
-    "brand": "Diesel",
-    "colors": [],
-    "price": 28,
-    "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=721469125675&ref=212491",
-    "source": "https://www.cnfans.com/product?id=721469125675&platform=TAOBAO"
-  },
-  {
     "title": "LV Trainer",
     "platform": "WEIDIAN",
     "id": "7350935720",
@@ -714,7 +708,8 @@
     "colors": [],
     "price": 130,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=729458250237&ref=212491",
-    "source": "https://www.cnfans.com/product?id=729458250237&platform=ALI_1688"
+    "source": "https://www.cnfans.com/product?id=729458250237&platform=ALI_1688",
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1853614275190915073"
   },
   {
     "title": "Coco mademoiselle Chanel",
@@ -798,7 +793,8 @@
     "colors": [],
     "price": 60,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=922814277364&ref=212491",
-    "source": "https://www.cnfans.com/product?id=922814277364&platform=TAOBAO"
+    "source": "https://www.cnfans.com/product?id=922814277364&platform=TAOBAO",
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1922268554357424129"
   },
   {
     "title": "Gymshark Training Long Sleeve",
@@ -834,7 +830,8 @@
     "colors": [],
     "price": 20,
     "cnfans_link": "https://cnfans.com/product?platform=ALI_1688&id=794501487339&ref=212491",
-    "source": "https://www.cnfans.com/product?id=794501487339&platform=ALI_1688"
+    "source": "https://www.cnfans.com/product?id=794501487339&platform=ALI_1688",
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1913760565198688257"
   },
   {
     "title": "Alpha SV",
