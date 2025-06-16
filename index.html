@@ -154,7 +154,7 @@
       const shuffled = seededShuffle(list, blockIndex);
       shuffled.forEach(p=>{
         const priceEUR = (p.price * rateEUR).toFixed(1).replace('.', ',');
-        const qcLink = p.qc ? `<a href="${p.qc}" target="_blank"><img src="https://e7.pngegg.com/pngimages/146/778/png-clipart-camera-logo-graphy-grapher-computer-icons-graphy-free-icon-miscellaneous-rectangle.png" alt="QC" width="20" height="20"></a>` : '';
+        const qcLink = p.qc ? `<a href="${p.qc}" target="_blank"><img src="https://www.shutterstock.com/image-vector/photo-camera-vector-icon-isolated-600nw-1198120360.jpg" alt="QC" width="20" height="20"></a>` : '';
         const card = document.createElement('a');
         card.className  = 'product';
         card.href       = p.cnfans_link;
