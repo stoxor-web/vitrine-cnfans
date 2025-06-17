@@ -1088,5 +1088,17 @@
     "price": 125,
     "cnfans_link": "https://cnfans.com/product?platform=TAOBAO&id=933308206153&ref=212491",
     "source": "https://www.cnfans.com/product?id=933308206153&platform=TAOBAO"
+  },
+  {
+    "title": "Jacket sport",
+    "platform": "WEIDIAN",
+    "id": "7492632122",
+    "image": "https://si.geilicdn.com/open1672878880-1234478995-0c9f0000019768feb62a0a8133b0_918_918.jpg",
+    "category": "Vetements",
+    "brand": "On Running",
+    "qc": "https://www.uufinds.com/goodItemDetail/qc/1934958346870267906?gm=2c928084977b97fa01977df6773303b0",
+    "price": 260,
+    "cnfans_link": "https://cnfans.com/product?platform=WEIDIAN&id=7492632122&ref=212491",
+    "source": "https://www.cnfans.com/product?id=7492632122&platform=WEIDIAN"
   }
 ]
